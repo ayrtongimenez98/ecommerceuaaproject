@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using UAAEcommerce.Models;
@@ -22,7 +23,7 @@ namespace UAAEcommerce.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -68,6 +69,9 @@ namespace UAAEcommerce.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            ApplicationDbContext context = new ApplicationDbContext();
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -79,6 +83,10 @@ namespace UAAEcommerce.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    var user = UserManager.FindByEmail(model.Email);
+                    var role = roleManager.FindByName("Admin");
+                    if (user.Roles.Any(x => x.RoleId == role.Id))
+                        return RedirectToAction("Index", "Dashboard", new { Area = "Admin"});
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -153,6 +161,7 @@ namespace UAAEcommerce.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                await UserManager.AddToRoleAsync(user.Id, "Admin");
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
