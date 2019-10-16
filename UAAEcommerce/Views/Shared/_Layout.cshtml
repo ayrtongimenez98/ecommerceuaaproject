@@ -79,7 +79,7 @@
 
                                         </ul>
                                     </li>
-                                    <li><a href="contact.html">contact</a></li>
+                                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                                 </ul>
                             </nav>
 
@@ -88,6 +88,7 @@
                                     <ul>
                                         <li><a href="/Home">Inicio</a></li>
                                         <li><a href="/Nosotros">Nosotros</a></li>
+                                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                                         @*<li>
                                             <a href="blog.html">blog</a>
                                             <ul>
@@ -108,7 +109,7 @@
                                                 <li>@Html.ActionLink("Iniciar sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                                             </ul>
                                         </li>
-                                        <li><a href="contact.html">contact</a></li>
+                                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                                     </ul>
                                 </nav>
                             </div>
