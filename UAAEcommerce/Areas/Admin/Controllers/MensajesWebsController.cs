@@ -11,6 +11,7 @@ using UAAEcommerce.Areas.Admin.Models;
 
 namespace UAAEcommerce.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class MensajesWebsController : Controller
     {
         private UAAEcommerceEntities2 db = new UAAEcommerceEntities2();

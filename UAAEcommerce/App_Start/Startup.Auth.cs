@@ -59,11 +59,11 @@ namespace UAAEcommerce
                appId: "424421351596285",
                appSecret: "ce82f8f3446943e5d4315953d3f49b4b");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "807461288149-ucaqchvc4alh2olabb9nm1d13e5el1e8.apps.googleusercontent.com",
+                ClientSecret = "GH7uwr2xpDdw9Qk-1aDrQ94V"
+            });
         }
     }
 }

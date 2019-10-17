@@ -10,17 +10,20 @@ using UAAEcommerce.Areas.Admin.Models;
 
 namespace UAAEcommerce.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CiudadController : Controller
     {
         private UAAEcommerceEntities db = new UAAEcommerceEntities();
 
         // GET: Admin/Ciudad
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View(db.Ciudad.ToList());
         }
 
         // GET: Admin/Ciudad/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +39,7 @@ namespace UAAEcommerce.Areas.Admin.Controllers
         }
 
         // GET: Admin/Ciudad/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -59,6 +63,7 @@ namespace UAAEcommerce.Areas.Admin.Controllers
         }
 
         // GET: Admin/Ciudad/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -90,6 +95,7 @@ namespace UAAEcommerce.Areas.Admin.Controllers
         }
 
         // GET: Admin/Ciudad/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

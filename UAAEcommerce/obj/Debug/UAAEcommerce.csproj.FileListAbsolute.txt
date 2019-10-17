@@ -244,8 +244,6 @@ C:\Users\Aspire 5\Documents\GitHub\ecommerceuaaproject\UAAEcommerce\bin\es\Syste
 C:\Users\Aspire 5\Documents\GitHub\ecommerceuaaproject\UAAEcommerce\bin\es\System.Net.Http.Formatting.resources.dll
 C:\Users\Aspire 5\Documents\GitHub\ecommerceuaaproject\UAAEcommerce\bin\es\System.Web.Http.resources.dll
 C:\Users\Aspire 5\Documents\GitHub\ecommerceuaaproject\UAAEcommerce\bin\es\System.Web.Http.WebHost.resources.dll
-C:\Users\Aspire 5\Documents\GitHub\ecommerceuaaproject\UAAEcommerce\bin\es\EntityFramework.resources.dll
-C:\Users\Aspire 5\Documents\GitHub\ecommerceuaaproject\UAAEcommerce\bin\es\EntityFramework.SqlServer.resources.dll
 C:\Users\Aspire 5\Documents\GitHub\ecommerceuaaproject\UAAEcommerce\bin\es\Microsoft.AspNet.Identity.Core.resources.dll
 C:\Users\Aspire 5\Documents\GitHub\ecommerceuaaproject\UAAEcommerce\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
 C:\Users\Aspire 5\Documents\GitHub\ecommerceuaaproject\UAAEcommerce\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
