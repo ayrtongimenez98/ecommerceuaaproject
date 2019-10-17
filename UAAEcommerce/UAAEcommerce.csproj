@@ -187,8 +187,22 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CiudadController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MensajesWebsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TipoClientesController.cs" />
+    <Compile Include="Areas\Admin\Models\AspNetRoles.cs">
+      <DependentUpon>UAAEcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Models\AspNetUserClaims.cs">
+      <DependentUpon>UAAEcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Models\AspNetUserLogins.cs">
+      <DependentUpon>UAAEcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Models\AspNetUsers.cs">
+      <DependentUpon>UAAEcommerceModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Admin\Models\Ciudad.cs">
-      <DependentUpon>CiudadModel.tt</DependentUpon>
+      <DependentUpon>UAAEcommerceModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\Models\CiudadModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -205,9 +219,49 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CiudadModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Admin\Models\Cliente.cs">
+      <DependentUpon>UAAEcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Models\C__MigrationHistory.cs">
+      <DependentUpon>UAAEcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Models\MensajesWeb.cs">
+      <DependentUpon>UAAEcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Models\Pedido.cs">
+      <DependentUpon>UAAEcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Models\PedidoDetalle.cs">
+      <DependentUpon>UAAEcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Models\Producto.cs">
+      <DependentUpon>UAAEcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Models\TipoCliente.cs">
+      <DependentUpon>UAAEcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Models\TipoProducto.cs">
+      <DependentUpon>UAAEcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Models\UAAEcommerceModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UAAEcommerceModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Models\UAAEcommerceModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UAAEcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Models\UAAEcommerceModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UAAEcommerceModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -227,6 +281,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CiudadModel.edmx</DependentUpon>
       <LastGenOutput>CiudadModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Models\UAAEcommerceModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UAAEcommerceModel.edmx</DependentUpon>
+      <LastGenOutput>UAAEcommerceModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Admin\Models\UAAEcommerceModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UAAEcommerceModel.edmx</DependentUpon>
+      <LastGenOutput>UAAEcommerceModel.cs</LastGenOutput>
     </Content>
     <Content Include="Content\css\sb-admin-2.css" />
     <Content Include="Content\css\sb-admin-2.min.css" />
@@ -2019,6 +2083,23 @@
     <Content Include="Areas\Admin\Views\Ciudad\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Ciudad\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Ciudad\Index.cshtml" />
+    <EntityDeploy Include="Areas\Admin\Models\UAAEcommerceModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UAAEcommerceModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Areas\Admin\Models\UAAEcommerceModel.edmx.diagram">
+      <DependentUpon>UAAEcommerceModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Views\TipoClientes\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\TipoClientes\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\TipoClientes\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\TipoClientes\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\TipoClientes\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\MensajesWebs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\MensajesWebs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\MensajesWebs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\MensajesWebs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\MensajesWebs\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

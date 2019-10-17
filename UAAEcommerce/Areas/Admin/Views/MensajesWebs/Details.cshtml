@@ -1,0 +1,50 @@
+﻿@model UAAEcommerce.Areas.Admin.Models.MensajesWeb
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MensajesWeb</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.mens_email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mens_email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mens_nombrecompleto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mens_nombrecompleto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mens_texto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mens_texto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mens_interes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mens_interes)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idMensajes }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

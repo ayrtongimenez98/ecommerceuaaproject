@@ -13,19 +13,16 @@ namespace UAAEcommerce.Areas.Admin.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class Ciudad
+    public partial class MensajesWeb
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ciudad()
-        {
-            this.Cliente = new HashSet<Cliente>();
-        }
-    
-        public int idCiudad { get; set; }
-        [Display(Name = "Descripción")]
-        public string ciu_descripcion { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cliente> Cliente { get; set; }
+        public int idMensajes { get; set; }
+        [Display (Name = "Email")]
+        public string mens_email { get; set; }
+        [Display(Name = "Nombre Completo")]
+        public string mens_nombrecompleto { get; set; }
+        [Display(Name = "Texto")]
+        public string mens_texto { get; set; }
+        [Display(Name = "Interés")]
+        public string mens_interes { get; set; }
     }
 }

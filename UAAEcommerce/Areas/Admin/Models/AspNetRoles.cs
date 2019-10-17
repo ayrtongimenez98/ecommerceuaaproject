@@ -11,21 +11,19 @@ namespace UAAEcommerce.Areas.Admin.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class Ciudad
+    
+    public partial class AspNetRoles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ciudad()
+        public AspNetRoles()
         {
-            this.Cliente = new HashSet<Cliente>();
+            this.AspNetUsers = new HashSet<AspNetUsers>();
         }
     
-        public int idCiudad { get; set; }
-        [Display(Name = "Descripción")]
-        public string ciu_descripcion { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cliente> Cliente { get; set; }
+        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
     }
 }

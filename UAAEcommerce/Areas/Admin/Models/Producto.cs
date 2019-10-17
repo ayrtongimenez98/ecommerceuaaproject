@@ -11,21 +11,23 @@ namespace UAAEcommerce.Areas.Admin.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class Ciudad
+    
+    public partial class Producto
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ciudad()
+        public Producto()
         {
-            this.Cliente = new HashSet<Cliente>();
+            this.PedidoDetalle = new HashSet<PedidoDetalle>();
         }
     
-        public int idCiudad { get; set; }
-        [Display(Name = "Descripción")]
-        public string ciu_descripcion { get; set; }
+        public int idProducto { get; set; }
+        public int idTipoProducto { get; set; }
+        public string pro_descripcion { get; set; }
+        public string pro_codigobarra { get; set; }
+        public int pro_precio { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cliente> Cliente { get; set; }
+        public virtual ICollection<PedidoDetalle> PedidoDetalle { get; set; }
+        public virtual TipoProducto TipoProducto { get; set; }
     }
 }

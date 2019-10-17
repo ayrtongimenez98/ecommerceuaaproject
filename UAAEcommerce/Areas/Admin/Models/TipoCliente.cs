@@ -12,18 +12,19 @@ namespace UAAEcommerce.Areas.Admin.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
-    public partial class Ciudad
+    
+    public partial class TipoCliente
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ciudad()
+        public TipoCliente()
         {
             this.Cliente = new HashSet<Cliente>();
         }
-    
-        public int idCiudad { get; set; }
+
+        [Display(Name = "Id")]
+        public int idTipoCliente { get; set; }
         [Display(Name = "Descripción")]
-        public string ciu_descripcion { get; set; }
+        public string tipcli_descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cliente> Cliente { get; set; }

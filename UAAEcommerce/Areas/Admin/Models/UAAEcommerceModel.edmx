@@ -1,0 +1,806 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="UAAEcommerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ciudad">
+          <Key>
+            <PropertyRef Name="idCiudad" />
+          </Key>
+          <Property Name="idCiudad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ciu_descripcion" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="idClientes" />
+          </Key>
+          <Property Name="idClientes" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTipoCliente" Type="int" Nullable="false" />
+          <Property Name="idCiudad" Type="int" Nullable="false" />
+          <Property Name="cli_ruc" Type="varchar" MaxLength="10" />
+          <Property Name="cli_razonsocial" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cli_direccion" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="cli_email" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="cli_telefono" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="MensajesWeb">
+          <Key>
+            <PropertyRef Name="idMensajes" />
+          </Key>
+          <Property Name="idMensajes" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mens_email" Type="varchar" MaxLength="40" />
+          <Property Name="mens_nombrecompleto" Type="varchar" MaxLength="50" />
+          <Property Name="mens_texto" Type="varchar" MaxLength="500" />
+          <Property Name="mens_interes" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Pedido">
+          <Key>
+            <PropertyRef Name="idPedido" />
+          </Key>
+          <Property Name="idPedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+          <Property Name="ped_fecha" Type="datetime" Nullable="false" />
+          <Property Name="ped_descuento" Type="float" Nullable="false" />
+          <Property Name="ped_confirmado" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="PedidoDetalle">
+          <Key>
+            <PropertyRef Name="idPedidoDetalle" />
+          </Key>
+          <Property Name="idPedidoDetalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idProducto" Type="int" Nullable="false" />
+          <Property Name="idPedidoCabecera" Type="int" Nullable="false" />
+          <Property Name="pedet_precio" Type="int" Nullable="false" />
+          <Property Name="pedet_montototal" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="idProducto" />
+          </Key>
+          <Property Name="idProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTipoProducto" Type="int" Nullable="false" />
+          <Property Name="pro_descripcion" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="pro_codigobarra" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="pro_precio" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoCliente">
+          <Key>
+            <PropertyRef Name="idTipoCliente" />
+          </Key>
+          <Property Name="idTipoCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipcli_descripcion" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TipoProducto">
+          <Key>
+            <PropertyRef Name="idTipoProducto" />
+          </Key>
+          <Property Name="idTipoProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipro_descripcion" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK_Cliente_Ciudad">
+          <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudad">
+              <PropertyRef Name="idCiudad" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="idCiudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_TipoCliente">
+          <End Role="TipoCliente" Type="Self.TipoCliente" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCliente">
+              <PropertyRef Name="idTipoCliente" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="idTipoCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pedido_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idClientes" />
+            </Principal>
+            <Dependent Role="Pedido">
+              <PropertyRef Name="idPedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PedidoDetalle_Cabecera">
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="1" />
+          <End Role="PedidoDetalle" Type="Self.PedidoDetalle" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido">
+              <PropertyRef Name="idPedido" />
+            </Principal>
+            <Dependent Role="PedidoDetalle">
+              <PropertyRef Name="idPedidoDetalle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PedidoDetalle_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="PedidoDetalle" Type="Self.PedidoDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="PedidoDetalle">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_TipoProducto">
+          <End Role="TipoProducto" Type="Self.TipoProducto" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProducto">
+              <PropertyRef Name="idTipoProducto" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="idTipoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UAAEcommerceModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MensajesWeb" EntityType="Self.MensajesWeb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pedido" EntityType="Self.Pedido" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PedidoDetalle" EntityType="Self.PedidoDetalle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoCliente" EntityType="Self.TipoCliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoProducto" EntityType="Self.TipoProducto" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cliente_Ciudad" Association="Self.FK_Cliente_Ciudad">
+            <End Role="Ciudad" EntitySet="Ciudad" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_TipoCliente" Association="Self.FK_Cliente_TipoCliente">
+            <End Role="TipoCliente" EntitySet="TipoCliente" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pedido_Cliente" Association="Self.FK_Pedido_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Pedido" EntitySet="Pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PedidoDetalle_Cabecera" Association="Self.FK_PedidoDetalle_Cabecera">
+            <End Role="Pedido" EntitySet="Pedido" />
+            <End Role="PedidoDetalle" EntitySet="PedidoDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PedidoDetalle_Producto" Association="Self.FK_PedidoDetalle_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="PedidoDetalle" EntitySet="PedidoDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_TipoProducto" Association="Self.FK_Producto_TipoProducto">
+            <End Role="TipoProducto" EntitySet="TipoProducto" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UAAEcommerceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="Ciudad">
+          <Key>
+            <PropertyRef Name="idCiudad" />
+          </Key>
+          <Property Name="idCiudad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ciu_descripcion" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_Ciudad" FromRole="Ciudad" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="idClientes" />
+          </Key>
+          <Property Name="idClientes" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTipoCliente" Type="Int32" Nullable="false" />
+          <Property Name="idCiudad" Type="Int32" Nullable="false" />
+          <Property Name="cli_ruc" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="cli_razonsocial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cli_direccion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cli_email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cli_telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Ciudad" Relationship="Self.FK_Cliente_Ciudad" FromRole="Cliente" ToRole="Ciudad" />
+          <NavigationProperty Name="TipoCliente" Relationship="Self.FK_Cliente_TipoCliente" FromRole="Cliente" ToRole="TipoCliente" />
+          <NavigationProperty Name="Pedido" Relationship="Self.FK_Pedido_Cliente" FromRole="Cliente" ToRole="Pedido" />
+        </EntityType>
+        <EntityType Name="MensajesWeb">
+          <Key>
+            <PropertyRef Name="idMensajes" />
+          </Key>
+          <Property Name="idMensajes" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mens_email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="mens_nombrecompleto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mens_texto" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="mens_interes" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Pedido">
+          <Key>
+            <PropertyRef Name="idPedido" />
+          </Key>
+          <Property Name="idPedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="ped_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ped_descuento" Type="Double" Nullable="false" />
+          <Property Name="ped_confirmado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_Pedido_Cliente" FromRole="Pedido" ToRole="Cliente" />
+          <NavigationProperty Name="PedidoDetalle" Relationship="Self.FK_PedidoDetalle_Cabecera" FromRole="Pedido" ToRole="PedidoDetalle" />
+        </EntityType>
+        <EntityType Name="PedidoDetalle">
+          <Key>
+            <PropertyRef Name="idPedidoDetalle" />
+          </Key>
+          <Property Name="idPedidoDetalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idProducto" Type="Int32" Nullable="false" />
+          <Property Name="idPedidoCabecera" Type="Int32" Nullable="false" />
+          <Property Name="pedet_precio" Type="Int32" Nullable="false" />
+          <Property Name="pedet_montototal" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pedido" Relationship="Self.FK_PedidoDetalle_Cabecera" FromRole="PedidoDetalle" ToRole="Pedido" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_PedidoDetalle_Producto" FromRole="PedidoDetalle" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="idProducto" />
+          </Key>
+          <Property Name="idProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTipoProducto" Type="Int32" Nullable="false" />
+          <Property Name="pro_descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pro_codigobarra" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pro_precio" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PedidoDetalle" Relationship="Self.FK_PedidoDetalle_Producto" FromRole="Producto" ToRole="PedidoDetalle" />
+          <NavigationProperty Name="TipoProducto" Relationship="Self.FK_Producto_TipoProducto" FromRole="Producto" ToRole="TipoProducto" />
+        </EntityType>
+        <EntityType Name="TipoCliente">
+          <Key>
+            <PropertyRef Name="idTipoCliente" />
+          </Key>
+          <Property Name="idTipoCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipcli_descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_TipoCliente" FromRole="TipoCliente" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="TipoProducto">
+          <Key>
+            <PropertyRef Name="idTipoProducto" />
+          </Key>
+          <Property Name="idTipoProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipro_descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_TipoProducto" FromRole="TipoProducto" ToRole="Producto" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_Ciudad">
+          <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudad">
+              <PropertyRef Name="idCiudad" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="idCiudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_TipoCliente">
+          <End Role="TipoCliente" Type="Self.TipoCliente" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCliente">
+              <PropertyRef Name="idTipoCliente" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="idTipoCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pedido_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idClientes" />
+            </Principal>
+            <Dependent Role="Pedido">
+              <PropertyRef Name="idPedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PedidoDetalle_Cabecera">
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="1" />
+          <End Role="PedidoDetalle" Type="Self.PedidoDetalle" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido">
+              <PropertyRef Name="idPedido" />
+            </Principal>
+            <Dependent Role="PedidoDetalle">
+              <PropertyRef Name="idPedidoDetalle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PedidoDetalle_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="PedidoDetalle" Type="Self.PedidoDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="PedidoDetalle">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_TipoProducto">
+          <End Role="TipoProducto" Type="Self.TipoProducto" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProducto">
+              <PropertyRef Name="idTipoProducto" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="idTipoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="UAAEcommerceEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="Ciudad" EntityType="Self.Ciudad" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="MensajesWeb" EntityType="Self.MensajesWeb" />
+          <EntitySet Name="Pedido" EntityType="Self.Pedido" />
+          <EntitySet Name="PedidoDetalle" EntityType="Self.PedidoDetalle" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" />
+          <EntitySet Name="TipoCliente" EntityType="Self.TipoCliente" />
+          <EntitySet Name="TipoProducto" EntityType="Self.TipoProducto" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Ciudad" Association="Self.FK_Cliente_Ciudad">
+            <End Role="Ciudad" EntitySet="Ciudad" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_TipoCliente" Association="Self.FK_Cliente_TipoCliente">
+            <End Role="TipoCliente" EntitySet="TipoCliente" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pedido_Cliente" Association="Self.FK_Pedido_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Pedido" EntitySet="Pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PedidoDetalle_Cabecera" Association="Self.FK_PedidoDetalle_Cabecera">
+            <End Role="Pedido" EntitySet="Pedido" />
+            <End Role="PedidoDetalle" EntitySet="PedidoDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PedidoDetalle_Producto" Association="Self.FK_PedidoDetalle_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="PedidoDetalle" EntitySet="PedidoDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_TipoProducto" Association="Self.FK_Producto_TipoProducto">
+            <End Role="TipoProducto" EntitySet="TipoProducto" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UAAEcommerceModelStoreContainer" CdmEntityContainer="UAAEcommerceEntities2">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="UAAEcommerceModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="UAAEcommerceModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="UAAEcommerceModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="UAAEcommerceModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="UAAEcommerceModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ciudad">
+            <EntityTypeMapping TypeName="UAAEcommerceModel.Ciudad">
+              <MappingFragment StoreEntitySet="Ciudad">
+                <ScalarProperty Name="idCiudad" ColumnName="idCiudad" />
+                <ScalarProperty Name="ciu_descripcion" ColumnName="ciu_descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="UAAEcommerceModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="idClientes" ColumnName="idClientes" />
+                <ScalarProperty Name="idTipoCliente" ColumnName="idTipoCliente" />
+                <ScalarProperty Name="idCiudad" ColumnName="idCiudad" />
+                <ScalarProperty Name="cli_ruc" ColumnName="cli_ruc" />
+                <ScalarProperty Name="cli_razonsocial" ColumnName="cli_razonsocial" />
+                <ScalarProperty Name="cli_direccion" ColumnName="cli_direccion" />
+                <ScalarProperty Name="cli_email" ColumnName="cli_email" />
+                <ScalarProperty Name="cli_telefono" ColumnName="cli_telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MensajesWeb">
+            <EntityTypeMapping TypeName="UAAEcommerceModel.MensajesWeb">
+              <MappingFragment StoreEntitySet="MensajesWeb">
+                <ScalarProperty Name="idMensajes" ColumnName="idMensajes" />
+                <ScalarProperty Name="mens_email" ColumnName="mens_email" />
+                <ScalarProperty Name="mens_nombrecompleto" ColumnName="mens_nombrecompleto" />
+                <ScalarProperty Name="mens_texto" ColumnName="mens_texto" />
+                <ScalarProperty Name="mens_interes" ColumnName="mens_interes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pedido">
+            <EntityTypeMapping TypeName="UAAEcommerceModel.Pedido">
+              <MappingFragment StoreEntitySet="Pedido">
+                <ScalarProperty Name="idPedido" ColumnName="idPedido" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="ped_fecha" ColumnName="ped_fecha" />
+                <ScalarProperty Name="ped_descuento" ColumnName="ped_descuento" />
+                <ScalarProperty Name="ped_confirmado" ColumnName="ped_confirmado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PedidoDetalle">
+            <EntityTypeMapping TypeName="UAAEcommerceModel.PedidoDetalle">
+              <MappingFragment StoreEntitySet="PedidoDetalle">
+                <ScalarProperty Name="idPedidoDetalle" ColumnName="idPedidoDetalle" />
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+                <ScalarProperty Name="idPedidoCabecera" ColumnName="idPedidoCabecera" />
+                <ScalarProperty Name="pedet_precio" ColumnName="pedet_precio" />
+                <ScalarProperty Name="pedet_montototal" ColumnName="pedet_montototal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="UAAEcommerceModel.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+                <ScalarProperty Name="idTipoProducto" ColumnName="idTipoProducto" />
+                <ScalarProperty Name="pro_descripcion" ColumnName="pro_descripcion" />
+                <ScalarProperty Name="pro_codigobarra" ColumnName="pro_codigobarra" />
+                <ScalarProperty Name="pro_precio" ColumnName="pro_precio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoCliente">
+            <EntityTypeMapping TypeName="UAAEcommerceModel.TipoCliente">
+              <MappingFragment StoreEntitySet="TipoCliente">
+                <ScalarProperty Name="idTipoCliente" ColumnName="idTipoCliente" />
+                <ScalarProperty Name="tipcli_descripcion" ColumnName="tipcli_descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoProducto">
+            <EntityTypeMapping TypeName="UAAEcommerceModel.TipoProducto">
+              <MappingFragment StoreEntitySet="TipoProducto">
+                <ScalarProperty Name="idTipoProducto" ColumnName="idTipoProducto" />
+                <ScalarProperty Name="tipro_descripcion" ColumnName="tipro_descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="UAAEcommerceModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

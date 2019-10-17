@@ -52,34 +52,37 @@
                             <nav class="mainmenu__nav  d-none d-lg-block">
                                 <ul class="main__menu">
                                     <li class="drop">
-                                        <a href="/Home">Home</a>
+                                        <a href="/Home">Inicio</a>
                                     </li>
-                                    @*<li><a href="about.html">About</a></li>
+                                    <li>@Html.ActionLink("Nosotros", "About", "Home")</li>
+                                    @*<li class="drop">
+                            <a href="blog.html">Blog</a>
+                            <ul class="dropdown">
+                                <li><a href="blog.html">blog</a></li>
+                                <li><a href="blog-details.html">blog details</a></li>
+                            </ul>
+                        </li>
+                        <li class="drop">
+                            <a href="shop.html">Shop</a>
+                        </li>*@
                                     <li class="drop">
-                                        <a href="blog.html">Blog</a>
-                                        <ul class="dropdown">
-                                            <li><a href="blog.html">blog</a></li>
-                                            <li><a href="blog-details.html">blog details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="drop">
-                                        <a href="shop.html">Shop</a>
-                                    </li>*@
-                                    <li class="drop">
-                                        <a href="#">pages</a>
+                                        <a href="#">Paginas</a>
                                         <ul class="dropdown">
                                             @*<li><a href="about.html">about</a></li>
-        <li><a href="shop.html">shop</a></li>
-        <li><a href="product-details.html">product details</a></li>
-        <li><a href="cart.html">cart</a></li>
-        <li><a href="wishlist.html">wishlist</a></li>
-        <li><a href="checkout.html">checkout</a></li>
-        <li><a href="team.html">team</a></li>*@
+                <li><a href="shop.html">shop</a></li>
+                <li><a href="product-details.html">product details</a></li>
+                <li><a href="cart.html">cart</a></li>
+                <li><a href="wishlist.html">wishlist</a></li>
+                <li><a href="checkout.html">checkout</a></li>
+                <li><a href="team.html">team</a></li>*@
                                             <li>@Html.ActionLink("Iniciar sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
 
                                         </ul>
                                     </li>
-                                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                                    <a href="api/Producto">
+                                        <span>WEB Api</span>
+                                    </a>
                                 </ul>
                             </nav>
 
@@ -110,7 +113,7 @@
                                                 <li>@Html.ActionLink("Iniciar sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                                             </ul>
                                         </li>
-                                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                                        <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                                     </ul>
                                 </nav>
                             </div>
@@ -272,7 +275,7 @@
             <div class="container">
                 <div class="row footer__container clearfix">
                     <!-- Start Single Footer Widget -->
-                    <div class="col-md-6 col-lg-3 col-sm-6">
+                    <!--<div class="col-md-6 col-lg-3 col-sm-6">
                         <div class="ft__widget">
                             <div class="ft__logo">
                                 <a href="index.html">
@@ -283,10 +286,10 @@
                                 <p>Get 10% discount with notified about the latest news and updates.</p>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <!-- End Single Footer Widget -->
                     <!-- Start Single Footer Widget -->
-                    <div class="col-md-6 col-lg-3 col-sm-6 smb-30 xmt-30">
+                    <!--<div class="col-md-6 col-lg-3 col-sm-6 smb-30 xmt-30">
                         <div class="ft__widget">
                             <h2 class="ft__title">Newsletter</h2>
                             <div class="newsletter__form">
@@ -307,30 +310,30 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <!-- End Single Footer Widget -->
                     <!-- Start Single Footer Widget -->
-                    <div class="col-md-6 col-lg-3 col-sm-6 smt-30 xmt-30">
-                        <div class="ft__widget contact__us">
-                            <h2 class="ft__title">Contact Us</h2>
-                            <div class="footer__inner">
-                                <p> 319 Clematis St. <br> Suite 100 WPB, FL 33401 </p>
-                            </div>
-                        </div>
-                    </div>
+                    <!--<div class="col-md-6 col-lg-3 col-sm-6 smt-30 xmt-30">
+        <div class="ft__widget contact__us">
+            <h2 class="ft__title">Contact Us</h2>
+            <div class="footer__inner">
+                <p> 319 Clematis St. <br> Suite 100 WPB, FL 33401 </p>
+            </div>
+        </div>
+    </div>-->
                     <!-- End Single Footer Widget -->
-                    <!-- Start Single Footer Widget -->
-                    <div class="col-md-6 col-lg-2 lg-offset-1 col-sm-6 smt-30 xmt-30">
-                        <div class="ft__widget">
-                            <h2 class="ft__title">Follow Us</h2>
-                            <ul class="social__icon">
-                                <li><a href="https://twitter.com/devitemsllc" target="_blank"><i class="zmdi zmdi-twitter"></i></a></li>
-                                <li><a href="https://www.instagram.com/devitems/" target="_blank"><i class="zmdi zmdi-instagram"></i></a></li>
-                                <li><a href="https://www.facebook.com/devitems/?ref=bookmarks" target="_blank"><i class="zmdi zmdi-facebook"></i></a></li>
-                                <li><a href="https://plus.google.com/" target="_blank"><i class="zmdi zmdi-google-plus"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    <!-- Start Single Footer Widget-->
+                    <!--<div class="col-md-6 col-lg-2 lg-offset-1 col-sm-6 smt-30 xmt-30">
+        <div class="ft__widget">
+            <h2 class="ft__title">Follow Us</h2>
+            <ul class="social__icon">
+                <li><a href="https://twitter.com/devitemsllc" target="_blank"><i class="zmdi zmdi-twitter"></i></a></li>
+                <li><a href="https://www.instagram.com/devitems/" target="_blank"><i class="zmdi zmdi-instagram"></i></a></li>
+                <li><a href="https://www.facebook.com/devitems/?ref=bookmarks" target="_blank"><i class="zmdi zmdi-facebook"></i></a></li>
+                <li><a href="https://plus.google.com/" target="_blank"><i class="zmdi zmdi-google-plus"></i></a></li>
+            </ul>
+        </div>
+    </div>-->
                     <!-- End Single Footer Widget -->
                 </div>
                 <!-- Start Copyright Area -->
@@ -340,7 +343,7 @@
                             <div class="copyright__inner">
                                 <div class="copyright">
                                     <p>
-                                        © 2019 <a href="https://freethemescloud.com/" target="_blank">Ecommerce UAA</a>
+                                        © 2019 <a href="#" target="_blank">Ecommerce UAA</a>
                                         All Right Reserved.
                                     </p>
                                 </div>
