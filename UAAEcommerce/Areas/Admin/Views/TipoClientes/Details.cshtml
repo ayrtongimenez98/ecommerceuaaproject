@@ -1,0 +1,26 @@
+﻿@model UAAEcommerce.Areas.Admin.Models.TipoCliente
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TipoCliente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tipcli_descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipcli_descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idTipoCliente }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

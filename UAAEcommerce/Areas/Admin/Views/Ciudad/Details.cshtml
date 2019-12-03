@@ -1,0 +1,26 @@
+﻿@model UAAEcommerce.Areas.Admin.Models.Ciudad
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ciudad</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ciu_descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ciu_descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.idCiudad }) |
+    @Html.ActionLink("Regresar a la lista", "Index")
+</p>

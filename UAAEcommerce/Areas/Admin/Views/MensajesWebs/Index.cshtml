@@ -1,0 +1,52 @@
+﻿@model IEnumerable<UAAEcommerce.Areas.Admin.Models.MensajesWeb>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Reclamos/Sugerencias de usuarios</h2>
+
+<!--<p>
+    @Html.ActionLink("Create New", "Create")
+</p>-->
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.mens_email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mens_nombrecompleto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mens_texto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mens_interes)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.mens_email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mens_nombrecompleto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mens_texto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mens_interes)
+        </td>
+        <!--<td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.idMensajes }) |
+        @Html.ActionLink("Details", "Details", new { id = item.idMensajes }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.idMensajes })
+    </td>-->
+    </tr>
+    }
+
+</table>

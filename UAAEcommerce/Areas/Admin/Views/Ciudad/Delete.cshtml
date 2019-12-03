@@ -1,0 +1,32 @@
+﻿@model UAAEcommerce.Areas.Admin.Models.Ciudad
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Borrar</h2>
+
+<h3>Desea borrar esta ciudad de la lista?</h3>
+<div>
+    <h4>Ciudad</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ciu_descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ciu_descripcion)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Borrar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar a la lista", "Index")
+        </div>
+    }
+</div>
