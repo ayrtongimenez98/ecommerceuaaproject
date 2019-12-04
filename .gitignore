@@ -259,3 +259,7 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+.vs/UAAEcommerce/v16/Server/sqlite3/storage.ide
+*.ide-shm
+.vs/UAAEcommerce/v16/Server/sqlite3/storage.ide
+.vs/UAAEcommerce/v16/Server/sqlite3/storage.ide-wal
