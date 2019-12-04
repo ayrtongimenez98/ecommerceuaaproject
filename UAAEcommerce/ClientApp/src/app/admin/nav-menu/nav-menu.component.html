@@ -1,0 +1,93 @@
+<header>
+  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>
+    <div class="container-fluid">
+      <a class="navbar-brand" [routerLink]='["/admin/dashboard"]'>
+        <img src="../../assets/images/brand/logo-byn.png" class="logo" />
+        <li class="nav-item">
+          <h1 class="logo-text">
+            Panel de control
+          </h1>
+        </li>
+        <mat-icon class="logo-text" style="font-family: Material Icons;">store_mall_directory</mat-icon>
+      </a>
+      <button mat-button [matMenuTriggerFor]="menu" class="menu-toggle">Menu</button>
+      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
+        <ul class="navbar-nav flex-grow">
+          <li class="nav-item" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link text-dark" [routerLink]='["/admin/categories"]'>
+              <span class="number">1</span>
+              Categorías
+            </a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link text-dark" [routerLink]='["/admin/products"]'>
+              <span class="number">2</span>
+              Productos
+            </a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link text-dark" [routerLink]='["/admin/orders"]'>
+              <mat-icon>library_books</mat-icon>
+              Ordenes
+            </a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link text-dark" [routerLink]='["/admin/coupons"]'>
+              <mat-icon>loyalty</mat-icon>
+              Cupones
+            </a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link text-dark" [routerLink]='["/admin/user"]'>
+              <mat-icon>person_add</mat-icon>
+              Usuarios
+            </a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' (click)="logout()">
+            <a class="nav-link text-dark">
+              <mat-icon>exit_to_app</mat-icon>
+              Salir
+            </a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+            <a class="nav-link text-dark" [routerLink]='["/home"]'>
+              <mat-icon>home</mat-icon>
+              Inicio
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <mat-menu #menu="matMenu" class="menu-responsive">
+    <a class="nav-link text-dark nav-responsive" [routerLink]='["/admin/categories"]'>
+      <span class="number">1</span>
+      Categorías
+    </a>
+    <a class="nav-link text-dark nav-responsive" [routerLink]='["/admin/products"]'>
+      <span class="number">2</span>
+      Productos
+    </a>
+    <a class="nav-link text-dark nav-responsive" [routerLink]='["/admin/orders"]'>
+      <mat-icon>library_books</mat-icon>
+      Ordenes
+    </a>
+    <a class="nav-link text-dark nav-responsive" [routerLink]='["/admin/coupons"]'>
+      <mat-icon>loyalty</mat-icon>
+      Cupones
+    </a>
+    <a class="nav-link text-dark nav-responsive" [routerLink]='["/admin/user"]'>
+      <mat-icon>person_add</mat-icon>
+      Usuarios
+    </a>
+    <a class="nav-link text-dark nav-responsive">
+      <mat-icon>exit_to_app</mat-icon>
+      Salir
+    </a>
+    <a class="nav-link text-dark nav-responsive" [routerLink]='["/home"]'>
+      <mat-icon>home</mat-icon>
+      Inicio
+    </a>
+  </mat-menu>
+  <div class="border-stripped"></div>
+</header>

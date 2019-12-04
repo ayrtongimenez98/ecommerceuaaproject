@@ -1,0 +1,80 @@
+
+<section id="map" class="container">
+  <iframe class="large" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1981.2173213907672!2d-57.58345255261304!3d-25.289840338268235!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x945da89c4ea4155b%3A0x748ae34af389a537!2sPalo+Santo+Brewing+Company!5e0!3m2!1ses!2spy!4v1561061894541!5m2!1ses!2spy" frameborder="0" style="border:0" allowfullscreen></iframe>
+  <!--<agm-map style="height: 500px;" [latitude]="lat"
+           [longitude]="lng"
+           [zoom]="zoom"
+           [styles]="styles">
+  </agm-map>-->
+  <button class="btn-primary" (click)="mapClick()">
+    <i>
+      <img src="../../../assets/images/icons/location.svg" alt="Alternate Text" />
+    </i>
+    ver en <span class="google">google</span> maps
+  </button>
+</section>
+<div id="instafeed">
+</div>
+<footer id="footer">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="footer-brand col-12 col-md-2 col-sm-7 col-lg-2">
+        <img src="../../../assets/images/brand/logoV.svg" alt="Alternate Text" />
+      </div>
+      <div class="col-12 col-md-3 col-sm-6 col-lg-2">
+       <h1 class="footer-titles">Nosotros</h1>
+       <ul class="footer-nav">
+         <li class="footer-li">
+           <a [routerLink]='["/shop"]' fragment="cerveceria">Shop</a>
+         </li>
+         <li class="footer-li">
+           <a (click)="mapClick()">
+             Encontranos
+           </a>
+         </li>
+         <li class="footer-li">
+           <a routerLink="/legal">
+             Avisos Legales
+           </a>
+         </li>
+         <li class="footer-li">
+           <a routerLink="/privacy-policy">
+             Politica de privacidad
+           </a>
+         </li>
+       </ul>
+      </div>
+      <!--<div class="col-12 col-md-3 col-sm-6 col-lg-2">
+        <h1 class="footer-titles">Contacto</h1>
+        <ul class="footer-nav">
+          <li class="footer-li">
+            <a (click)="mapClick()">
+            <mat-icon>location_on</mat-icon>Encontranos</a>
+          </li>
+        </ul>
+      </div>-->
+      <div class="col-12 col-md-3 col-sm-6 col-lg-3 order-md-1">
+        <h1 class="footer-titles">Seguinos</h1>
+        <ul class="footer-nav share">
+          <li class="footer-li">
+            <a href="https://www.facebook.com/palosantobrewingco/" class="footer-share" target="_blank">
+              <img src="../../../assets/images/icons/facebook.svg" alt="facebook" />
+            </a>
+          </li>
+          <li class="footer-li">
+            <a href="https://www.instagram.com/palosantobrewingco/" class="footer-share" target="_blank">
+              <img src="../../../assets/images/icons/instagram.svg" alt="instagram" />
+            </a>
+          </li>
+          <li class="footer-li">
+            <a href="https://wa.me/595972234336" class="footer-share" target="_blank">
+              <img src="../../../assets/images/icons/whatsapp.svg" alt="whatsapp" />
+            </a>
+          </li>
+        </ul>
+      </div>
+     
+    </div>
+
+  </div>
+</footer>

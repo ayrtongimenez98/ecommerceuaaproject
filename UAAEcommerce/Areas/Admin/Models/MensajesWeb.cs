@@ -11,18 +11,13 @@ namespace UAAEcommerce.Areas.Admin.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class MensajesWeb
     {
         public int idMensajes { get; set; }
-        [Display (Name = "Email")]
         public string mens_email { get; set; }
-        [Display(Name = "Nombre Completo")]
         public string mens_nombrecompleto { get; set; }
-        [Display(Name = "Texto")]
         public string mens_texto { get; set; }
-        [Display(Name = "Interés")]
         public string mens_interes { get; set; }
     }
 }

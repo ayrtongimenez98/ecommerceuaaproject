@@ -1,0 +1,29 @@
+<section class="container">
+  <form class="form-inline" [formGroup]="categoryForm" (ngSubmit)="upsertCategory()">
+    <div class="row w-100">
+      <div class="col-8 m-auto form-upsert">
+        <h1 class="section-title">{{ categoryId == null ? 'Agregar' : 'Editar' }} Categoría</h1>
+        <div>
+          <label style="flex-wrap: wrap; justify-content: flex-start; padding-bottom: 2em;">
+            Nombre:
+            <input type="text" class="form-control w-100" id="name" formControlName="name">
+            <span class="text_info text_warning"
+                  *ngIf="cf.name.invalid && (cf.name.dirty || cf.name.touched) && cf.name.errors.required">Este campo es obligatorio</span>
+            <span class="text_info text_warning"
+                  *ngIf="cf.name.invalid && (cf.name.dirty || cf.name.touched) && cf.name.errors.repeated">la categoria ingresada ya existe</span>
+          </label>
+        </div>
+        <div [hidden]="!process">
+          <img src="https://www.upperroom.org/assets/loading-eb6127d20416f075771d08fcbf10aefe0cfd2865b801fb733ce981514c89b09d.gif"
+               alt="Alternate Text" style="width:50px; height:50px;" />
+        </div>
+        <div class="w-100 text-right">
+          <button (click)="back()" mat-button style="display: inline-flex; align-items: center; margin-bottom: 10px; margin-right: auto;" class="add-btn">
+            CANCELAR
+          </button>
+          <button type="submit" class="btn-primary btn-small" [disabled]="categoryForm.invalid" style="display: inline-flex;">GUARDAR</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>

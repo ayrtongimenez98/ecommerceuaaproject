@@ -1,0 +1,15 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+#instafeed {
+  flex-wrap: wrap;
+}
+@media screen and (max-width: 445px) {
+  .p3_instagram_post {
+    width: 50%;
+  }
+}
+@media (max-width: 767px) {
+  /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+  .body-content {
+    padding-top: 50px;
+  }
+}

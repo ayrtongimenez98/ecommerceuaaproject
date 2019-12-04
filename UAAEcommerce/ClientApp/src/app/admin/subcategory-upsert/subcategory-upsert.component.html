@@ -1,0 +1,32 @@
+<section class="container">
+  <form class="form-inline" [formGroup]="subCategoryForm" (ngSubmit)="upsertSubCategory()">
+    <div class="row w-100">
+      <div class="col-8 m-auto form-upsert">
+        <h1 class="section-title">{{ subCategoryId == null ? 'Agregar' : 'Editar' }} SubCategoría</h1>
+        <div>
+          <label style="flex-wrap: wrap; justify-content: flex-start; padding-bottom: 2em;">
+            Nombre:
+            <input type="text" class="form-control w-100" id="name" formControlName="name">
+            <span class="text_info text_warning" *ngIf="cf.name.invalid && (cf.name.dirty || cf.name.touched) && cf.name.errors.required">Este campo es obligatorio</span>
+            <span class="text_info text_warning" *ngIf="cf.name.invalid && (cf.name.dirty || cf.name.touched) && cf.name.errors.repeated">la subcategoria ingresada ya existe</span>
+          </label>
+        </div>
+        <h1 class="section-title w-100">Categoría</h1>
+        <mat-form-field>
+          <mat-select formControlName="categoryName" (selectionChange)="onCategorySelected($event.value)" [value]='this.categoryIdSelected' required>
+            <mat-option value="" disabled>Elija una categoria</mat-option>
+            <mat-option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="w-100 text-right">
+          <button (click)="back()" mat-button style="display: inline-flex; align-items: center; margin-bottom: 10px; margin-left: auto;" class="add-btn">
+            CANCELAR
+          </button>
+          <button type="submit" class="btn-primary btn-small" [disabled]="subCategoryForm.invalid" style="display: inline-flex;">
+            GUARDAR
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,157 @@
+<section class="breadcrumb">
+  <ul>
+    <li class="breadcrumb-link"><a routerLink="/">Inicio</a></li>
+    <li class="breadcrumb-link"><a>Carrito</a></li>
+  </ul>
+</section>
+<div class="container">
+  <div class="row" style="justify-content: flex-end;">
+    <div class="col-12 col-lg-4 d-flex totals" style="color: #515356">
+      <mat-icon style="font-size: 1.5em; margin: 0 20px 0 0; width: 1em; height: 100%; color: #54682A; display: flex; align-items: center;">shopping_cart</mat-icon>
+      <h1 class="section-title d-flex" style="margin: 0; line-height: 1; align-items: center">Carrito</h1>
+    </div>
+    <div class="totals col-12 col-lg-8 up">
+      <mat-icon class="icon-small">shopping_cart</mat-icon>
+      <label class="total">Total: </label>
+      <label class="total">Gs. {{ total | formatNumber }}</label>
+      <div [hidden]="isCartEmpty">
+        <button  class="btn-primary btn-line btn-small only-big" (click)="clickPayButton()" [hidden]="loading" *ngIf="isAuthenticated | async">Pagar</button>
+      </div>
+    </div>
+  </div>
+  <div class="row" [formGroup]="cartForm">
+    <mat-progress-bar mode="buffer" *ngIf="loading"></mat-progress-bar>
+    <div class="col-12 table-container" [hidden]="loading">
+      <table class="table mat-table">
+        <thead class="cart-header">
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Subtotal</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Borrar</th>
+            <th scope="col" class="d-flex" style="align-items: center;">
+              <mat-icon>card_giftcard</mat-icon>
+              ¿Para regalo?
+            </th>
+          </tr>
+        </thead>
+        <tbody formArrayName="items">
+          <tr>
+            <td colspan="7" [hidden]="!isCartEmpty" class="no-border">
+              <p class="product-name" style="text-align: center; padding: 25px;">No tienes ningun producto agregado en el carrito.</p>
+              <a routerLink="/shop" class="table-a">Explorar el Shop</a>
+            </td>
+          </tr>
+          <tr *ngFor="let item of getControl('items').controls; let i = index" [formGroupName]="i" class="product-row">
+            <td class="product-image">
+              <span>
+                <img class="product-thumb" [src]="item.get('photo')?.value" *ngIf="item.get('photo') != null" alt="imagen" />
+              </span>
+            </td>
+            <td>
+              <p class="product-name">{{item.get('name').value}}</p>
+            </td>
+            <td class="price">Gs. {{ item.get('price').value | formatNumber }}</td>
+            <td class="price">Gs. {{ item.get('subTotal').value | formatNumber }}</td>
+            <td>
+              <div class="cantidad">
+                <input type="number" name="name" formControlName="quantity" min="0" />
+                <button (click)="subtractItem(item)" [disabled]="item.get('quantity').value <= 0"><mat-icon>remove</mat-icon></button>
+                <button (click)="addItem(item)"><mat-icon>add</mat-icon></button>
+              </div>
+            </td>
+            <td class="options" style="text-align: center;">
+              <label class="small">Eliminar Item?</label>
+              <img (click)="deleteItem(item)" src="../../../assets/images/icons/cancel.png" alt="borrar">
+            </td> <!-- TODO: Descargar esta foto -->
+            <td class="options" style="text-align: left">
+              <p class="small">Para regalo?</p>
+              <label class="localmark spec-option gift-check">
+                <input type="checkbox" formControlName="forGift" />Sí
+                <span class="radiomark"></span>
+              </label>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td class="no-border"></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="container" [formGroup]="cartForm">
+  <div class="row table-container cart-options" id="cartOptions">
+    <div class="col-12 col-lg-4">
+      <div class="d-flex spec-item">
+        <label class="spec">
+          <mat-icon class="coupon-icon">loyalty</mat-icon>
+          <span class="col-title">
+            ¿Tenes un cupón? Efectualo aquí.
+          </span>
+        </label>
+        <label class="coupon-input">
+          <input type="text" maxlength="20" id="cupon" class="w-100" style="background: #eee; padding: 10px;" formControlName="coupon"/>
+          <span *ngIf="cf.coupon.valid && (cf.coupon.dirty || cf.coupon.touched)" class="valid"></span>
+        </label>
+      </div>
+    </div>
+    <div class="col-12 col-lg-2">
+      <h3 class="col-title">DELIVERY</h3>
+      <label class="d-flex product-options localmark" style="flex-wrap: wrap;">
+        Retirar del Bar
+        <input type="radio" name="deliveryMethod" id="rdlPickUp" value="TAKEOUT" formControlName="deliveryMethod" />
+        <span class="radiomark"></span>
+        <a (click)="mapClick()" class="w-100" style="color: #94BF00;">Ver en Maps</a>
+      </label>
+<!--      <label class="d-flex product-options localmark" style="flex-wrap: wrap;">-->
+<!--    Delivery-->
+<!--    <input type="radio" name="deliveryMethod" id="rdlDelivery" value="DELIVERY" formControlName="deliveryMethod" disabled/>-->
+<!--    <span class="radiomark"></span>-->
+<!--  </label>-->
+    </div>
+<!--    <div class="col-12 col-lg-2">-->
+<!--      <h3 class="col-title">MÉTODO DE PAGO</h3>-->
+<!--      <label class="d-flex product-options localmark" style="flex-wrap: wrap;">-->
+<!--        Efectivo-->
+<!--        <input type="radio" name="paymentMethod"/>-->
+<!--        <span class="radiomark"></span>-->
+<!--      </label>-->
+<!--      <label class="d-flex product-options localmark" style="flex-wrap: wrap;">-->
+<!--       Tarjeta-->
+<!--        <input type="radio" name="paymentMethod" value="Tarjeta"/>-->
+<!--        <span class="radiomark"></span>-->
+<!--      </label>-->
+<!--    </div>-->
+    <div class="col-6 col-lg-2" style="display: flex; justify-content: flex-end;">
+      <div class="subtotals">
+        <h3 class="col-title">RESUMEN</h3>
+        <label class="w-100">Subtotales: </label>
+        <label class="w-100">Delivery: </label>
+        <label class="w-100">Descuentos: </label>
+      </div>
+    </div>
+    <div class="col-6 col-lg-2" style="display: flex; justify-content: flex-end;">
+      <div class="subtotals">
+        <h3 class="col-title" style="color: white">RESUMEN</h3>
+        <label class="w-100">Gs. {{ subTotal | formatNumber }}</label>
+        <label class="w-100">Gs. {{ deliveryTotal | formatNumber }}</label>
+        <label class="w-100">Gs. {{ discounts | formatNumber }}</label>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="justify-content: flex-end; padding-top: 15px;">
+    <div class="totals">
+      <label class="total" style="margin-left: auto;">Total: </label>
+      <label class="total">Gs. {{ total | formatNumber }}</label>
+    </div>
+  </div>
+  <div class="row cart-actions" [hidden]="isCartEmpty">
+    <button class="btn-primary" [routerLink]='["/login"]' [queryParams]="{ returnUrl: '/cart' }" *ngIf="!(isAuthenticated | async)">Iniciar Sesión</button>
+    <button class="btn-primary btn-line" #payButton [hidden]="!(isAuthenticated | async)">Pagar</button>
+  </div>
+</div>

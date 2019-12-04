@@ -1,0 +1,88 @@
+button {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+.form-signin {
+  padding: 0 15px;
+  margin: 0 auto;
+  padding-bottom: 25px;
+}
+fieldset {
+  font-size: 12px;
+}
+.section-title {
+  margin-top: 0;
+  margin-bottom: .28em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.sidenav-btn {
+  color: #7A7A7A;
+  display: flex;
+  align-items: center;
+}
+.form-label {
+  width: 100%;
+  padding-bottom: 2.2em;
+  position: relative;
+}
+.form-label input {
+    width: 100%;
+    margin-top: 15px;
+    padding-right: 30px;
+  }
+.text_info {
+  position: absolute;
+  font-size: 0.8em;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
+
+.eye {
+  position: absolute;
+  right: 10px;
+  bottom: calc(50% - 13px);
+  z-index: 1;
+  cursor: pointer
+}
+.filter {
+  display: none;
+  margin-right: auto;
+  background: white;
+}
+.sidenav-btn {
+  width: 100%;
+}
+.mat-form-field {
+  margin-right: 15px;
+}
+.mat-form-field-suffix {
+  align-self: center;
+}
+.form-inputs {
+  display: inline-flex;
+}
+.passwords {
+  display: inline-flex;
+}
+@media screen and (max-width: 767px) {
+  .filter {
+    display: block;
+  }
+}
+@media screen and (max-width: 668px) {
+}
+@media screen and (max-width: 445px) {
+  .form-signin {
+    padding: 0;
+    padding-bottom: 30px;
+  }
+  .section-title {
+    font-size: 14px;
+    margin-left: 0.5em;
+    width: 100%;
+    padding: 7px 0;
+  }
+}

@@ -1,0 +1,55 @@
+h1 {
+  font-family: 'Pier Sans Bold', Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: white;
+  font-size: 1em;
+  text-align: center;
+  background: black;
+  padding: 25px;
+}
+h2 {
+  font-weight: bold;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: white;
+  font-size: 0.5em;
+  text-align: center;
+  background: black;
+  padding: 25px 25px;
+}
+.info {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: inherit;
+  padding-right: 90px;
+  font-size: 70px;
+}
+.notFound {
+  background: url(../../../assets/images/brand/notFoundBg.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 70vh;
+  height: 70vh;
+}
+@media screen and (max-width: 992px) {
+  .notFound {
+    background: url(../../../assets/images/brand/notFound.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 70vh;
+    height: 95vh;
+  }
+}
+@media screen and (max-width: 767px) {
+  .info {
+    padding: 15px;
+  }
+  h1, h2 {
+    color: white;
+  }
+}

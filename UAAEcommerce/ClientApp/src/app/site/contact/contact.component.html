@@ -1,0 +1,49 @@
+<section class="breadcrumb">
+  <ul>
+    <li class="breadcrumb-link"><a routerLink="/">Inicio</a></li>
+    <li class="breadcrumb-link"><a>Contacto</a></li>
+  </ul>
+</section>
+<section id="contact" class="container">
+  <div class="section-header col-12 col-lg-8 mr-auto ml-auto">
+    <img src="../../../assets/images/carrusel/carrusel4.jpg" alt="Barman sirviendo cerveza" class="hero" />
+    <img src="../../../assets/images/brand/logoB.svg" alt="Palo Santo Logo" class="logo-B" />
+    <div class="border-stripped"></div>
+  </div>
+  <div class="card d-flex col-12 col-lg-8 mr-auto ml-auto">
+    <h1 class="section-title">Contactanos</h1>
+    <form action="/" method="post" [formGroup]="contactForm" (ngSubmit)="sendmail()" class="form">
+      <label class="form-label">
+        <mat-icon>person</mat-icon>
+        Nombre:
+        <input type="text" id="materialContactFormName" class="form-control" formControlName="name" autocomplete="on">
+        <span *ngIf="contact.name.invalid && (contact.name.dirty || contact.name.touched)" class="text_info text_warning">
+          <span *ngIf="contact.name.errors.required">Este campo es obligatorio</span>
+        </span>
+      </label>
+      <label class="form-label">
+        <mat-icon>alternate_email</mat-icon>
+        E-mail:
+        <span *ngIf="contact.message.invalid && (contact.message.dirty || contact.message.touched)" class="text_info text_warning">
+          <span *ngIf="contact.email.errors.required">Este campo es obligatorio</span>
+          <span>Este campo tiene que ser un email valido</span>
+        </span>
+        <input type="email" id="materialContactFormEmail" class="form-control" formControlName="email">
+      </label>
+      <label class="form-label">
+        <mat-icon>message</mat-icon>
+        Mensaje:
+        <textarea placeholder="Sugerencia o mensaje" formControlName="message"></textarea>
+        <span class="text_info text_warning" *ngIf="contact.message.invalid && (contact.message.dirty || contact.message.touched)">
+          <span *ngIf="contact.message.errors.required">Este campo es obligatorio</span>
+        </span>
+      </label>
+      <button class="btn-primary" style="padding-right: 98px; margin: 1em auto;" type="submit" [disabled]="contactForm.invalid">
+        Enviar
+        <mat-icon style="position: absolute; top: auto; right: 48px">send</mat-icon>
+      </button>
+    </form>
+  </div>
+  <div>
+  </div>
+</section>

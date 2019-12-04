@@ -1,0 +1,71 @@
+<section class="breadcrumb">
+  <ul>
+    <li class="breadcrumb-link"><a routerLink="/">Inicio</a></li>
+    <li class="breadcrumb-link"><a>Cambiar contraseña</a></li>
+  </ul>
+</section>
+<main class="main_acceso">
+  <section class="acceso" id="acceso">
+    <div class="container">
+      <div class="row">
+        <div class="section-header col-12 col-lg-8 mr-auto ml-auto">
+          <img src="../../../assets/images/carrusel/carrusel4.jpg" alt="Barman sirviendo cerveza" class="hero"/>
+          <img src="../../../assets/images/brand/logoB.svg" alt="Palo Santo Logo" class="logo-B"/>
+          <div class="border-stripped"></div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="col-lg-8" style="margin: auto;">
+          <div class="card">
+            <form class="form-signin" *ngIf="!hidePass" [formGroup]="sendForm" (submit)="sendEmailForResetPass()">
+              <label class="form-label">
+                Email:
+                <input type="text" placeholder="correo electrónico" required formControlName="username"
+                       autocomplete="on">
+                <span *ngIf="sf.username.invalid && (sf.username.dirty || sf.username.touched)">
+                      <span class="text_info text_warning"
+                            *ngIf="sf.username.errors.required">Este campo es obligatorio</span>
+                      <span class="text_info text_warning"
+                            *ngIf="sf.username.errors.email">Ingrese un email valido</span>
+                    </span>
+              </label>
+              <button class="btn-primary btn-block" type="submit" [disabled]="sendForm.invalid"
+                      style="max-width: 13em; margin: auto; margin-bottom: 30px">
+                <label [hidden]="loading">Enviar</label>
+                <mat-spinner [diameter]="40" *ngIf="loading"></mat-spinner>
+              </button>
+            </form>
+            <form class="form-signin" [formGroup]="resetForm" *ngIf="hidePass" (ngSubmit)="resetPassword()">
+              <label class="form-label" formGroupName="passwords">
+                Contraseña:
+                <input type="password" id="inputPass" formControlName="password">
+                <span *ngIf="rfp.password.invalid && (rfp.password.dirty || rfp.password.touched)">
+              <mat-error *ngIf="rfp.password.errors?.required">Este campo es obligatorio</mat-error>
+            </span>
+                <span *ngIf="rfp.password.invalid && (rfp.password.dirty || rfp.password.touched)">
+              <mat-error *ngIf="rfp.password.errors?.minlength">La contraseña debe contener mas de 6 caracteres</mat-error>
+            </span>
+              </label>
+              <label class="form-label" formGroupName="passwords">
+                Confirmar Contraseña:
+                <input type="password" id="inputPass2" formControlName="confirmPassword">
+                <span *ngIf="rfp.confirmPassword.invalid && (rfp.confirmPassword.dirty || rfp.confirmPassword.touched)">
+              <mat-error *ngIf="rfp.confirmPassword.errors?.required">Este campo es obligatorio</mat-error>
+              <br/>
+            </span>
+                <span *ngIf="rf.passwords.invalid && (rf.passwords.dirty || rf.passwords.touched)">
+              <mat-error *ngIf="rf.passwords.errors?.confirmPassword">Las contraseñas no son iguales</mat-error>
+            </span>
+              </label>
+              <button class="btn-primary btn-block" type="submit" [disabled]="resetForm.invalid"
+                      style="max-width: 13em; margin: auto; margin-bottom: 30px">
+                <label [hidden]="loading">Cambiar</label>
+                <mat-spinner [diameter]="40" *ngIf="loading"></mat-spinner>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+

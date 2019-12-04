@@ -1,0 +1,53 @@
+<section class=" container">
+  <div class="row" style="margin-top: 30px;">
+    <div class="col-12 product-container">
+      <mat-progress-bar mode="buffer" *ngIf="loading"></mat-progress-bar>
+      <table class="mat-elevation-z6 mat-table" role="grid">
+        <thead role="rowgroup">
+          <tr style=" background: white">
+            <td class="mat-table-sticky" style="top: 0px; position: sticky; z-index: 100;" colspan="6">
+              <h1 class="section-title">Productos</h1>
+            </td>
+          </tr>
+          <tr class="mat-header-row">
+            <th class="mat-header-cell" style="top: 30.4px; position: sticky; z-index: 100;">#</th>
+            <th class="mat-header-cell" style="top: 30.4px; position: sticky; z-index: 100;">Nombre</th>
+            <th class="mat-header-cell" style="top: 30.4px; position: sticky; z-index: 100;">Categoria</th>
+            <th class="mat-header-cell" style="top: 30.4px; position: sticky; z-index: 100;">Descripción</th>
+            <th class="mat-header-cell" style="top: 30.4px; position: sticky; z-index: 100;">Precio</th>
+            <th class="mat-header-cell" style="top: 30.4px; position: sticky; z-index: 100;">Opciones</th>
+          </tr>
+        </thead>
+        <tbody role="rowgroup" [hidden]="loading">
+          <tr *ngFor="let product of products; let i = index;" role="row" class="mat-row">
+            <td class="mat-cell cell-id" role="gridcell" title="{{ product.id }}">{{i + 1 }}</td>
+            <td class="mat-cell" role="gridcell">{{ product.name }}</td>
+            <td class="mat-cell" role="gridcell">{{ product.subCategory.category.name }}</td>
+            <td class="mat-cell description" role="gridcell">{{ product.description }}</td>
+            <td class="mat-cell price" role="gridcell">Gs. {{product.price | formatNumber}}</td>
+            <td class="mat-cell" role="gridcell">
+              <button mat-button [routerLink]="['/admin/product-upsert', product.id]">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-button (click)="deleteProduct(product.id)">
+                <mat-icon>clear</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot role="rowgroup" class="mat-table-sticky" style="bottom: 0px; position: sticky; z-index: 10;">
+          <tr _ngcontent-auu-c38="" class="mat-footer-row ng-star-inserted" role="row">
+            <td colspan="6" class="mat-footer-cell mat-table-sticky ng-star-inserted" role="gridcell" style="bottom: 0px; position: sticky; z-index: 10;">
+              <nav class="administrador">
+                <button routerLink="/admin/product-upsert" class="add-btn">
+                  <mat-icon>add</mat-icon>
+                  AGREGAR
+                </button>
+              </nav>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</section>

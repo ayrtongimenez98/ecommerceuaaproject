@@ -1,0 +1,4 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+.flickity-viewport {
+  width: 100% !important;
+}

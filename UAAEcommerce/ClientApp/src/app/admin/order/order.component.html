@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row">
+    <mat-list>
+      <mat-list-item>
+        <label style="margin-right: 8px;">Estado:</label>
+        <mat-chip-list aria-label="Status" [ngSwitch]="orderState">
+          <mat-chip *ngSwitchCase="'Ninguno'" class="ninguno">Ninguno</mat-chip>
+          <mat-chip *ngSwitchCase="'Pendiente'" class="pending">Pendiente</mat-chip>
+          <mat-chip *ngSwitchCase="'Pagado'" class="payed" selected>Pagado</mat-chip>
+          <mat-chip *ngSwitchCase="'Cancelado'" class="cancelled" selected>Cancelado</mat-chip>
+        </mat-chip-list>
+      </mat-list-item>
+      </mat-list>
+        <div class="col-12 col-lg-5 d-flex" style="color: #515356; flex-wrap: wrap;">
+          <h1 class="d-flex order-number">
+            Orden de compra N°:
+            {{this.order.numeroPedido}}
+          </h1>
+        </div>
+</div>
+  <div class="row">
+    <div class="col-12 table-container">
+      <mat-progress-bar mode="buffer" *ngIf="loading"></mat-progress-bar>
+      <table class="table table-big" [hidden]="loading">
+        <thead class="cart-header">
+          <tr>
+            <th scope="col"></th>
+            <th scope="col" class="text-center">Nombre</th>
+            <th scope="col" class="text-center">Cantidad</th>
+            <th scope="col" class="text-center">Precio</th>
+            <th scope="col">Subtotal</th>
+            <th scope="col" class="text-center">Regalo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of []">
+            <td>
+              <span *ngFor="let photo of item.product.photos">
+                <span *ngFor="let photoitem of photo.images">
+                  <img src="https://palosanto.blob.core.windows.net/development-photos/{{photoitem.blobName}}" alt="{{item.product.name}}" class="product-image" />
+                </span>
+              </span>
+            </td>
+            <td class="text-center">{{item.product.name}}</td>
+            <td class="text-center">{{item.quantity}}</td>
+            <td class="text-center">Gs. {{item.product.price}}</td>
+            <td>Gs. {{item.quantity * item.product.price}}</td>
+            <td class="text-center">Si</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" class="total w-100" style="max-width: unset;">Total: {{total}} Gs.</td>
+          </tr>
+        </tfoot>
+      </table>
+      <!--<mat-divider></mat-divider>
+      <div class="row">
+        <div class="col-12">
+          <h3 class="subtitle">DETALLES</h3>
+          <a class="a-link">Datos de Delivery</a>
+          <a class="a-link">Datos Facturacion</a>
+        </div>
+      </div>-->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,91 @@
+<section class=" container">
+  <div class="row">
+    <div class="col-3 form-upsert" style="max-height: 110px;">
+      <button mat-button (click)="back()" style="display: flex; align-items: center; margin-bottom: 10px;" class="add-btn">
+        CANCELAR
+      </button>
+    </div>
+    <div class="form-upsert d-flex col-12 col-sm-8 m-auto" style="flex-wrap: wrap;">
+      <mat-progress-bar mode="buffer" *ngIf="process"></mat-progress-bar>
+      <form [formGroup]="userForm" (ngSubmit)="upsertUser()" class="form-inline" [hidden]="process">
+        <h1 class="section-title">{{ userId == null ? 'Agregar' : 'Editar' }} Usuario</h1>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="inputUsername">
+              <p>Nombre de Usuario:</p>
+              <input type="text" id="inputUsername" placeholder="Nombre de Usuario" formControlName="username">
+              <mat-error class="text_info text_warning" *ngIf="uf.username.invalid && (uf.username.dirty || uf.username.touched) && uf.username.errors.required">Este campo es obligatorio</mat-error>
+              <mat-error class="text_info text_warning" *ngIf="uf.username.invalid && (uf.username.dirty || uf.username.touched) && uf.username.errors.repeated">Este nombre ya existe</mat-error>
+              <mat-error class="text_info text_warning" *ngIf="uf.username.invalid && (uf.username.dirty || uf.username.touched) && uf.username.errors.minlength">El nombre de usuario tiene que tener por lo menos 3 caracteres</mat-error>
+            </label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-12 col-md-6">
+            <label class="form-label" for="inputName">
+              <p>Nombre:</p>
+              <input type="text" id="inputName" placeholder="Nombre" formControlName="firstName">
+              <mat-error class="text_info text_warning" *ngIf="uf.firstName.invalid && (uf.firstName.dirty || uf.firstName.touched)">Este campo es obligatorio</mat-error>
+            </label>
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <label class="form-label" for="inputApellido">
+              <p>Apellido:</p>
+              <input type="text" id="inputApellido" placeholder="Apellido" formControlName="lastName">
+              <mat-error class="text_info text_warning" *ngIf="uf.lastName.invalid && (uf.lastName.dirty || uf.lastName.touched)">Este campo es obligatorio</mat-error>
+            </label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-12 col-md-6">
+            <label class="form-label" for="inputCellphone">
+              <p>Teléfono:</p>
+              <input type="text" id="inputCellphone" formControlName="cellphone">
+              <mat-error class="text_info text_warning" *ngIf="uf.cellphone.invalid && (uf.cellphone.dirty || uf.cellphone.touched)">Este campo es obligatorio</mat-error>
+            </label>
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <label class="form-label" for="inputRoles">
+              <p>Roles:</p>
+              <select id="inputRoles" formControlName="roles" multiple>
+                <option *ngFor="let role of roles" [value]="role.name">{{ role.name }}</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-12 col-md-6">
+            <label class="form-label" for="inputPassword">
+              <p>Nueva contraseña</p>
+              <input type="password" id="inputPassword" [formControl]="uf.passwords.get('password')" autocomplete="new-password" />
+              <a class="eye" (click)="mostrarPass('inputPassword', 'i_repassw')">
+                <mat-icon id="i_repassw">visibility</mat-icon>
+              </a>
+            </label>
+          </div>
+          <div class="form-group col-12 col-md-6">
+            <label class="form-label" for="inputRePassword">
+              <p>Repetir contraseña</p>
+              <input type="password" id="inputRePassword" [formControl]="uf.passwords.get('rePassword')">
+              <a class="eye" (click)="mostrarPass('inputRePassword', 'i_repassw2')">
+                <mat-icon id="i_repassw2">visibility</mat-icon>
+              </a>
+              <mat-error class="text_info text_warning" autocomplete="new-password" *ngIf="uf.passwords.invalid && (uf.passwords.dirty || uf.passwords.touched)">Las contraseñas tiene que ser iguales</mat-error>
+            </label>
+          </div>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn-primary btn-small ml-auto" [disabled]="userForm.invalid">
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+
+</section>

@@ -1,0 +1,133 @@
+<section class="breadcrumb">
+  <ul>
+    <li class="breadcrumb-link"><a routerLink="/">Inicio</a></li>
+    <li class="breadcrumb-link"><a>Completa tus datos</a></li>
+  </ul>
+</section>
+<div class="container">
+  <div class="row">
+    <div class="section-header col-12 col-sm-8 mr-auto ml-auto">
+      <img src="../../../assets/images/carrusel/carrusel4.jpg" alt="Barman sirviendo cerveza" class="hero" />
+      <img src="../../../assets/images/brand/logoB.svg" alt="Palo Santo Logo" class="logo-B" />
+      <div class="border-stripped"></div>
+    </div>
+    <div class="col-sm-8" style="margin: auto;">
+      <div class="card">
+        <form class="form-signin" [formGroup]="registerForm" (ngSubmit)="updateUser()">
+          <fieldset>
+            <div class="col-12 col-md-5 form-inputs">
+              <label class="form-label">
+                Nombre:
+                <input type="text" id="inputFirstName" matInput formControlName="firstName">
+                <mat-error *ngIf="rf.firstName.invalid && (rf.firstName.dirty || rf.firstName.touched) && rf.firstName.errors.required">Este campo es obligatorio</mat-error>
+              </label>
+            </div>
+            <div class="col-12 col-md-5 form-inputs">
+              <label class="form-label">
+                Apellido:
+                <input type="text" matInput id="inputLastName" formControlName="lastName">
+                <mat-error *ngIf="rf.lastName.invalid && (rf.lastName.dirty || rf.lastName.touched) && rf.lastName.errors.required">Este campo es obligatorio</mat-error>
+              </label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <div class="col-12 col-md-5 form-inputs">
+              <label class="fomr-label">
+                Correo electrónico:
+                <input type="text" matInput id="inputEmail" formControlName="email">
+                <mat-error *ngIf="rf.email.invalid && (rf.email.dirty || rf.email.touched) && rf.email.errors.required">Este campo es obligatorio</mat-error>
+              </label>
+            </div>
+            <div class="col-12 col-md-5 form-inputs">
+              <label class="form-label">
+                Documento:
+                <input type="text" matInput id="inputDocument" formControlName="document" autocomplete="on">
+                <mat-error *ngIf="rf.document.invalid && (rf.document.dirty || rf.document.touched) && rf.document.errors.required">Este campo es obligatorio</mat-error>
+              </label>
+            </div>
+          </fieldset>
+          <fieldset formGroupName="passwords">
+            <div class="col-12 col-md-5 passwords">
+              <label class="form-label">
+                Contraseña Nueva:
+                <input type="password" matInput id="inputPass" formControlName="password">
+                <a class="eye" (click)="mostrarPass('inputPass', 'i_repassw')">
+                  <mat-icon id="i_repassw">visibility</mat-icon>
+                </a>
+                <span *ngIf="rfp.password.invalid && (rfp.password.dirty || rfp.password.touched)"  class="text_info">
+                  <mat-error *ngIf="rfp.password.errors?.required">Este campo es obligatorio</mat-error>
+                </span>
+                <span *ngIf="rfp.password.invalid && (rfp.password.dirty || rfp.password.touched)"  class="text_info">
+                  <mat-error *ngIf="rfp.password.errors?.minlength">El password debe contener mas de 6 caracteres</mat-error>
+                </span>
+              </label>
+            </div>
+            <div class="col-12 col-md-5 passwords">
+              <label class="form-label">
+                Repetir Contraseña:
+                <input type="password" matInput id="inputPass2" formControlName="rePassword" autocomplete="new-password">
+                <a class="eye" (click)="mostrarPass('inputPass2', 'i_repassw2')">
+                  <mat-icon id="i_repassw2">visibility</mat-icon>
+                </a>
+                <span *ngIf="rfp.rePassword.invalid && (rfp.rePassword.dirty || rfp.rePassword.touched)"  class="text_info">
+                  <mat-error *ngIf="rfp.rePassword.errors?.required">Este campo es obligatorio</mat-error>
+                  <br />
+                </span>
+                <span *ngIf="rf.passwords.invalid && (rf.passwords.dirty || rf.passwords.touched)"  class="text_info">
+                  <mat-error *ngIf="rf.passwords.errors?.confirmPassword">Las contraseñas no son iguales</mat-error>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <div class="col-12 col-md-5 form-inputs">
+              <label class="form-label">
+                Dirección:
+                <input type="text" matInput id="inputAddress" formControlName="address">
+                <mat-error *ngIf="rf.address.invalid && (rf.address.dirty || rf.address.touched) && rf.address.errors.required">Este campo es obligatorio</mat-error>
+              </label>
+            </div>
+            <div class="col-12 col-md-5 form-inputs">
+              <label class="form-label">
+                Ciudad:
+                <input type="text" matInput id="inputCity" formControlName="city">
+                <mat-error *ngIf="rf.city.invalid && (rf.city.dirty || rf.city.touched) && rf.city.errors.required">Este campo es obligatorio</mat-error>
+              </label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <div class="col-12 col-md-5 form-inputs">
+              <label class="form-label">
+                Razón Social:
+                <input type="text" matInput id="inputRazonSocial" formControlName="razonSocial" autocomplete="on">
+              </label>
+            </div>
+            <div class="col-12 col-md-5 form-inputs">
+              <label class="form-label">
+                RUC:
+                <input type="text" matInput id="inputRuc" formControlName="ruc">
+              </label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <div class="col-12 col-md-5 form-inputs">
+              <label class="form-label">
+                Fecha de Nacimiento:
+                <input type="date" matInput formControlName="date">
+              </label>
+            </div>
+            <div class="col-12 col-md-5 form-inputs">
+              <label class="form-label">
+                Teléfono:
+                <input type="text" matInput formControlName="phone">
+              </label>
+            </div>
+          </fieldset>
+          <button class="btn-primary btn-block" type="submit" [disabled]="registerForm.invalid" style="max-width: 18em; margin: auto; margin-bottom: 30px; margin-top: 30px;">
+            Guardar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<li class="nav-item" [routerLinkActive]='["link-active"]' style="border: none;">
+  <a class="nav-link text-dark cart" [routerLink]='["/cart"]'>
+    <img src="../../assets/images/icons/i_cart.svg" style="margin-right: 5px;"/>
+    <span matBadge="{{quantity}}" matBadgeOverlap="true" matBadgePosition="above after" class="badge"></span>
+    <h5 class="nav-cart-total">{{ price | formatNumber }} Gs.</h5>
+    <img src="../../../assets/images/icons/loading.gif" width="32" height="32" *ngIf="loading" />
+  </a>
+</li>

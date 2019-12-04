@@ -38,5 +38,8 @@ namespace UAAEcommerce.Areas.Admin.Models
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<TipoCliente> TipoCliente { get; set; }
         public virtual DbSet<TipoProducto> TipoProducto { get; set; }
+        public virtual DbSet<Entrega> Entrega { get; set; }
+
+        public System.Data.Entity.DbSet<UAAEcommerce.Models.ContactModel> ContactModels { get; set; }
     }
 }

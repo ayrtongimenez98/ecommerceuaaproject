@@ -1,0 +1,60 @@
+<section class="breadcrumb">
+  <ul>
+    <li class="breadcrumb-link"><a routerLink="/">Inicio</a></li>
+    <li class="breadcrumb-link"><a>Shop</a></li>
+  </ul>
+</section>
+<section id="shop" class="container">
+  <div class="row">
+    <mat-sidenav-container [style.marginTop.px]="56">
+        <mat-sidenav #snav [mode]="'over'" fixedTopGap="56">
+          <mat-nav-list>
+            <button mat-list-item (click)="filterCategory('')" routerLink="/shop" class="subcategory" [ngClass]="{'active': categoryIdSelected == null}">TODAS</button>
+            <button mat-list-item *ngFor="let category of this.categories" [id]="category.id" (click)="getSubCategories($event.currentTarget)" class="subcategory" [ngClass]="{'active': this.categoryIdSelected == category.id}">{{category.name}}</button>
+          </mat-nav-list>
+          <mat-divider></mat-divider>
+          <mat-nav-list *ngIf="categoryIdSelected != null">
+            <span *ngFor="let subCategory of this.subCategories" [id]="subCategory.id" (click)="filterSubCategory($event.currentTarget)"> <a class="subcategory">{{subCategory.name}}</a></span>
+          </mat-nav-list>
+        </mat-sidenav>
+      </mat-sidenav-container>
+    <button mat-button (click)="snav.toggle()" class="menu-toggle filter" style="margin-left: auto;">
+          <mat-icon>filter_list</mat-icon>
+          Filtrar productos
+      </button>
+    <nav class="nav-shop">
+        <ul class="d-flex">
+          <li (click)="filterCategory('')"><a routerLink="/shop" class="subcategory" [ngClass]="{'active': categoryIdSelected == null}">TODAS</a></li>
+          <li *ngFor="let category of this.categories" [id]="category.id" (click)="getSubCategories($event.currentTarget)"><a class="subcategory" [ngClass]="{'active': this.categoryIdSelected == category.id}">{{category.name}}</a></li>
+        </ul>
+      </nav>
+  </div>
+  <div class="row">
+    <nav class="nav-products">
+      <ul class="d-flex" *ngIf="categoryIdSelected != null">
+        <li *ngFor="let subCategory of this.subCategoriesTab" [id]="subCategory.id" (click)="filterSubCategory($event.currentTarget)"> <a class="subcategory" [ngClass]="{'active': this.categoryIdSelected == subCategory.id}">{{subCategory.name}}</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="row cards">
+    <div class="col-12">
+      <img src="../../../assets/images/brand/nitsugaB.svg" alt="Nitsuga" class="logo-nitsuga" />
+    </div>
+    <mat-spinner [diameter]="50" *ngIf="loading"></mat-spinner>
+    <div class="card col-12 col-sm-10 col-md-6 col-lg-3 col-xl-3" *ngFor="let product of products">
+      <img class="card-img-top" src="{{getMainPhoto(product)}}" alt="{{product.name}}">
+      <div class="card-body">
+        <a [routerLink]="['/product', product.id]" class="card-title">{{product.name}}</a>
+        <p class="card-text">{{product.description}}</p>
+        <p class="card-price">Gs. {{product.price | formatNumber}}</p>
+      </div>
+      <div class="d-flex" style="align-items: center; justify-content: center; padding-top: 15px;">
+        <button mat-button class="shop-btn" (click)="openModal(product)">
+          AGREGAR
+        </button>
+        <button mat-button class="shop-btn" [routerLink]="['/product', product.id]">DETALLES</button>
+      </div>
+    </div>
+  </div>
+</section>
+

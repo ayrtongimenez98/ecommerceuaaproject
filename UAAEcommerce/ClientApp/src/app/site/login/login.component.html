@@ -1,0 +1,71 @@
+<section class="breadcrumb">
+  <ul>
+    <li class="breadcrumb-link"><a routerLink="/">Inicio</a></li>
+    <li class="breadcrumb-link"><a>Login</a></li>
+  </ul>
+</section>
+<main class="main_acceso" *ngIf="!process; else redirecting">
+  <section class="acceso" id="acceso">
+    <div class="container">
+      <div class="row">
+        <div class="section-header col-12 col-lg-8 mr-auto ml-auto">
+          <img src="../../../assets/images/carrusel/carrusel4.jpg" alt="Barman sirviendo cerveza" class="hero" />
+          <img src="../../../assets/images/brand/logoB.svg" alt="Palo Santo Logo" class="logo-B" />
+          <div class="border-stripped"></div>
+        </div>
+        <div class="col-lg-8" style="margin: auto;">
+          <div class="card d-flex social">
+            <button type="button" (click)="socialSignIn('facebook')"><img src="../../../assets/images/icons/log-in-fb.png" alt="Ingresar con Facebook" class="img-login" /></button>
+            <button type="button" (click)="socialSignIn('google')"><img src="../../../assets/images/icons/log-in-google.png" alt="Ingresar con Google" class="img-login" /></button>
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+        <div class="col-lg-8" style="margin: auto;">
+          <div class="card">
+            <form class="form-signin" [formGroup]="loginForm" (submit)="login()">
+              <label class="form-label">
+                Nombre:
+                <input type="text" placeholder="correo electrónico" required autofocus formControlName="username" autocomplete="on">
+                <span *ngIf="lf.username.invalid && (lf.username.dirty || lf.username.touched)">
+                  <span class="text_info text_warning" *ngIf="lf.username.errors.required">Este campo es obligatorio</span>
+                </span>
+              </label>
+              <label class="form-label">
+                Contraseña:
+                <input type="password" placeholder="Password" required formControlName="password" class="inputPassword" id="repassw" />
+                <a class="eye" (click)="mostrarPass('repassw', 'i_repassw')">
+                  <mat-icon id="i_repassw">visibility</mat-icon>
+                </a>
+                <span *ngIf="lf.password.invalid && (lf.password.dirty || lf.password.touched)">
+                  <span class="text_info text_warning" *ngIf="lf.password.errors.required">Este campo es obligatorio</span>
+                </span>
+              </label>
+              <button class="btn-primary btn-block" type="submit" [disabled]="loginForm.invalid" style="max-width: 13em; margin: auto; margin-bottom: 30px">
+                <label [hidden]="loading">Entrar</label>
+                <mat-spinner [diameter]="40" *ngIf="loading"></mat-spinner>
+              </button>
+              <ul class="nav-low">
+                <li class="nav-item">
+                  <a href="#" [routerLink]='["/reset-account"]' class="nav-link new-account">¿Olvidaste tu contraseña?</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link new-account" [routerLink]='["/register"]'>Crear cuenta</a>
+                </li>
+              </ul>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<ng-template #redirecting>
+  <section id="loader">
+    <div class="contenedor">
+      <img src="assets/images/brand/logoV.svg" alt="Palo Santo Brewing Co. Logotipo" class="logo logo-loader" />
+      <div class="track">
+      </div>
+    </div>
+  </section>
+</ng-template>

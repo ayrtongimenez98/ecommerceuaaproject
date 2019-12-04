@@ -1,0 +1,10 @@
+#dashboard {
+  /*background: url(/../assets/images/brand/iso_pattern.svg);
+  background-repeat: repeat-x; 
+  width: 100%;
+  background-position: bottom;*/
+  background-color: rgba(84, 104, 42, 0.09);
+  padding-top: 30px;
+  padding-bottom: 30px;
+  min-height: 90vh;
+}

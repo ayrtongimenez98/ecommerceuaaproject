@@ -1,0 +1,64 @@
+<div style="background: white; padding: 15px;">
+  <label>
+    Filtrar:
+    <input type="text" matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </label>
+  <h1 class="section-title">
+    <mat-icon>library_books</mat-icon>
+    Órdenes
+  </h1>
+  <mat-progress-bar mode="buffer" *ngIf="loading"></mat-progress-bar>
+  <table [dataSource]="dataSource" matSort mat-table [hidden]="loading">
+    <ng-container cdkColumnDef="numeroPedido">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Nº Pedido </th>
+      <td mat-cell *cdkCellDef="let element">{{element.numeroPedido}}</td>
+    </ng-container>
+    <ng-container cdkColumnDef="username">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Usuario </th>
+      <td mat-cell *cdkCellDef="let element">{{element.user.username}}</td>
+    </ng-container>
+    <ng-container cdkColumnDef="date">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Fecha orden </th>
+      <td mat-cell *cdkCellDef="let element">{{element.date}}</td>
+    </ng-container>
+    <ng-container cdkColumnDef="cantItems">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Cantidad </th>
+      <td mat-cell *cdkCellDef="let element">{{element.cantItems}}</td>
+    </ng-container>
+    <ng-container cdkColumnDef="paymentMethod">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Metodo de pago </th>
+      <td mat-cell *cdkCellDef="let element">{{element.paymentMethod}}</td>
+    </ng-container>
+    <ng-container cdkColumnDef="total">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Total </th>
+      <td mat-cell *cdkCellDef="let element">{{element.total}}</td>
+    </ng-container>
+    <ng-container cdkColumnDef="status">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Estado </th>
+      <td mat-cell *cdkCellDef="let element">
+        {{element.status}}
+        <mat-chip-list aria-label="Status" [ngSwitch]="orderState">
+          <mat-chip *ngSwitchCase="'Ninguno'" class="ninguno">Ninguno</mat-chip>
+          <mat-chip *ngSwitchCase="'Pendiente'" class="pending">Pendiente</mat-chip>
+          <mat-chip *ngSwitchCase="'Pagado'" class="payed" selected>Pagado</mat-chip>
+          <mat-chip *ngSwitchCase="'Cancelado'" class="cancelled" selected>Cancelado</mat-chip>
+        </mat-chip-list>
+      </td>
+    </ng-container>
+    <ng-container cdkColumnDef="hash">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <td mat-cell *cdkCellDef="let element">
+        <button mat-button (click)="updateOrderDetails(element.hash)">
+          <mat-icon>refresh</mat-icon><!--TODO [ngclass]="refreshing"-->
+        </button>
+        <button mat-button (click)="goOrder(element.hash)">
+          <mat-icon>open_in_new</mat-icon><!--TODO [ngclass]="refreshing"-->
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let element; columns: displayedColumns"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+</div>
+

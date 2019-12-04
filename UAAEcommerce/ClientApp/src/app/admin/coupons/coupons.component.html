@@ -1,0 +1,52 @@
+<section class="container">
+  <div class="row">
+    <div class="col-12">
+      <p class="page-desc">En esta página configuras cupones de descuento</p>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 30px;">
+    <mat-progress-bar mode="buffer" *ngIf="loading"></mat-progress-bar>
+    <table class="mat-elevation-z6 mat-table" role="grid">
+      <thead role="rowgroup">
+        <tr style=" background: white">
+          <td class="mat-table-sticky" style="top: 0px; position: sticky; z-index: 100;" colspan="5">
+            <h1 class="section-title">
+              <mat-icon>loyalty</mat-icon>
+              Cupones
+            </h1>
+          </td>
+        </tr>
+        <tr class="mat-header-row">
+          <th class="mat-header-cell" style="top: 30.44px; position: sticky; z-index: 100;">Codigo</th>
+          <th class="mat-header-cell" style="top: 30.44px; position: sticky; z-index: 100;">Descripción</th>
+          <th class="mat-header-cell" style="top: 30.44px; position: sticky; z-index: 100;">Estado</th>
+          <th class="mat-header-cell" style="top: 30.44px; position: sticky; z-index: 100;">Porcentaje</th>
+          <th class="mat-header-cell" style="top: 30.44px; position: sticky; z-index: 100;">Opciones</th>
+        </tr>
+      </thead>
+      <tbody [hidden]="loading">
+        <tr *ngFor="let coupon of coupons" role="row" class="mat-row">
+          <td class="mat-cell" role="gridcell" title="{{ coupon.code }}" #code>{{ coupon.code }}</td>
+          <td class="mat-cell" role="gridcell">{{ coupon.description }}</td>
+          <td class="mat-cell" role="gridcell">{{ coupon.status }}</td>
+          <td class="mat-cell" role="gridcell">{{ coupon.percentage }}%</td>
+          <td>
+            <button mat-button (click)="delete(coupon.id)">
+              <mat-icon>clear</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot role="rowgroup" class="mat-table-sticky" style="bottom: 0px; position: sticky; z-index: 10;">
+        <tr _ngcontent-auu-c38="" class="mat-footer-row ng-star-inserted" role="row">
+          <td colspan="5" class="mat-footer-cell cdk-column-cost mat-column-cost mat-table-sticky ng-star-inserted" role="gridcell" style="bottom: 0px; position: sticky; z-index: 10;">
+            <button routerLink="/admin/coupon-upsert" class="add-btn">
+              <mat-icon>add</mat-icon>
+              Agregar
+            </button>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</section>

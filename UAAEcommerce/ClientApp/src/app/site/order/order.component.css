@@ -1,0 +1,318 @@
+table td {
+  vertical-align: middle !important;
+  padding: .75rem 5px !important;
+}
+th, label {
+  color: #7A7A7A;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+label {
+  margin: 0;
+}
+.product-row {
+  border-bottom: 1px solid #dee2e6;
+}
+.table-container {
+  background: white;
+  padding: 25px 25px 0;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+.table td {
+  padding: .75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+  font-size: 13px;
+}
+.status {
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;
+  margin-left: 0px;
+  margin-left: 7px;
+  display: inline-flex;
+}
+.subtotals {
+  font-size: 18px;
+  width: 100%;
+  text-align: right;
+  padding: 15px;
+}
+.totals {
+  font-size: 24px;
+  display: flex;
+  width: 100%;
+  padding: 15px;
+  border-radius: 4px;
+  background: white;
+}
+.label-title {
+  color: #7A7A7A;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: "Pier Sans Bold";
+  font-size: 9pt;
+  margin-bottom: 25px;
+}
+.section-title {
+  font-size: 1.8em;
+}
+.order-number {
+  padding: 0;
+  padding-left: 18px;
+  margin-left: -15px;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: #afafaf;
+  flex-wrap: wrap;
+}
+.total {
+  font-family: "Pier Sans Bold";
+  color: #54682A;
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+}
+.product-name {
+  font-family: "Bushcraft", Impact;
+  font-size: 1.6em;
+  margin: 0;
+  line-height: 1;
+}
+.section-title {
+  font-family: "Pier Sans Bold";
+}
+.product-row {
+  border-bottom: 1px solid #dee2e6;
+}
+.product-thumb {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+.cart-options {
+  padding-bottom: 25px;
+}
+.icon-small {
+  font-size: 1.5em;
+  margin: 0 10px 0 0;
+  width: 15px;
+  height: 100%;
+  color: #54682A;
+  display: none;
+  align-items: center;
+}
+.coupon-actions {
+  justify-content: space-around;
+}
+.td-p {
+  display: inline-block;
+  transform: translateY(-5px);
+  margin-left: 7px;
+  margin-bottom: 0;
+}
+.product-options {
+  padding-bottom: 15px;
+  border-bottom: 1px solid #dee2e6;
+}
+.cart-options h5 {
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: #7A7A7A;
+}
+@media screen and (max-width: 1600px) {
+}
+
+@media screen and (max-width: 1200px) {
+  .product-image {
+    max-width: 155px;
+    width: 155px;
+  }
+
+  table td {
+    vertical-align: middle !important;
+    font-size: 14px;
+    padding: .75rem 28px !important;
+  }
+
+  .price {
+    padding: 0.75rem 28px !important;
+    font-size: 12px;
+  }
+
+  .options {
+    padding: 0.75rem 28px !important;
+  }
+
+  .cantidad {
+    max-width: 11em;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .totals.up {
+    display: none;
+  }
+
+  .spec-option {
+    margin-left: auto;
+    display: inline-flex;
+    width: auto;
+    width: auto;
+    margin: 0 !important;
+    padding-top: 2px !important;
+  }
+
+  .small {
+    display: inline-block;
+  }
+
+  .product-row {
+    padding: 0 1em;
+    display: block;
+    border-bottom: none;
+  }
+
+    .product-row td {
+      display: block;
+      text-align: left !important;
+    }
+
+  .cart-header {
+    display: none;
+  }
+
+  .cantidad input {
+    height: 1.5em;
+  }
+
+  .totals {
+    font-size: 16px;
+    justify-content: flex-start;
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  .table-container {
+    margin: auto;
+  }
+
+  .totals button {
+    margin-left: auto;
+  }
+
+  .icon-small {
+    display: flex;
+  }
+
+  .coupon-actions {
+    justify-content: flex-start;
+    margin-bottom: 25px;
+  }
+
+  .cart-options ~ .row > .totals {
+    max-width: 500px;
+    margin: auto;
+  }
+
+  .product-image {
+    border: none !important;
+    max-width: 125px;
+    width: 125px;
+  }
+
+  .table-container {
+    padding: 0;
+  }
+
+  .product-name {
+    text-align: left;
+  }
+
+  .price {
+    font-size: 14px;
+    display: inline-block !important;
+    width: 50%;
+    background: rgba(0,0,0,0.05);
+    padding: 0.75rem 28px !important;
+    border-right: 1px solid #dee2e6;
+  }
+
+  .options {
+    font-size: 14px;
+    display: inline-flex !important;
+    justify-content: space-between;
+    width: 50%;
+    align-items: center;
+    padding: 0 2em !important;
+    background: rgba(0,0,0,0.05);
+    border-right: 1px solid #dee2e6;
+    padding: 0.75rem 28px !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+}
+
+@media screen and (max-width: 668px) {
+  .table-container {
+    padding: 15px 15px 0;
+  }
+
+  .cart-options {
+    padding: 0;
+    padding-bottom: 25px;
+  }
+
+  .cart-actions button {
+    padding: 12px 18px;
+    font-size: 8pt;
+    border-radius: 20px;
+  }
+}
+
+@media screen and (max-width: 445px) {
+  #cartOptions ~ .row > .totals > .total:first-of-type {
+    display: flex;
+  }
+
+  .cantidad {
+    flex-wrap: wrap;
+  }
+
+    .cantidad input {
+      height: 1.5em;
+      padding: 0;
+      max-width: 2em;
+    }
+
+    .cantidad button {
+      margin: 0;
+    }
+
+  .product-thumb {
+    width: 90px;
+    height: 90px;
+  }
+
+  .product-image {
+    max-width: 110px;
+    width: 110px;
+  }
+
+  .total:first-of-type {
+    display: none;
+  }
+
+  .total {
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+  }
+
+  .cart-actions button span {
+    display: none;
+  }
+}

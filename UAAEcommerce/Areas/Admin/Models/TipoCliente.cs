@@ -11,7 +11,6 @@ namespace UAAEcommerce.Areas.Admin.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class TipoCliente
     {
@@ -20,10 +19,8 @@ namespace UAAEcommerce.Areas.Admin.Models
         {
             this.Cliente = new HashSet<Cliente>();
         }
-
-        [Display(Name = "Id")]
+    
         public int idTipoCliente { get; set; }
-        [Display(Name = "Descripción")]
         public string tipcli_descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

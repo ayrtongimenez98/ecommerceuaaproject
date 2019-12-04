@@ -1,0 +1,49 @@
+.cell-id {
+  max-width: 3em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.mat-table, .mat-elevation-z6 {
+  border-color: #6e6e6e;
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+  border-top: none; 
+  background: white;
+}
+td.mat-cell, td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+  border-bottom-color: rgba(0,0,0,.12);
+  color: rgba(0, 0, 0, 0.7);
+}
+.page-desc {
+  font-size: 16px;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.7);
+  letter-spacing: 3px;
+  text-align: center;
+  margin-bottom: 0;
+}
+.section-title {
+  font-family: 'Pier Sans Regular';
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 16px;
+  padding: 5px 15px;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.4);
+  margin-bottom: 15px;
+}
+.add-btn {
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 14px;
+}
+.mat-footer-row, .mat-header-cell {
+  background: white;
+}
+.mat-header-row {
+  border: 1px solid white;
+}

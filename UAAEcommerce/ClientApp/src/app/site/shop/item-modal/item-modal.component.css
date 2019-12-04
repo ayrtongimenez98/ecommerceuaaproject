@@ -1,0 +1,313 @@
+#shop {
+  background: white;
+}
+.cards {
+  justify-content: center;
+  padding: 25px 0;
+  border-top: 4px solid #304FFE;
+  border-radius: 4px;
+  box-shadow: 0px 5px 20px #304FFE;
+}
+.card {
+  transition: all 150ms ease;
+  padding: 15px;
+  font-size: 24px;
+  padding: 15px;
+  border: 1px solid #d9d9d9;
+  margin: 15px;
+}
+.price {
+  vertical-align: middle;
+}
+.subtotal {
+  vertical-align: middle;
+}
+.card:hover {
+  box-shadow: 0 3px 15px rgba(0,0,0,0.16);
+  transition: all 150ms ease;
+}
+.card-title {
+  font-family: "Bushcraft", Impact;
+  font-size: 1em;
+  color: #646464;
+}
+.card-text {
+  font-size: 0.7em;
+  margin: 0;
+  line-height: 1.7;
+  min-height: 4em;
+  max-height: 5em;
+  overflow: hidden;
+}
+.card-price {
+  font-size: 0.9em;
+  font-weight: 800
+}
+.card-img-top {
+  width: 255px;
+  height: 255px;
+  object-fit: contain;
+  object-position: top;
+}
+.nav-shop {
+  width: 100%;
+  padding: 1rem;
+}
+.nav-products {
+  background: #304FFE;
+  width: 100%;
+  padding: 1rem;
+}
+.nav-products ul {
+  list-style: none;
+  margin: 0;
+}
+.nav-shop ul {
+  list-style: none;
+  margin: 0;
+}
+.nav-products li {
+  font-family: "Pier Sans Bold";
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0 15px
+}
+.nav-shop li {
+  font-family: "Pier Sans Bold";
+  color: black;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0 15px;
+  padding: 15px 0;
+}
+.product-category {
+  font-family: "Bushcraft", Impact;
+  font-size: 5em;
+  color: #000;
+  text-align: center;
+  width: 100%;
+  padding: 0.5em;
+}
+.category.active {
+  background: transparent;
+  border: 2px solid #304FFE;
+  padding: 15px 35px;
+  color: #304FFE !important;
+  font-family: 'Pier Sans Bold', Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 10pt;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  border-radius: 50px;
+}
+.nav-shop li a {
+  font-family: "Pier Sans Bold";
+  color: black;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 15px 35px;
+}
+.product-thumb {
+  width: 125px;
+  height: 125px;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+.category:hover {
+  background: #c9d3b3;
+  border-radius: 50px;
+  padding: 15px 35px;
+  transition: all 150ms ease;
+  text-decoration: none;
+}
+.subcategory:hover {
+  background: rgba(151, 179, 90, 0.4);
+  border-radius: 50px;
+  padding: 10px 30px;
+  transition: all 150ms ease;
+  text-decoration: none;
+}
+.subcategory {
+  font-family: "Pier Sans Bold";
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 10px 30px;
+}
+.subcategory.active {
+  background: rgba(151, 179, 90, 0.4);
+  border-radius: 50px;
+  padding: 10px 30px;
+  transition: all 150ms ease;
+}
+.added {
+  background: rgba(250, 250, 250, 1);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+.cantidad {
+  background: transparent;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+  font-family: "Pier Sans Bold";
+  color: #304FFE;
+  border-radius: 3px;
+}
+.cantidad input {
+  background: transparent;
+  border: none;
+  text-align: center;
+  padding-left: 0;
+  color: #304FFE;
+  max-width: 4em;
+}
+.cantidad button {
+  font-size: 22px;
+  color: #304FFE;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+.product-name {
+  font-size: 1.6em;
+  margin: 0;
+  line-height: 1;
+  margin-bottom: 20px;
+}
+.section-title {
+  font-family: "Pier Sans Bold";
+  font-size: 24px !important;
+  padding: 15px 35px;
+  color: white;
+  background-color: #304FFE;
+  background-size: 200%;
+  background-position: bottom;
+  width: 100%;
+  margin-bottom: 0;
+}
+th {
+  color: #7A7A7A;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.spec-item {
+  flex-wrap: wrap;
+}
+.product-row {
+  border-bottom: 1px solid #dee2e6;
+}
+.table td, .table th {
+  padding: .75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+.totals {
+  font-size: 1em;
+  width: 100%;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+.totals label {
+  margin: auto 5px;
+}
+.total {
+  color: #000;
+  font-size: 1.5em;
+  letter-spacing: 2px;
+}
+.table-footer {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  margin: 15px auto;
+  width: 100%;
+}
+.label {
+  text-transform: uppercase;
+  font-family: 'Pier Sans Bold', sans-serif;
+  margin: auto 5px;
+}
+.subtitle {
+  color: #7A7A7A;
+  text-transform: uppercase;
+  font-size: 1em;
+  margin: auto 5px;
+}
+.cart-actions {
+  justify-content: center;
+  margin: 15px auto;
+}
+.cant-desktop {
+  vertical-align: middle;
+}
+@media screen and (max-width: 1600px) {
+}
+@media screen and (max-width: 1200px) {
+}
+@media screen and (max-width: 992px) {
+}
+@media screen and (max-width: 767px) {
+  thead {
+    display: none;
+  }
+  td {
+    display: block;
+  }
+  .price {
+    display: inline-block;
+    width: 50%;
+    background: #f2f2f2;
+    border: 1px solid #ccc;
+    border-right: 1px solid transparent;
+    border-bottom: transparent
+  }
+  .subtotal {
+    display: inline-block;
+    width: 50%;
+    background: #f2f2f2;
+    border: 1px solid #ccc;
+    border-bottom: transparent
+  }
+  .cant-desktop {
+    display: flex;
+    padding-right: 24px;
+  }
+  .product-name {
+    font-size: 1.6em;
+    margin: 0;
+    margin-bottom: 0px;
+    line-height: 1.6em;
+    margin-bottom: 0;
+  }
+  .cantidad {
+    margin-left: auto;
+  }
+  .product-thumb {
+    margin-top: 1.6em;
+  }
+  .added {
+    background: rgba(250, 250, 250, 1);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 29px;
+  }
+}
+@media screen and (max-width: 668px) {
+
+}
+@media screen and (max-width: 445px) {
+
+}

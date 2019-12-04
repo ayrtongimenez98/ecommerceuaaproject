@@ -1,0 +1,156 @@
+#footer {
+  background: white;
+  padding: 25px;
+  font-size: 18px;
+}
+#map {
+  padding-top: 145px;
+}
+#map .btn-primary {
+  padding-right: 98px;
+  margin: 40px auto;
+  display: block;
+}
+#map .btn-primary > i {
+  position: absolute;
+  top: 1.6em;
+  right: 48px
+}
+a {
+  color: inherit;
+}
+.footer-titles {
+  color: #515356;
+  text-transform: uppercase;
+  padding: 1em 0;
+  letter-spacing: 2px;
+  font-size: 1em;
+  font-family: 'Pier Sans Bold';
+  font-weight: bold;
+}
+.footer-li {
+  color: #B2B2B2;
+  list-style: none;
+}
+  .footer-li:hover {
+    color: #94BF00;
+    cursor: pointer;
+  }
+.subscribe-form {
+  position: relative;
+}
+.subscribe-submit {
+  position: absolute;
+  top: 0.7em;
+  right: 0px;
+  z-index: 2;
+  width: 48px;
+}
+.footer-nav {
+  padding-left: 0;
+}
+.footer-share {
+  cursor: pointer;
+  opacity: 0.6;
+  display: block;
+  margin: 10px;
+}
+.footer-share img {
+  width: 34px;
+  height: 34px;
+}
+.share {
+  display: flex;
+}
+#instafeed {
+  display: flex;
+}
+.p3_instagram_square {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#map iframe {
+  display: block;
+  margin: auto;
+  margin-top: 40px;
+}
+#map .large {
+  width: 100%;
+  height: 500px;
+}
+@media screen and (max-width: 1200px) {
+  #footer .footer-brand > img {
+    width: 90px;
+  }
+  #footer {
+    font-size: 16px
+  }
+}
+@media screen and (max-width: 1200px) {
+  .footer-brand img {
+    width: 100px;
+  }
+  #map .btn-primary {
+    margin: 2em auto;
+  }
+}
+@media screen and (max-width:767px) {
+  .google {
+    display: none;
+  }
+  .footer-brand img {
+    width: 100px;
+  }
+  .container {
+    max-width: 100%;
+  }
+  .rugertek {
+    padding-left: 0;
+  }
+
+  #map {
+    padding-top: 100px;
+  }
+}
+@media screen and (max-width: 668px) {
+#footer {   
+    font-size: 16px;
+  }
+#footer .container-fluid {
+    padding: 0;
+  }
+#footer .footer-brand > img {
+      width: 90px;
+      margin: 15px 0;
+    }
+}
+@media screen and (max-width: 445px) {
+  #footer {
+    font-size: 16px;
+  }
+
+    #footer .container-fluid {
+      padding: 0;
+    }
+
+    #footer .footer-brand > img {
+      width: 90px;
+      margin: 15px 0;
+    }
+
+  #map .btn-primary {
+    width: 90%;
+    margin: auto;
+    font-size: 12px;
+    padding: 23px 23px 23px 40px !important;
+    margin-bottom: 20px;
+  }
+
+    #map .btn-primary > i {
+      position: absolute;
+      top: 1.6em;
+      left: 20px;
+      text-align: left;
+    }
+}

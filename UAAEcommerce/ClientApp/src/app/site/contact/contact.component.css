@@ -1,0 +1,137 @@
+label mat-icon {
+  color: #606060;
+}
+.hero {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+.form {
+  margin: auto;
+}
+.form-label {
+  width: 100%;
+  padding-bottom: 1.3em;
+  position: relative;
+}
+.form-label input{
+  width:100%;
+  margin-top: 15px;
+}
+.form-label textarea {
+  width: 100%;
+  margin-top: 15px;
+}
+#contact {
+  padding-bottom: 2em;
+}
+.section-title {
+  font-family: 'Pier Sans Bold';
+  text-transform: capitalize;
+  width: 70%;
+  padding-left: 20px;
+  padding-top: 20px;
+}
+.text_info {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  left: 0
+}
+.text_warning {
+  color: #E46D00;
+}
+.text_warning ~ input, .text_warning ~ textarea {
+  border: 3px solid #E46D00;
+  box-shadow: 0 2px 5px #E46D0029;
+}
+.contact .card {
+  flex-wrap: wrap;
+  max-width: 700px;
+  margin: auto;
+  margin-top: 2em;
+}
+.section-header {
+  position: relative;
+  border: none;
+  padding: 0;
+  margin: auto;
+
+}
+.logo-B {
+  position: absolute;
+  left: 60px;
+  top: 20%;
+  max-width: 100px;
+}
+@media screen and (max-width: 1600px) {
+  .logo-B {
+    position: absolute;
+    left: 60px;
+    top: 15%;
+    width: 17%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .logo-B {
+    position: absolute;
+    left: 40px;
+    top: 10%;
+    width: 17%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .logo-B {
+    position: absolute;
+    left: 30px;
+    top: 10%;
+    width: 15%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .form {
+    padding: 8px 15px;
+  }
+  .logo-B {
+    position: absolute;
+    left: 30px;
+    top: 40px;
+    width: 60px;
+  }
+  .section-title {
+    margin-top: 15px;
+    font-size: 1.5em;
+  }
+
+  .logo-B {
+    position: absolute;
+    left: 30px;
+    top: 22%;
+    width: 70px;
+  }
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 445px) {
+  .form {
+    padding: 15px 5px;
+  }
+
+  .logo-B {
+    position: absolute;
+    left: 30px;
+    top: 22%;
+    width: 10%;
+  }
+
+  .section-title {
+    margin-top: 15px;
+    font-size: 1.5em;
+    padding-left: 0;
+    margin-left: 0;
+  }
+}

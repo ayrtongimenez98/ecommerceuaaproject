@@ -1,0 +1,212 @@
+<section class="breadcrumb">
+  <ul>
+    <li class="breadcrumb-link"><a routerLink="/">Inicio</a></li>
+    <li class="breadcrumb-link"><a>Perfil</a></li>
+  </ul>
+</section>
+<section class="container" id="profile">
+  <button mat-button (click)="snavp.toggle()" class="menu-toggle filter">
+    <mat-icon>filter_list</mat-icon>
+    Opciones
+  </button>
+  <mat-sidenav-container>
+    <mat-sidenav opened [mode]="mobileQuery.matches ? 'over' : 'side'" #snavp id="snavp">
+      <mat-list role="list">
+        <mat-list-item role="listitem">
+          <button mat-button style="color: #7A7A7A; display: flex; align-items: center;" (click)="getUserView(true)">
+            <mat-icon style="margin-right: 5px">person</mat-icon>
+            Datos Personales
+          </button>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item role="listitem">
+          <button mat-button style="color: #7A7A7A; display: flex; align-items: center;" (click)="getUserView(false)">
+            <mat-icon style="margin-right: 5px">timeline</mat-icon>
+            Historial de Pedidos
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <ng-template #profileTemplate [ngIf]="isProfileView">
+        <h1 class="section-title">Datos personales</h1>
+        <mat-progress-bar mode="buffer" *ngIf="loading"></mat-progress-bar>
+        <form class="form-signin mat-table" [formGroup]="userForm" [hidden]="loading" (ngSubmit)="updateUser()">
+          <fieldset style="margin-top: 40px;">
+            <div class="form-inputs col-md-5">
+              <label class="form-label">
+                Nombre:
+                <input matInput type="text" id="inputFirstName" formControlName="firstName">
+                <!--<span *ngIf="firstName.invalid" class="text_info">
+                  <mat-error>Campo obligatorio</mat-error>
+                  <br />
+                </span>-->
+              </label>
+            </div>
+            <div class="form-inputs col-md-5">
+              <label class="form-label">
+                Apellido:
+                <input matInput type="text" id="inputLastName" formControlName="lastName">
+                <!--<span *ngIf="lastName.invalid" class="text_info">
+                  <mat-error>Campo obligatorio</mat-error>
+                  <br />
+                </span>-->
+              </label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <div class="form-inputs col-md-5">
+              <label class="form-label">
+                Dirección:
+                <input matInput type="text" id="inputAddress" formControlName="address">
+                <!--<span *ngIf="address.invalid" class="text_info">
+                  <mat-error>Campo obligatorio</mat-error>
+                  <br />
+                </span>-->
+              </label>
+            </div>
+            <div class="form-inputs col-md-5">
+              <label class="form-label">
+                Ciudad:
+                <input matInput type="text" id="inputCity" formControlName="city">
+                <!--<span *ngIf="city.invalid" class="text_info">
+                  <mat-error>Campo obligatorio</mat-error>
+                  <br />
+                </span>-->
+              </label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <div class="form-inputs col-md-5">
+              <label class="form-label">
+                Correo electrónico:
+                <input matInput type="email" class="form-control" disabled id="inputEmail" formControlName="username" [disabled]="true">
+                <!--<span *ngIf="username.invalid" class="text_info">
+                  <mat-error>Campo obligatorio</mat-error>
+                  <br />
+                </span>-->
+              </label>
+            </div>
+            <div class="passwords col-md-5">
+              <label class="form-label">
+                Contraseña anterior:
+                <a class="eye" (click)="mostrarPass('currentInputPass', 'i_cupassw2')">
+                  <mat-icon id="i_cupassw2">visibility</mat-icon>
+                </a>
+                <input type="password" matInput id="currentInputPass" formControlName="password">
+              </label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <div class="col-md-5 passwords">
+              <label class="form-label" formGroupName="newPasswords">
+                Contraseña Nueva:
+                <input type="password" id="inputPass1" matInput [formControl]="rfp.newPassword">
+                <a class="eye" (click)="mostrarPass('inputPass1', 'i_repassw1')">
+                  <mat-icon id="i_repassw1">visibility</mat-icon>
+                </a>
+              </label>
+            </div>
+            <div class="col-md-5 passwords">
+              <label class="form-label" formGroupName="newPasswords">
+                Repetir Nueva Contraseña:
+                <input type="password" matInput id="inputPass2" [formControl]="rfp.reNewPassword">
+                <a class="eye" (click)="mostrarPass('inputPass2', 'i_repassw2')">
+                  <mat-icon id="i_repassw2">visibility</mat-icon>
+                </a>
+                <span *ngIf="rf.newPasswords.invalid && (rf.newPasswords.dirty || rf.newPasswords.touched)" class="text_info">
+              <mat-error *ngIf="rf.newPasswords.errors?.confirmPassword">Las contraseñas no son iguales</mat-error>
+            </span>
+              </label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <div class="form-inputs col-md-5">
+              <label class="form-label">
+                Razón Social:
+                <input matInput type="text" id="inputRazonSocial" autocomplete="on" formControlName="razonSocial">
+                <!--<span *ngIf="razonSocial" class="text_info">
+                  <mat-error>Campo obligatorio</mat-error>
+                  <br />
+                </span>-->
+              </label>
+            </div>
+            <div class="form-inputs col-md-5">
+              <label class="form-label">
+                Documento:
+                <input matInput type="text" id="inputDocument" autocomplete="on" formControlName="documento">
+                <!--<span *ngIf="documento.invalid" class="text_info">
+                  <mat-error>Campo obligatorio</mat-error>
+                  <br />
+                </span>-->
+              </label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <div class="form-inputs col-md-5">
+              <label class="form-label">
+                Fecha de Nacimiento:
+                <input matInput type="date" class="form-control" formControlName="date">
+              </label>
+            </div>
+            <div class="form-inputs col-md-5">
+              <label class="form-label">
+                Teléfono:
+                <input matInput type="text" class="form-control" formControlName="phoneNumber">
+              </label>
+            </div>
+          </fieldset>
+          <button class="btn-primary btn-block" type="submit" style="max-width: 13em; margin: auto; margin-bottom: 30px; justify-content: center; margin-top: 30px;">
+            Guardar
+          </button>
+        </form>
+      </ng-template>
+      <ng-template #history [ngIf]="!isProfileView">
+        <h1 class="section-title">Historial de Pedidos</h1>
+        <table mat-table matSort [dataSource]="dataSource">
+          <tr>
+            <td colspan="7">
+              <p class="product-name" style="text-align: center; padding: 25px;">No realizaste compras.</p>
+              <a routerLink="/shop" class="table-a">Explorar el Shop</a>
+            </td>
+          </tr>
+          <!-- Name Column -->
+          <ng-container matColumnDef="date">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef> Fecha </th>
+            <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+          </ng-container>
+          <!-- Weight Column -->
+          <ng-container matColumnDef="cantItems">
+            <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+            <td mat-cell *matCellDef="let element"> {{element.cantItems}} </td>
+          </ng-container>
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="paymentMethod">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef> Metodo de pago </th>
+            <td mat-cell *matCellDef="let element"> {{element.paymentMethod}} </td>
+          </ng-container>
+          <ng-container matColumnDef="total">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef> Total </th>
+            <td mat-cell *matCellDef="let element"> {{element.total | formatNumber}} </td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef> Estado </th>
+            <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+          </ng-container>
+          <ng-container cdkColumnDef="hash">
+            <th mat-header-cell *matHeaderCellDef> Ver </th>
+            <td mat-cell *cdkCellDef="let element">
+              <button mat-button (click)="goOrder(element.hash)">
+                <mat-icon>arrow_forward_ios</mat-icon><!--TODO [ngclass]="refreshing"-->
+              </button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+      </ng-template>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</section>
+

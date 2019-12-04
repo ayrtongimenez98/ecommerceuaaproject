@@ -1,0 +1,481 @@
+table td {
+  vertical-align: middle !important;
+  padding: .75rem 5px !important;
+}
+.table thead th {
+  border-bottom: none;
+}
+.no-border {
+  border: unset !important;
+}
+th {
+  color: #7A7A7A;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  vertical-align: middle;
+}
+.spec {
+  display: flex;
+  align-items: center;
+}
+.table-a {
+  display: block;
+  margin: auto;
+  text-align: center;
+  text-decoration: underline;
+}
+.spec-item {
+  flex-wrap: wrap;
+}
+.spec-option {
+  margin: 0 5px 5px 5px;
+  width: 100%;
+  padding-top: 0;
+}
+.product-row {
+  border-bottom: 1px solid #dee2e6;
+}
+.product-image {
+  max-width: 255px;
+  width: 255px;
+}
+.table-container {
+  background: white;
+  padding: 0 45px 0;
+  border-radius: 4px;
+}
+.table td, .table th {
+  padding: .75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+.subtotals {
+  font-size: 18px;
+  width: 100%;
+  text-align: right; 
+  padding: 0 15px;  
+}
+.totals {
+  font-size: 24px;
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
+  width: 100%;
+  background: white;
+  padding: 25px 15px 25px 0;
+  border-radius: 4px;
+}
+.label-title {
+  color: #7A7A7A;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: "Pier Sans Bold";
+  font-size: 9pt;
+  margin-bottom: 25px;
+}
+.subtotals label, .totals label {
+    margin: 0 5px;
+  }
+.total {
+  font-family: "Pier Sans Bold";
+  color: #54682A;
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+}
+.cart-header {
+  font-size: 9pt;
+}
+.localmark .radiomark {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 100%;
+  border: 1px solid #54682A
+}
+.localmark {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 1em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #5F6772;
+  padding-top: 6px;
+}
+.localmark input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    margin: 10px 0;
+  }
+.localmark:hover input ~ .radiomark {
+    background-color: #ccc;
+    transition: all 150ms ease;
+  }
+.localmark input:checked ~ .radiomark {
+    background-color: #54682A;
+  }
+.radiomark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.localmark input:checked ~ .radiomark:after {
+  display: block;
+}
+.localmark .radiomark:after {
+  left: 7px;
+  top: 4px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.valid {
+  background-color: #54682A;
+  position: absolute;
+  top: 25%;
+  right: 8px;
+  height: 25px;
+  width: 25px;
+  border-radius: 100%;
+  border: 1px solid #54682A
+}
+.valid:after {
+  content: "";
+  position: absolute;
+  display: block;
+  left: 9px;
+  top: 6px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.table-footer {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  margin: 15px auto;
+  width: 100%;
+}
+.label {
+  text-transform: uppercase;
+  font-family: 'Pier Sans Bold', sans-serif;
+  margin: auto 5px;
+}
+.subtitle {
+  color: #7A7A7A;
+  text-transform: uppercase;
+  font-size: 1em;
+  margin: auto 5px;
+}
+.cart-actions {
+  justify-content: center;
+  margin: 15px auto;
+}
+.cantidad {
+  background: rgba(84, 104, 42, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  font-family: "Pier Sans Bold";
+  color: #54682A;
+  border-radius: 3px;
+  max-width: 11em;
+}
+.cantidad input {
+    background: transparent;
+    border: none;
+    text-align: center;
+    padding-left: 15px;
+    color: #54682A;
+    max-width: 4em;
+  }
+.cantidad button {
+    font-size: 22px;
+    color: #54682A;
+    width: 42px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+.product-name {
+  font-family: "Bushcraft", Impact;
+  font-size: 1.6em;
+  margin: 0;
+  line-height: 1.2;
+}
+.section-title {
+  font-family: "Pier Sans Bold";
+}
+.product-row {
+  border-bottom: 1px solid #dee2e6;
+}
+.product-thumb {
+  width: 125px;
+  height: 125px;
+  object-fit: contain;
+}
+.price {
+  vertical-align: middle!important;
+  text-align: right;
+}
+.cart-options {
+  padding-bottom: 25px;
+  padding-top: 30px;
+}
+.icon-small {
+  font-size: 1.5em;
+  margin: 0 10px 0 0;
+  width: 15px;
+  height: 100%;
+  color: #54682A;
+  display: none;
+  align-items: center;
+}
+.coupon-actions {
+  justify-content: flex-start;
+}
+.product-name {
+  text-align: center;
+}
+.small {
+  display: none;
+  margin: 0;
+}
+.col-title {
+  font-size: 10px;
+  letter-spacing: 1px;
+  height: 30px;
+  display: flex;
+  align-items: flex-end;
+  text-transform: uppercase;
+}
+.coupon-input {
+ width: 80%;
+ position: relative;
+}
+.coupon-icon {
+  position: relative;
+  left: -10px;
+  top: 8px;
+  transform: scale(-1, 1) rotate(-45deg);
+}
+@media screen and (max-width: 1600px) {
+  .section-title {
+    font-size: 1.1em;
+  }
+ 
+}
+@media screen and (max-width: 1200px) {
+  td.product-name {
+   text-align: left;
+  }
+  table td {
+    vertical-align: middle !important;
+    font-size: 14px;
+    padding: .75rem 28px !important;
+  }
+  .product-image {
+    max-width: 90px;
+    width: 90px;
+    padding: .75rem 15px !important;
+  }
+  .price {
+    padding: 0.75rem 28px !important;
+    font-size: 12px;
+  }
+  .options {
+    padding: 0.75rem 28px !important;
+  }
+  .cantidad {
+    max-width: 11em;
+  }
+  .total {
+    font-size: 1.1em;
+  }
+  .subtotals label {
+    font-size: 12px;
+  }
+  .product-options {
+    font-size: 12px;
+  }
+  .coupon-input {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 992px) {
+  .totals.up {
+    display: none;
+  }
+  .cantidad {
+    position: relative;
+    left: -28px;
+  }
+  .gift-check .radiomark {
+    top: 2px;
+  }
+  .spec-option {
+    margin-left: auto;
+    display: inline-flex;
+    width: auto;
+    width: auto;
+    margin: 0 !important;
+    padding-top: 2px !important;
+  }
+  .small {
+    display: inline-block;
+  }
+  .product-row {
+    padding: 0 1em;
+    display: block;
+    border-bottom: none;
+  }  
+  .product-row td {
+      display: block;
+      text-align: left!important;
+    }
+  .cart-header {
+    display: none;
+  }
+  .cantidad input {
+    height: 1.5em;
+  }
+  .totals {
+    font-size: 16px;
+    justify-content: flex-start;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 400px;
+    padding-left: 16px;
+  }
+  .table-container {
+    margin: auto;
+  }
+  .totals button {
+    margin-left: auto;
+  }
+  .icon-small {
+    display: flex;
+  }
+  .coupon-actions {
+    justify-content: flex-start;
+    margin-bottom: 25px;
+  }
+  .product-image {
+    border: none!important;
+    max-width: 125px;
+    width: 125px;
+  }
+  .table-container {
+    padding: 0;
+    padding-bottom: 16px;
+    max-width: 400px;
+  }
+  .product-name {
+    text-align: left;
+  }
+  .price {
+    font-size: 14px;
+    display: inline-block !important;
+    width: 50%;
+    background: rgba(0,0,0,0.05);
+    padding: 0.75rem 28px !important;
+    border-right: 1px solid #dee2e6;
+  }
+  .options {
+    font-size: 14px;
+    display: inline-flex !important;
+    justify-content: space-between;
+    width: 50%;
+    align-items: center;
+    padding: 0 2em !important;
+    background: rgba(0,0,0,0.05);
+    border-right: 1px solid #dee2e6;
+    padding: 0.75rem 28px !important;
+  }
+  .subtotals label {
+    text-align: left;
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .totals {
+    padding: 15px;
+  }
+  .coupon-input {
+    width: 100%;
+  }
+  #cartOptions .col-12 {
+    margin-bottom: 16px;
+  }
+}
+@media screen and (max-width: 668px) {
+  .table-container {
+    padding: 0 15px 0;
+  }
+  input[type="text"] {
+    height: 50px;
+  }
+  .cart-options {
+    padding: 0;
+    padding-bottom: 25px;
+  }
+  .cart-actions button {
+  padding: 12px 18px;
+  font-size: 8pt;
+  border-radius: 20px;
+  }
+}
+@media screen and (max-width: 445px) {
+  #cartOptions ~ .row > .totals > .total:first-of-type {
+    display: flex;
+  }
+  .cantidad {
+  flex-wrap: wrap;
+  }
+  .cantidad input {
+      height: 1.5em;
+      padding: 0;
+      max-width: 2em;
+    }
+  .cantidad button {
+    margin: 0;
+  }
+  .product-thumb {
+    width: 90px;
+    height: 90px;
+  }
+  .product-image {
+    max-width: 110px;
+    width: 110px;
+  }
+  .total:first-of-type {
+    display: none;
+  }
+  .total {
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+  }
+  .cart-actions button span {
+    display: none;
+  }
+}

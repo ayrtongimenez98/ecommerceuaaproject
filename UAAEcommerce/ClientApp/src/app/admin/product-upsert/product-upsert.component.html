@@ -1,0 +1,152 @@
+<section class="container">
+  <form [formGroup]="productForm" (ngSubmit)="upsertProduct()">
+    <div class="row">
+      <div class="col-10 col-lg-3 m-auto form-upsert btn-group">
+        <button (click)="back()" style="display: flex; align-items: center; margin-bottom: 10px;" class="add-btn">
+          CANCELAR
+        </button>
+        <button type="submit" class="add-btn btn-primary btn-small">Guardar</button>
+      </div>
+      <div class="form-upsert col-10 col-lg-8 m-auto">
+        <h1 class="section-title">{{ productId == null ? 'Agregar' : 'Editar' }} Producto</h1>
+        <mat-progress-bar mode="buffer" *ngIf="loading"></mat-progress-bar>
+        <div class="form-row" [hidden]="loading">
+          <div class="form-group col-md-6">
+            <label for="inputName">Nombre:</label>
+            <input type="text" class="form-control" id="inputName" formControlName="name">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPrice">Precio:</label>
+            <input type="text" class="form-control" id="inputPrice" formControlName="price" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Categoría:</label>
+            <mat-form-field>
+              <mat-select formControlName="category">
+                <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="form-group col-md-6">
+            <label>Sub-Categoría:</label>
+            <mat-form-field>
+              <mat-select [value]="this.subCategorySelected" formControlName="subCategory">
+                <mat-option *ngFor="let subCategory of subCategories"
+                            [value]="subCategory.id">{{subCategory.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="form-row" *ngIf="isNitsuga">
+          <div class="form-group col-md-4">
+            <label for="inputAlcohol">Alcohol:</label>
+            <input type="text" class="form-control" id="inputAlcohol" formControlName="alcoholVol" />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputColor">Color:</label>
+            <input type="text" class="form-control" id="inputColor" formControlName="color" />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputAmargo">Amargor:</label>
+            <input type="text" class="form-control" id="inputAmargo" formControlName="amargo" />
+          </div>
+        </div>
+        <div class="form-row" *ngIf="isNitsuga">
+          <div class="form-group col-md-4" style="width:100%">
+            <label for="inputArtist">Artista:</label>
+            <input type="text" class="form-control" id="inputArtist" formControlName="artist" />
+          </div>
+          <div class="form-group col-md-8">
+            <label for="inputArtist">Biografía:</label>
+            <textarea id="inputArtistDesc" formControlName="artistDesc" style="max-height: 150px;"></textarea>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-12" style="width: 100%;">
+            <label for="inputDescription">Descripción:</label>
+            <textarea id="inputDescription" formControlName="description"></textarea>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="d-flex" style="flex-wrap: wrap;">
+            <h3 class="section-title w-100">
+              <mat-icon>
+                collections
+              </mat-icon>
+              Imagenes del producto:
+            </h3>
+            <small class="w-100">La imagen principal aparece en la tarjeta del producto en el Shop.</small>
+            <small class="w-100">La imagen de Portada aparece en la vista de Detalles de cada cerveza.</small>
+          </div>
+        </div>
+        <!--      <span *ngFor="let photo of product.photos">-->
+        <!--          <span *ngIf="photo.main">-->
+        <!--            <span *ngFor="let image of photo.images">-->
+        <!--              <img *ngIf="image.original" [src]="mainPhoto" alt="Alternate Text" class="main-img"/>-->
+        <!--            </span>-->
+        <!--          </span>-->
+        <div class="form-group images-group">
+          <mat-progress-bar mode="buffer" *ngIf="loading"></mat-progress-bar>
+          <div [hidden]="loading" class=" col-md-4" style="display: inline-block" *ngFor="let photo of product.photos">
+            <div class="image-item" id="test" *ngFor="let photoItem of photo.images">
+              <div *ngIf="photoItem.original">
+                <img class="image" src="{{photoItem.url}}"
+                     id="{{photoItem.blobName}}" alt="">
+                <a class="remImage" (click)="deletePhoto(photo, photoItem.blobName)" id="remove_{{photoItem.blobName}}">
+                  <mat-icon>remove</mat-icon>
+                  Quitar
+                </a>
+                <a class="remImage" (click)="addPhoto(photo, photoItem.blobName)" id="add_{{photoItem.blobName}}"
+                   style="display:none;">
+                  <mat-icon>add</mat-icon>
+                  Agregar
+                </a>
+              </div>
+            </div>
+            <div class="image-options">
+              <label class="d-flex product-options localmark" style="flex-wrap: wrap;">
+                Imagen principal
+                <input type="radio" name="mainPhoto" (click)="mainPhoto(photo.id)" [checked]="photo.main ? true : null"
+                       class="mat-radio-button cdk-visually-hidden" />
+                <span class="radiomark"></span>
+              </label>
+              <label class="d-flex product-options localmark" style="flex-wrap: wrap;">
+                Imagen de portada
+                <input type="radio" name="bannerPhoto" (click)="bannerPhoto(photo.id)"
+                       [checked]="photo.banner ? true : null" class="mat-radio-button cdk-visually-hidden" />
+                <span class="radiomark"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex" style="flex-wrap: wrap">
+          <div class="w-100">
+            <p class="section-title">Arrastra los archivos aquí</p>
+          </div>
+          <ngx-dropzone (filesDropped)="onFilesDropped($event)" [customContent]="customDropzone" class="w-100">
+            <ng-template #customDropzone>
+              <div class="custom-dropzone">
+                <div *ngIf="files.length < 1">Subir archivos</div>
+                <div class="row" *ngFor="let file of files">
+                  <div class="archivo">
+                    <img src="https://maxcdn.icons8.com/Share/icon/Logos/google_docs1600.png" alt="Alternate Text"
+                         style="width:80px;" />
+                    <p><a href="#">{{ file.name }}</a></p>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngx-dropzone>
+        </div>
+
+      </div>
+      <div [hidden]="!process">
+        <img
+          src="https://www.upperroom.org/assets/loading-eb6127d20416f075771d08fcbf10aefe0cfd2865b801fb733ce981514c89b09d.gif"
+          alt="Alternate Text" style="width:50px; height:50px;"/>
+      </div>
+    </div>
+  </form>
+</section>

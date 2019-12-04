@@ -19,6 +19,7 @@ namespace UAAEcommerce.Areas.Admin.Models
         public int idPedidoCabecera { get; set; }
         public int pedet_precio { get; set; }
         public int pedet_montototal { get; set; }
+        public int pedet_cantidad { get; set; }
     
         public virtual Pedido Pedido { get; set; }
         public virtual Producto Producto { get; set; }

@@ -1,0 +1,99 @@
+<header>
+  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow' style="flex-wrap: wrap; width: 100%;">
+    <div class="container-fluid" style="flex-wrap: wrap;">
+      <a class="navbar-brand" [routerLink]='["/"]'>
+        <img src="../../assets/images/brand/logo-byn.png" class="logo" />
+        <h1 class="logo-text">PCHub.ng</h1>
+      </a>
+      <div style="flex: 1 1 auto;"></div>
+      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" style="flex-wrap: wrap;">
+        <ul class="navbar-nav flex-grow">
+          <li class="nav-item contacto-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+            <a class="nav-link text-dark" [routerLink]='["/contact"]'>Contacto</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' style="border: none; padding-right: 0;">
+            <a class="nav-link text-dark" href="#" target="_blank">
+              <img src="../../../assets/images/icons/facebook.svg" alt="Alternate Text" />
+            </a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' style="border: none; padding-right: 0;">
+            <a class="nav-link text-dark" href="#" target="_blank">
+              <img src="../../../assets/images/icons/instagram.svg" alt="Alternate Text" />
+            </a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' style="border: none; padding-right: 0;">
+            <a class="nav-link text-dark" href="https://wa.me/595972234336" target="_blank">
+              <img src="../../../assets/images/icons/whatsapp.svg" alt="Alternate Text" />
+            </a>
+          </li>
+        </ul>
+      </div>
+      <app-cart-info class="menu-toggle"></app-cart-info>
+      <button mat-menu-item [routerLink]='["/login"]' *ngIf="!(isAuthenticated | async)" class="menu-toggle">
+        <img src="../../../assets/images/icons/login.svg" alt="Alternate Text" />
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="menuProfile" *ngIf="isAuthenticated | async" class="menu-toggle">
+        <img src="../../../assets/images/icons/login.svg" alt="Alternate Text" />
+      </button>
+      <button mat-button [matMenuTriggerFor]="menu" class="menu-toggle" style="margin-left: auto;">Menú</button>
+      <mat-menu #menu="matMenu">
+        <a mat-menu-item [routerLink]='["/home"]'>Inicio</a>
+        <a mat-menu-item [routerLink]='["/home"]' fragment="empresa"> La empresa</a>
+        <a mat-menu-item [routerLink]='["/home"]' fragment="historia">Historia</a>
+        <a mat-menu-item [routerLink]='["/home"]' fragment="productos">Productos</a>
+        <a mat-menu-item [routerLink]='["/home"]' fragment="encontranos">Encontranos</a>
+        <a mat-menu-item [routerLink]='["/contact"]'>Contacto</a>
+        <button mat-menu-item [routerLink]='["/shop"]'>Shop</button>
+      </mat-menu>
+      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" style="flex-wrap: wrap; width: 100%;">
+        <ul class="nav-low flex-grow w-100 d-flex">
+          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }' style="padding-left: 0;">
+            <a class="nav-link text-dark" [routerLink]='["/home"]'>Inicio</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+            <a class="nav-link text-dark" [routerLink]='["/home"]' fragment="empresa">La empresa</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+            <a class="nav-link text-dark" [routerLink]='["/home"]' fragment="historia">Historia</a>
+          </li>
+          <li class="nav-item hide1600" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+            <a class="nav-link text-dark" [routerLink]='["/home"]' fragment="productos">Productos</a>
+          </li>
+          <li class="nav-item hide1600" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link text-dark" [routerLink]='["/home"]' fragment="encontranos">Encontranos</a>
+          </li>
+          <li class="nav-item hide1600" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link text-dark" [routerLink]='["/shop"]'>Shop</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]'>
+            <a class="nav-link text-dark" [routerLink]='["/login"]' *ngIf="!(isAuthenticated | async)">
+              <img src="../../../assets/images/icons/login.svg" alt="Alternate Text" />
+            </a>
+            <a class="nav-link text-dark" [matMenuTriggerFor]="menuProfile" *ngIf="isAuthenticated | async">
+              <img src="../../../assets/images/icons/login.svg" alt="Alternate Text" />
+            </a>
+          </li>
+          <li class="nav-item hide1601">
+            <button mat-button [matMenuTriggerFor]="menu1600" class="menu-toggle menu1600 d-flex" style="align-content: center;">
+              Más opciones<mat-icon>expand_more</mat-icon>
+            </button>
+          </li>
+          <app-cart-info></app-cart-info>
+          <li class="nav-item hide1600" [routerLinkActive]='["link-active"]'>
+          </li>
+        </ul>
+        <mat-menu #menu1600="matMenu">
+          <a mat-menu-item [routerLink]='["/home"]' fragment="historia">Historia</a>
+          <a mat-menu-item [routerLink]='["/home"]' fragment="encontranos">Encontranos</a>
+          <button mat-menu-item [routerLink]='["/shop"]'>Shop</button>
+        </mat-menu>
+        <mat-menu #menuProfile="matMenu">
+          <button mat-menu-item [routerLink]='["/profile"]'>VER PERFIL</button>
+          <button mat-menu-item (click)="logout()">
+            CERRAR SESIÓN
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </nav>
+</header>

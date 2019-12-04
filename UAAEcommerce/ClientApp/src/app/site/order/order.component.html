@@ -1,0 +1,103 @@
+
+<section class="breadcrumb">
+  <ul>
+    <li class="breadcrumb-link"><a routerLink="/">Inicio</a></li>
+    <li class="breadcrumb-link"><a>Orden de Compra</a></li>
+  </ul>
+</section>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-xl-3 totals">
+      <mat-list>
+        <mat-list-item>
+          <label>Estado:</label>
+          <mat-chip-list aria-label="Status" [ngSwitch]="orderState" >
+            <mat-chip *ngSwitchCase="'Ninguno'" class="ninguno">Ninguno</mat-chip>
+            <mat-chip *ngSwitchCase="'Pendiente'" class="pending">Pendiente</mat-chip>
+            <mat-chip *ngSwitchCase="'Pagado'" class="payed" selected>Pagado</mat-chip>
+            <mat-chip *ngSwitchCase="'Cancelado'" class="cancelled" selected>Cancelado</mat-chip>
+          </mat-chip-list>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <label>
+            Orden N°:
+          </label>
+          <h1 class="d-flex order-number">
+            {{order.numeroPedido}}
+          </h1>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <label>Método de pago:</label>
+          <p class="status">{{order.metodoPago}}</p>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          <label class="total">Total: </label>
+          <label class="total"> {{total | formatNumber}} Gs.</label>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div class="col-12 col-xl-8 table-container mat-table">
+      <mat-progress-bar mode="buffer" *ngIf="loading"></mat-progress-bar>
+      <table class="table" [hidden]="loading">
+        <thead class="cart-header">
+          <tr>
+            <th scope="col" colspan="2">Item</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Subtotal</th>
+            <th scope="col" class="d-flex" style="align-items: center;">
+              Regalo
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of order.items">
+            <td>
+              <img class="product-thumb" [src]="item.imageUrl" alt="{{item.name}}" />
+            </td>
+            <td> <p class="product-name">{{item.name}}</p></td>
+            <td><label>Cantidad: </label> {{item.quantity}}</td>
+            <td class="price">Gs. {{item.price | formatNumber}}</td>
+            <td class="price">Gs. {{item.totalPrice | formatNumber}}</td>
+            <td>
+              <mat-icon>card_giftcard</mat-icon>
+              <p class="td-p">{{item.forGift ? 'Sí' : 'No'}}</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+<!--<mat-card>
+  <mat-card-content>
+    <label>Estado:</label><p class="status">{{order.status}}</p>
+  </mat-card-content>
+</mat-card>
+<mat-divider></mat-divider>
+<mat-card>
+  <mat-card-content>
+    <label>
+      Orden N°:
+    </label>
+    <h1 class="d-flex order-number">
+      {{order.numeroPedido}}
+    </h1>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-content>
+    <label>Método de pago:</label>
+    <p class="status">{{order.metodoPago}}</p>
+  </mat-card-content>
+</mat-card>
+<mat-divider></mat-divider>
+<mat-card>
+  <mat-card-content>
+    <label class="total">Total: {{total | formatNumber}} Gs.</label>
+  </mat-card-content>
+</mat-card>-->

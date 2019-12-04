@@ -1,0 +1,289 @@
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+.number {
+  font-family: 'Pier Sans Bold';
+  color: #515356;
+  padding: 5px;
+  border: 2px solid #515356;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  font-size: 8pt;
+}
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+html {
+  font-size: 14px;
+}
+header .logo {
+  width: 72px;
+  height: 72px;
+}
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+.logo-text {
+  font-family: 'Pier Sans Bold';
+  color: #515356;
+  margin-left: 25px;
+  letter-spacing: -2px;
+  margin-bottom: 0;
+  font-size: 2.5rem;
+}
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+.navbar-brand li {
+  list-style: none;
+}
+.nav-link {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.nav-link mat-icon, .nav-link span {
+  margin: 0 10px;  
+}
+.nav-low {
+  list-style: none;
+  border-top: 1px solid #ccc;
+  justify-content: flex-start;
+  padding: 0px 15px;
+  padding-top: 0px;
+  padding-left: 15px;
+  margin-left: 90px;
+  padding-left: 0;
+  font-size: 12pt;
+  margin-bottom: 0;
+  padding-top: calc(0px + .5rem);
+}
+
+.nav-item {
+  border-right: 1px solid #ccc;
+  padding: 0 10px;
+}
+.nav-link {
+  font-size: 14px;
+  padding: 5px 0!important;
+}
+.nav-link:hover {
+  color: #94BF00 !important;
+}
+
+.navbar-nav .nav-link img {
+  width: 32px;
+  height: 32px;
+}
+
+.nav-cart-cant {
+  background: #E46D00;
+  border-radius: 100%;
+  color: white !important;
+  width: 25px;
+  height: 25px;
+  font-family: 'Pier Sans Bold' Arial, Helvetica, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  text-align: center;
+  font-size: 10pt;
+  margin-left: 10px;
+}
+
+.cart {
+  display: flex;
+}
+
+.nav-cart-total {
+  font-family: 'Pier Sans Bold', Arial, Helvetica, sans-serif;
+  font-size: 0.9em;
+  margin: 0;
+  margin-left: 10px;
+  line-height: unset;
+}
+
+.menu-toggle {
+  display: none !important;
+  margin-left: auto;
+}
+.navbar {
+  margin-bottom: 0 !important;
+}
+.nav-responsive {
+  height: 48px;
+  justify-content: flex-start;
+  padding-left: 15px !important;
+}
+@media screen and (max-width: 1600px) {
+  .logo-text {
+    font-size: 24px;
+  }
+  .logo {
+    width: 50px;
+    height: 50px;
+  }
+  .nav-link {
+    font-size: 12px;
+  }
+}
+@media screen and (max-width: 1440px) {
+  .logo-text {
+    display: none;
+  }
+}
+@media screen and (max-width: 1080px) {
+  .logo-text {
+    display: none;
+  }
+  header .logo {
+    width: 32px;
+    height: 32px;
+  }
+  .nav-link {
+    font-size: 10px;
+  }
+  .nav-low {
+    border-top: 0;
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .menu-toggle {
+    display: block!important;
+  }
+  .nav-link {
+    font-size: 14px;
+  }
+  html {
+    font-size: 16px;
+  }
+
+  header .logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .navbar-brand {
+    margin-right: 0;
+  }
+
+  .logo-text {
+    margin-left: 10px;
+    margin-bottom: 0;
+    font-size: 28px;
+    display: block!important
+  }
+
+  .menu-toggle {
+    margin: 0;
+  }
+
+  .nav-low, .navbar-collapse {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  header .logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .navbar-brand {
+    margin-right: 0;
+  }
+
+  .logo-text {
+    margin-left: 10px;
+    margin-bottom: 0;
+    font-size: 32px;
+  }
+
+  .menu-toggle {
+    margin: 0;
+  }
+
+  .nav-low, .navbar-collapse {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 668px) {
+  header .logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .navbar-brand {
+    margin-right: 0;
+  }
+
+  .logo-text {
+    margin-left: 10px;
+    margin-bottom: 0;
+    font-size: 24px;
+  }
+
+  .menu-toggle {
+    margin: 0;
+  }
+
+  .nav-low, .navbar-collapse {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 445px) {
+  header .logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .navbar-brand {
+    margin-right: 0;
+  }
+
+  .logo-text {
+    margin-left: 10px;
+    margin-bottom: 0;
+    font-size: 18px;
+  }
+
+  .menu-toggle {
+    margin: 0;
+  }
+}
+
+

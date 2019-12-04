@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="UAAEcommerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="UAAEcommerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -86,6 +86,15 @@
           <Property Name="cli_email" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="cli_telefono" Type="varchar" MaxLength="15" />
         </EntityType>
+        <EntityType Name="Entrega">
+          <Key>
+            <PropertyRef Name="id_entrega" />
+          </Key>
+          <Property Name="id_entrega" Type="int" Nullable="false" />
+          <Property Name="id_pedido" Type="int" Nullable="false" />
+          <Property Name="chofer" Type="varchar" MaxLength="100" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="MensajesWeb">
           <Key>
             <PropertyRef Name="idMensajes" />
@@ -115,6 +124,7 @@
           <Property Name="idPedidoCabecera" Type="int" Nullable="false" />
           <Property Name="pedet_precio" Type="int" Nullable="false" />
           <Property Name="pedet_montototal" Type="int" Nullable="false" />
+          <Property Name="pedet_cantidad" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Producto">
           <Key>
@@ -125,6 +135,8 @@
           <Property Name="pro_descripcion" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="pro_codigobarra" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="pro_precio" Type="int" Nullable="false" />
+          <Property Name="pro_blobname" Type="varchar" MaxLength="100" />
+          <Property Name="pro_blobcontainername" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="TipoCliente">
           <Key>
@@ -220,6 +232,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Entrega_Pedido">
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="1" />
+          <End Role="Entrega" Type="Self.Entrega" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido">
+              <PropertyRef Name="idPedido" />
+            </Principal>
+            <Dependent Role="Entrega">
+              <PropertyRef Name="id_pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Pedido_Cliente">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
           <End Role="Pedido" Type="Self.Pedido" Multiplicity="0..1" />
@@ -277,6 +301,7 @@
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Entrega" EntityType="Self.Entrega" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MensajesWeb" EntityType="Self.MensajesWeb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pedido" EntityType="Self.Pedido" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PedidoDetalle" EntityType="Self.PedidoDetalle" Schema="dbo" store:Type="Tables" />
@@ -307,6 +332,10 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Entrega_Pedido" Association="Self.FK_Entrega_Pedido">
+            <End Role="Pedido" EntitySet="Pedido" />
+            <End Role="Entrega" EntitySet="Entrega" />
+          </AssociationSet>
           <AssociationSet Name="FK_Pedido_Cliente" Association="Self.FK_Pedido_Cliente">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Pedido" EntitySet="Pedido" />
@@ -324,8 +353,7 @@
             <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="UAAEcommerceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -433,6 +461,7 @@
           <Property Name="ped_confirmado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK_Pedido_Cliente" FromRole="Pedido" ToRole="Cliente" />
           <NavigationProperty Name="PedidoDetalle" Relationship="Self.FK_PedidoDetalle_Cabecera" FromRole="Pedido" ToRole="PedidoDetalle" />
+          <NavigationProperty Name="Entrega" Relationship="UAAEcommerceModel.FK_Entrega_Pedido" FromRole="Pedido" ToRole="Entrega" />
         </EntityType>
         <EntityType Name="PedidoDetalle">
           <Key>
@@ -445,6 +474,7 @@
           <Property Name="pedet_montototal" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Pedido" Relationship="Self.FK_PedidoDetalle_Cabecera" FromRole="PedidoDetalle" ToRole="Pedido" />
           <NavigationProperty Name="Producto" Relationship="Self.FK_PedidoDetalle_Producto" FromRole="PedidoDetalle" ToRole="Producto" />
+          <Property Name="pedet_cantidad" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Producto">
           <Key>
@@ -457,6 +487,8 @@
           <Property Name="pro_precio" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PedidoDetalle" Relationship="Self.FK_PedidoDetalle_Producto" FromRole="Producto" ToRole="PedidoDetalle" />
           <NavigationProperty Name="TipoProducto" Relationship="Self.FK_Producto_TipoProducto" FromRole="Producto" ToRole="TipoProducto" />
+          <Property Name="pro_blobname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pro_blobcontainername" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="TipoCliente">
           <Key>
@@ -628,7 +660,34 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="Entrega" EntityType="UAAEcommerceModel.Entrega" />
+          <AssociationSet Name="FK_Entrega_Pedido" Association="UAAEcommerceModel.FK_Entrega_Pedido">
+            <End Role="Pedido" EntitySet="Pedido" />
+            <End Role="Entrega" EntitySet="Entrega" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Entrega">
+          <Key>
+            <PropertyRef Name="id_entrega" />
+          </Key>
+          <Property Name="id_entrega" Type="Int32" Nullable="false" />
+          <Property Name="id_pedido" Type="Int32" Nullable="false" />
+          <Property Name="chofer" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Pedido" Relationship="UAAEcommerceModel.FK_Entrega_Pedido" FromRole="Entrega" ToRole="Pedido" />
+        </EntityType>
+        <Association Name="FK_Entrega_Pedido">
+          <End Type="UAAEcommerceModel.Pedido" Role="Pedido" Multiplicity="1" />
+          <End Type="UAAEcommerceModel.Entrega" Role="Entrega" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido">
+              <PropertyRef Name="idPedido" />
+            </Principal>
+            <Dependent Role="Entrega">
+              <PropertyRef Name="id_pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -737,6 +796,7 @@
           <EntitySetMapping Name="PedidoDetalle">
             <EntityTypeMapping TypeName="UAAEcommerceModel.PedidoDetalle">
               <MappingFragment StoreEntitySet="PedidoDetalle">
+                <ScalarProperty Name="pedet_cantidad" ColumnName="pedet_cantidad" />
                 <ScalarProperty Name="idPedidoDetalle" ColumnName="idPedidoDetalle" />
                 <ScalarProperty Name="idProducto" ColumnName="idProducto" />
                 <ScalarProperty Name="idPedidoCabecera" ColumnName="idPedidoCabecera" />
@@ -748,6 +808,8 @@
           <EntitySetMapping Name="Producto">
             <EntityTypeMapping TypeName="UAAEcommerceModel.Producto">
               <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="pro_blobcontainername" ColumnName="pro_blobcontainername" />
+                <ScalarProperty Name="pro_blobname" ColumnName="pro_blobname" />
                 <ScalarProperty Name="idProducto" ColumnName="idProducto" />
                 <ScalarProperty Name="idTipoProducto" ColumnName="idTipoProducto" />
                 <ScalarProperty Name="pro_descripcion" ColumnName="pro_descripcion" />
@@ -780,6 +842,16 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Entrega">
+            <EntityTypeMapping TypeName="UAAEcommerceModel.Entrega">
+              <MappingFragment StoreEntitySet="Entrega">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="chofer" ColumnName="chofer" />
+                <ScalarProperty Name="id_pedido" ColumnName="id_pedido" />
+                <ScalarProperty Name="id_entrega" ColumnName="id_entrega" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

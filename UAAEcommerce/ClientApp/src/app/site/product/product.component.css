@@ -1,0 +1,685 @@
+#product-breadcrumb {
+  background: rgba(0,0,0,0.8);
+  color: white;
+  margin-bottom: 0;
+  margin-top: 0;
+  border-radius: 0;
+}
+#product-breadcrumb .breadcrumb-link a {
+  color: white;
+}
+#hero {
+  width: 100%;
+  font-size: 24px;
+  position: relative;
+}
+.hero-img {
+  height: 136px;
+  width: 100%;
+  overflow: hidden;
+  display: block;
+  position: relative;
+}
+.hero-img > img, .hero-img > source {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+.caption {
+  position: absolute;
+  font-size: 24px;
+  bottom: 1em;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+}
+.nitsuga-logo {
+  width: 250px;
+}
+.title {
+  font-family: "Bushcraft", Impact;
+  font-size: 2em;
+  color: #e0e0e0;
+}
+.subtitle {
+  font-family: "Bushcraft", Impact;
+  font-size: 2em;
+  color: #e0e0e0;
+  padding: 0 15px;
+}
+.main-img {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(to right, #F3EBE2 50%, #DACCBC 50%);
+}
+.ingredients {
+  list-style: none;
+  text-align: center;
+  width: 100%;
+  padding: 0;
+}
+.product-title {
+  font-family: "Bushcraft", Impact;
+  font-size: 2.5em;
+  color: #54682A;
+  margin: 25px auto;
+  color: black;
+}
+.product-price {
+  font-family: 'Pier Sans Bold', Arial, Helvetica, sans-serif;
+  font-size: 1.2em;
+  color: #54682A;
+}
+.product-spec {
+  justify-content: center;
+  padding: 15px 0;
+  margin: 15px auto;
+  color: #323E18;
+}
+.product-spec > div{
+  margin: 0 7.5px;
+}
+.product-description {
+  text-align: left;
+}
+.product-spec h2 {
+  letter-spacing: 1px;
+}
+.product-spec h5 {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 16px;
+}
+.product-spec img {
+  max-width: 120px; 
+}
+.product-warnings {
+  margin: 15px auto;
+  padding: 0 15px;
+  font-size: 14px;
+}
+.product-warnings p {
+  font-size: 0.8em;
+
+}
+.info-industria {
+  margin: 15px auto;
+}
+.col-right {
+  background: #DACCBC;
+  min-height: 70vh;
+  text-align: center;
+  padding: 30px 35px 30px 15px;
+}
+.col-left {
+  background: #F3EBE2;
+    min-height: 70vh;
+    text-align: center;
+    padding: 15px 15px 15px 50px;
+}
+.notBeer ~ .col-right {
+  min-height: unset;
+}
+.lupulo {
+  max-width: 200px;
+  mix-blend-mode: multiply;
+  filter: contrast(30%);
+}
+.arte {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 250px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(to right, #F3EBE2 50.6%, #DACCBC 50%);
+}
+.artista-hero-img {
+  object-fit: cover;
+  width: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  background-size: 100%;
+  height: 100%;
+  background-position: center;
+  filter: sepia(90%);
+}
+.art-description {
+  position: relative;
+  z-index: 1;
+  /*background: rgba(243, 235, 226, 0.88);*/
+  width: 80%;
+  margin: auto;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 3em;
+  max-width: 45em;
+}
+.main-img {
+  max-width: 290px;
+  width: 100%;
+  justify-content: center;
+}
+.notBeer {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  min-height: unset;
+}
+.notBeer-description {
+  margin: auto;
+  width: 70%;
+}
+.artist-bio { 
+  color: black;
+  max-width: 800px;
+  margin: auto;
+  width: 100%;
+  margin-top: 1em;
+}
+.art-author-name {
+  font-family: "Bushcraft", Impact;
+  font-size: 2em;
+  color: black;
+}
+.cantidad {
+  background: rgba(84, 104, 42, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 8px;
+  font-family: "Pier Sans Bold";
+  color: #54682A;
+  border-radius: 3px;
+  margin: 1.5em auto;
+  max-width: 15em;
+}
+.cantidad input {
+  background: transparent;
+  border: none;
+  text-align: center;
+  padding-left: 15px;
+  color: #54682A;
+  max-width: 4em;
+}
+.product-images .col {
+  padding: 0;
+}
+.product-images {
+  width: 100%;
+  background: linear-gradient(to right, #F3EBE2 50.6%, #DACCBC 50%);
+  justify-content: center;
+  padding: 48px;
+}
+.cantidad ~ button {
+  color: #54682A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 30em;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.chemistry {
+  color: #515151;
+  font-size: 12px;
+}
+.prod-secondary-img {
+  max-height: 400px;
+  object-fit: cover;
+}
+.overlay {
+  background: rgba(0,0,0,0.2);
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+}
+.merch-mainImg {
+  max-width: 400px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
+  margin: auto;
+}
+.btn-add {
+  display: flex;
+  align-items: center;
+  max-width: calc(100% - 60px);
+  margin-top: 30px;
+  margin-right: auto;
+}
+@media screen and (max-width: 1600px) {
+.caption {
+    background: rgba(0,0,0,0.5);
+    padding: 1em 15px;
+    width: calc(100% - 30px);
+    height: 100%;
+    bottom: 0;
+  }
+.col-left {
+    width: 41%;
+    padding: 30px 20px;
+  }
+.col-right {
+    width: 41%;
+    padding: 30px 20px;
+  }
+.main-img {
+    width: 17%;
+    justify-content: center;
+    align-items: flex-start;
+  }
+.main-img img {
+      width: 140px;
+      padding-top: 30px;
+    }
+.col-right form {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+.product-title {
+    margin: 0.5em auto;
+    font-size: 1.5em;
+  }
+.product-spec {
+    font-size: 16px;
+  }
+.product-spec h2 {
+      font-size: 1.4em;
+    }
+.product-spec h5 {
+      font-size: 1em;
+    }
+.product-images {
+    background: linear-gradient(to right, #F3EBE2 50%, #DACCBC 50%);
+  }
+.arte {
+    height: auto;
+    padding: 30px 0;
+    background: linear-gradient(to right, #F3EBE2 50%, #DACCBC 50%);
+  }
+.product-images {
+    background: linear-gradient(to right, #F3EBE2 50%, #DACCBC 50%);
+  }
+.art-author-name {
+    font-size: 1.5em;
+  }
+.art-description {
+    padding: 2em;
+  }
+.nitsuga-logo {
+    width: 200px;
+  }
+.hero-img {
+  height: 120px;
+}
+}
+@media screen and (max-width: 1200px) {
+.notBeer-description {
+    width: 100%;
+  }
+.caption {
+    background: linear-gradient(to top, black, transparent);
+    padding: 1em 15px;
+    bottom: 0;
+  }
+.col-left {
+    width: 41%;
+    padding: 30px 20px;
+  }
+.col-right {
+    width: 41%;
+    padding: 30px 20px;
+  }
+.main-img {
+    width: 17%;
+    justify-content: center;
+    align-items: flex-start;
+  }
+.main-img img {
+      width: 140px;
+      padding-top: 30px;
+    }
+.col-right form {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+.product-title {
+    margin: 0.5em auto;
+    font-size: 1.5em;
+  }
+.product-spec {
+    font-size: 16px;
+  }
+.product-spec h2 {
+      font-size: 1.4em;
+    }
+.product-spec h5 {
+    font-size: 12px;
+  }
+.product-images {
+      padding: 0;
+  }
+.arte {
+    height: auto;
+  }
+.art-author-name {
+    font-size: 1.5em;
+  }
+.art-description {
+    padding: 2em;
+  }
+.btn-primary {
+    font-size: 11px;
+    padding: 15px 25px;
+}
+.hero-img {
+  height: 120px;
+}
+.btn-add {
+       margin-right: auto;
+ }
+}
+@media screen and (max-width: 992px) {
+.col-left {
+    width: 41%;
+    padding: 30px 20px;
+  }
+.col-right {
+    width: 41%;
+    padding: 30px 20px;
+  }
+.main-img {
+    width: 17%;
+    justify-content: center;
+    align-items: flex-start;
+  }
+.main-img img {
+      width: 140px;
+      padding-top: 30px;
+    }
+.col-right form {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+.product-title {
+    margin: 0.5em auto;
+    font-size: 1.5em;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+.product-title .col-right {
+      text-align: left;
+    }
+.lupulo {
+    padding: 0 15px;
+  }
+.product-spec {
+    font-size: 16px;
+    padding: 15px;
+  }
+.product-spec h2 {
+      font-size: 1.4em;
+    }
+.product-spec h5 {
+      font-size: 1em;
+    }
+.product-images {
+  }
+.arte {
+    height: auto;
+  }
+.art-author-name {
+    font-size: 1.5em;
+  }
+.art-description {
+    padding: 3em;
+    width: 70%;
+  }
+.subtitle {
+    font-size: 1em;
+    padding: 0 15px;
+  }
+.product-description {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+.ingredients {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+.hero-img {
+    height: 120px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+  .container {
+    max-width: calc(100% - 68px);
+  }
+}
+@media screen and (max-width: 767px) {
+#product-breadcrumb {
+    padding: 7px 15px;
+  }
+.breadcrumb-link a {
+    font-size: 12px;
+  }
+.col-left {
+    width: 100%;
+    padding: 30px 40px;
+    order: 1;
+    flex: 1 1 100%;
+    min-height: unset;
+  }
+.col-left.notBeer {
+  order: 0;
+}
+.col-right {
+    width: 100%;
+    padding: 30px 40px;
+    flex: 1 1 100%;
+    min-height: unset;
+  }
+.main-img {
+    width: 100%;
+    justify-content: center;
+    background: #DACCBC;
+    max-width: unset
+  }
+.main-img img {
+      width: 140px;
+      padding-top: 30px;
+    }
+.col-right form {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+.product-title {
+    margin: 0.5em auto;
+    font-size: 1.5em;
+  }
+.product-spec {
+    font-size: 16px;
+  }
+.product-spec h2 {
+      font-size: 1.4em;
+    }
+.product-spec h5 {
+      font-size: 1em;
+    }
+.product-images {
+    order: 3;
+    background: #F3EBE2;
+  }
+.arte {
+    order: 2;
+    height: auto;
+    background: #DACCBC;
+  }
+.art-author-name {
+    font-size: 1.5em;
+  }
+.art-description {
+    padding: 2em;
+  }
+.nitsuga-logo {
+  width: 140px;
+}
+.hero-img {
+  height: 74px;
+}
+.caption {
+    background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+    padding: 10px 15px;
+    bottom: 0;
+  }
+}
+@media screen and (max-width: 668px) {
+.col-left {
+    width: 100%;
+    padding: 30px 40px;
+    order: 1;
+    flex: 1 1 100%;
+    min-height: unset;
+  }
+.col-right {
+    width: 100%;
+    padding: 30px 40px;
+    flex: 1 1 100%;
+    min-height: unset;
+  }
+.main-img {
+    width: 100%;
+    justify-content: center;
+    background: #DACCBC;
+    max-width: unset;
+  }
+.main-img img {
+      width: 108px;
+      padding-top: 30px;
+    }
+.col-right form {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+.product-title {
+    margin: 0.5em auto;
+    font-size: 1.5em;
+  }
+.product-spec {
+    font-size: 16px;
+  }
+.product-spec h2 {
+      font-size: 1.4em;
+    }
+.product-spec h5 {
+      font-size: 1em;
+    }
+.product-images {
+    order: 3;
+  }
+.arte {
+    order: 2;
+    height: auto;
+  }
+.art-author-name {
+    font-size: 1.5em;
+  }
+.art-description {
+    padding: 2em;
+  }
+}
+@media screen and (max-width: 445px) {
+.title {
+  font-size: 1.5em;
+}
+.subtitle {
+  font-size: 1.2em;
+}
+.product-spec img {
+  max-width: 70px;
+}
+.product-spec h5 {
+  font-size: 0.7em;
+}
+.col-left {
+    width: 100%;
+    padding: 30px 15px;
+    order: 1;
+    flex: 1 1 100%;
+    min-height: unset;
+  }
+.col-right {
+    width: 100%;
+    padding: 30px 15px;
+    flex: 1 1 100%;
+    min-height: unset;
+  }
+.main-img {
+    width: 100%;
+    justify-content: center;
+    background: #DACCBC;
+    max-width: unset;
+    background: rgba(250, 250, 250, 1);
+    max-width: unset;
+    margin-bottom: 15px;
+    margin-top: 15px;
+  }
+.main-img img {
+    width: 100px;
+    padding-top: 30px;
+  }
+.product-description {
+    margin-top: 16px;
+    margin-bottom: 32px;
+  }
+.col-right form {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+.product-title {
+    margin: 0.5em auto;
+    font-size: 27px;
+  }
+.product-spec {
+    font-size: 16px;
+    padding: 5px 0px;
+    margin: 0;
+    background: rgba(0,0,0,0.03);
+  }
+.product-warnings {
+    padding: 0 30px;
+  }
+.product-spec h2 {
+    font-size: 18px;
+  }
+.product-spec h5 {
+    font-size: 1em;
+  }
+.product-images {
+    order: 3;
+  }
+.arte {
+    order: 2;
+    height: auto;
+    padding: 0;
+  }
+.art-author-name {
+    font-size: 1.5em;
+  }
+.art-description {
+    padding: 45px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.75)
+  }
+.subtitle {
+    font-size: 28px;
+  }
+}
