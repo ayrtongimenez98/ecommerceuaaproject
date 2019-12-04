@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SiteModule } from './site/site.module';
-import { AdminModule } from './admin/admin.module';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
@@ -34,12 +33,10 @@ import { PageNotFoundComponent } from './site/page-not-found/page-not-found.comp
     FormsModule,
     RouterModule.forRoot([
       { path: "", loadChildren: "./site/site.module#SiteModule", pathMatch: "full" },
-      { path: "admin", loadChildren: "./admin/admin.module#AdminModule", pathMatch: "full", canActivate: [AdminGuard] },
       { path: '**', component: PageNotFoundComponent }
     ], { anchorScrolling: "enabled", scrollPositionRestoration:"enabled" }),
     SiteModule,
     SharedModule,
-    AdminModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBUDOXaYOjdWCMXZR4t8RRNCWzRLhA21zk'
     }),

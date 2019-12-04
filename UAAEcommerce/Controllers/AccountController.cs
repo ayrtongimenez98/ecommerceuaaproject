@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -62,11 +63,50 @@ namespace UAAEcommerce.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> LoginAdmin(LoginViewModel model, string returnUrl)
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            // No cuenta los errores de inicio de sesión para el bloqueo de la cuenta
+            // Para permitir que los errores de contraseña desencadenen el bloqueo de la cuenta, cambie a shouldLockout: true
+            try
+            {
+                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, false, shouldLockout: false);
+                if ()
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        return new HttpStatusCodeResult(HttpStatusCode.OK);
+                    case SignInStatus.LockedOut:
+                        return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                    case SignInStatus.RequiresVerification:
+                        return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                    case SignInStatus.Failure:
+                        return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+                    default:
+                        return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+                throw;
+            }
+        }
+
+
         //
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             ApplicationDbContext context = new ApplicationDbContext();
@@ -76,26 +116,29 @@ namespace UAAEcommerce.Controllers
             {
                 return View(model);
             }
-
             // No cuenta los errores de inicio de sesión para el bloqueo de la cuenta
             // Para permitir que los errores de contraseña desencadenen el bloqueo de la cuenta, cambie a shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            try
             {
-                case SignInStatus.Success:
-                    var user = UserManager.FindByEmail(model.Email);
-                    var role = roleManager.FindByName("Admin");
-                    if (user.Roles.Any(x => x.RoleId == role.Id))
-                        return RedirectToAction("Index", "Dashboard", new { Area = "Admin"});
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Intento de inicio de sesión no válido.");
-                    return View(model);
+                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, false, shouldLockout: false);
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        return new HttpStatusCodeResult(HttpStatusCode.OK);
+                    case SignInStatus.LockedOut:
+                        return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                    case SignInStatus.RequiresVerification:
+                        return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                    case SignInStatus.Failure:
+                        return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+                    default:
+                        return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+                throw;
             }
         }
 

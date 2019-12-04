@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProductRecommender.DataModel;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -10,18 +11,25 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using UAAEcommerce.Areas.Admin.Models;
+using UAAEcommerce.Services;
 
 namespace UAAEcommerce.Controllers
 {
     public class ProductoController : ApiController
     {
         private UAAEcommerceEntities2 db = new UAAEcommerceEntities2();
-
+        private Recommender recommender = new Recommender();
+        private BlobStorageService blobStorage = new BlobStorageService();
         // GET: api/Producto
-        
-        public IQueryable<Producto> GetProducto()
+
+        public IEnumerable<Producto> GetProducto()
         {
-            return db.Producto;
+            var productos = db.Producto.ToList();
+            foreach (var item in productos)
+            {
+                item.pro_blobname = blobStorage.GetBlobUrl(item.pro_blobname, item.pro_blobcontainername);
+            }
+            return productos;
         }
 
         // GET: api/Producto/5
@@ -110,6 +118,38 @@ namespace UAAEcommerce.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public IEnumerable<Producto> Recommendations(int id)
+        {
+            var enigneTask = recommender.GetEngine();
+            var productTask = db.Producto
+                .FirstOrDefaultAsync(x => x.idProducto == id);
+            Task.WaitAll(enigneTask, productTask);
+
+            var engine = enigneTask.Result;
+            var product = productTask.Result;
+
+            var products = db.Producto.Where(x =>  x.TipoProducto.idTipoProducto == product.TipoProducto.idTipoProducto && x.idProducto != id).ToList();
+            var scores = new Dictionary<int, float>();
+            foreach (var coProduct in products)
+            {
+                var input = new ProductInput
+                {
+                    ProductId = (uint)product.idProducto,
+                    CoPurchasedProductId = (uint)coProduct.idProducto
+                };
+
+                scores.Add(coProduct.idProducto, engine.Predict(input).Score);
+            }
+
+            var recommendationIds = scores.OrderByDescending(x => x.Value).Take(5).Select(x => x.Key).ToList();
+            var recommendations = products.Where(x => recommendationIds.Contains(x.idProducto)).ToList();
+            foreach (var item in recommendations)
+            {
+                item.pro_blobname = blobStorage.GetBlobUrl(item.pro_blobname, item.pro_blobcontainername);
+            }
+            return recommendations;
         }
 
         private bool ProductoExists(int id)
