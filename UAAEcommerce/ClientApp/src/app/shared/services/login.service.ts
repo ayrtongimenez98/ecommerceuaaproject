@@ -9,17 +9,26 @@ import {map} from "rxjs/operators";
 
 @Injectable()
 export class LoginService {
+  headers: HttpHeaders = new HttpHeaders();
   constructor(private readonly http: HttpClient, private readonly subscribeService: SubscribeService) {
 
+    this.appendHeaders();
+  }
+  
+  appendHeaders() {
+    this.headers.append('Accept', 'application/json');
+    this.headers.append('bar', 'test');
+    this.headers.append('Content-Type', '*');
+    this.headers.append('Access-Control-Allow-Origin', '*');
   }
 
   login(username: string, password: string): Observable<LoginResponseModel> {
-    const body = {
-      username,
-      password,
-      rememberMe: false
+    const model = {
+      "email": username,
+      "password":password,
+      "rememberMe": false
     };
-    return this.http.post<LoginResponseModel>('/api/authentication/login', body);
+    return this.http.post<LoginResponseModel>('https://localhost:44375/Account/LoginCliente', model);
   }
 
   socialLogin(id: string): Observable<LoginResponseModel> {
@@ -40,25 +49,21 @@ export class LoginService {
     });
   }
 
-  register(firstName: string, lastName: string, email: string, address: string, document: string,
-           razonSocial: string, ruc:string, city: string, date: string, phone: string, password: string) {
-    const body = {
-      firstName,
-      lastName,
-      email,
-      address,
-      document,
-      razonSocial,
-      ruc,
-      city,
-      date,
-      phone,
-      password
+  register(email: string, address: string,
+           razonSocial: string, ruc:string, cityId: number, phone: string, password: string) {
+    const model = {
+      "Email": email,
+      "Direccion": address,
+      "RazonSocial": razonSocial,
+      "Ruc": ruc,
+      "Telefono": phone,
+      "Password": password,
+      "CiudadId": cityId
     };
-    return this.http.post<SystemValidationModel>('/api/authentication/register', body);
+    return this.http.post<SystemValidationModel>('https://localhost:44375/Account/Register', model);
   }
 
-  completeRegistration = (userId: string, email: string, address: string, document: string,
+  completeRegistration = (userId: number, email: string, address: string, document: string,
                           razonSocial: string,
                           city: string,
                           date: string,
@@ -85,7 +90,7 @@ export class LoginService {
     return this.http.post<LoginResponseModel>('/api/authentication/completeRegister', body);
   };
 
-  updateProfile = (userId: string, email: string, address: string, document: string,
+  updateProfile = (userId: number, email: string, address: string, document: string,
                           razonSocial: string,
                           city: string,
                           date: string,

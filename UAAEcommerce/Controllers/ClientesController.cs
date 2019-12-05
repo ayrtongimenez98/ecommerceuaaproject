@@ -15,7 +15,7 @@ namespace UAAEcommerce.Controllers
 {
     public class ClientesController : ApiController
     {
-        private UAAEcommerceEntities2 db = new UAAEcommerceEntities2();
+        private DataContext db = new DataContext();
 
         // GET: api/Clientes
         public IQueryable<Cliente> GetCliente()

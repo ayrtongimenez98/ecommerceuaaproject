@@ -13,10 +13,10 @@ namespace UAAEcommerce.Areas.Admin.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class UAAEcommerceEntities2 : DbContext
+    public partial class DataContext : DbContext
     {
-        public UAAEcommerceEntities2()
-            : base("name=UAAEcommerceEntities2")
+        public DataContext()
+            : base("name=DataContext")
         {
         }
     
@@ -32,14 +32,13 @@ namespace UAAEcommerce.Areas.Admin.Models
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Ciudad> Ciudad { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<Entrega> Entrega { get; set; }
         public virtual DbSet<MensajesWeb> MensajesWeb { get; set; }
         public virtual DbSet<Pedido> Pedido { get; set; }
         public virtual DbSet<PedidoDetalle> PedidoDetalle { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TipoCliente> TipoCliente { get; set; }
         public virtual DbSet<TipoProducto> TipoProducto { get; set; }
-        public virtual DbSet<Entrega> Entrega { get; set; }
-
-        public System.Data.Entity.DbSet<UAAEcommerce.Models.ContactModel> ContactModels { get; set; }
     }
 }

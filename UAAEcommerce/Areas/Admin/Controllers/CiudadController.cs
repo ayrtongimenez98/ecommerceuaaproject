@@ -13,7 +13,7 @@ namespace UAAEcommerce.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class CiudadController : Controller
     {
-        private UAAEcommerceEntities db = new UAAEcommerceEntities();
+        private DataContext db = new DataContext();
 
         // GET: Admin/Ciudad
         [Authorize(Roles = "Admin")]

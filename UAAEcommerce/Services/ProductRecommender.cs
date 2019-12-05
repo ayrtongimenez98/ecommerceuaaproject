@@ -13,7 +13,7 @@ namespace UAAEcommerce.Services
 {
     public class Recommender
     {
-        private UAAEcommerceEntities2 db = new UAAEcommerceEntities2();
+        private DataContext db = new DataContext();
         BlobStorageService blobStorage = new BlobStorageService();
 
         public Recommender()

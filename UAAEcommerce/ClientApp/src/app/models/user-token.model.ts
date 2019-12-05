@@ -1,7 +1,7 @@
 
 export class UserTokenModel {
   token: string;
-  userId: string;
+  userId: number;
   expirationDate: Date;
   roles: Array<string> = [];
   email: string;
@@ -13,7 +13,7 @@ export class UserTokenModel {
   lastName: string;
   succeeded: boolean;
 
-  constructor(token?: string, userId?: string, expirationDate?: Date, roles?: Array<string>, email?: string,
+  constructor(token?: string, userId?: number, expirationDate?: Date, roles?: Array<string>, email?: string,
               username?: string, documento?:string, razonSocial?:string, ruc?:string, firstName?: string,
               lastName?: string, succeeded?: boolean) {
     this.token = token;

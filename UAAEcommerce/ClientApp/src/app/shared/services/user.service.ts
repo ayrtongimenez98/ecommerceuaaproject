@@ -134,7 +134,7 @@ export class UserService {
     window.localStorage.removeItem("roles");
   };
 
-  userProfile(id: string): Observable<UserModel> {
+  userProfile(id: number): Observable<UserModel> {
     const query = `query($id: ID!){
                       userProfile(id: $id){
                         id

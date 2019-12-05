@@ -32,7 +32,7 @@ export class OrderService {
     return this.graphql.query(query, null).pipe(map(x => x.data["orders"] as Array<OrderModel>));
   }
 
-  ordersByUser(id: string): Observable<Array<OrderModel>> {
+  ordersByUser(id: number): Observable<Array<OrderModel>> {
     const query = `query ($id: ID!) {
                     ordersByUser(id: $id) {
                       id

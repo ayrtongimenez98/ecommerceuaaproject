@@ -44,29 +44,29 @@ export class LoginComponent implements OnInit {
     const username: string = this.loginForm.get("username").value;
     const password: string = this.loginForm.get("password").value;
     this.loginService.login(username.toLowerCase(), password).subscribe(x => {
-      if (x.succeeded) {
+      if (x.Succeeded) {
         this.currentUser.setUser({
-          email: x.email,
-          expirationDate: new Date(x.expirationDate),
-          roles: x.roles,
-          token: x.token,
-          firstName: x.firstName,
-          lastName: x.lastName,
-          succeeded: x.succeeded,
-          userId: x.userId,
-          documento: x.documento,
-          ruc: x.ruc,
-          razonSocial: x.razonSocial,
-          username: x.username
+          email: x.Email,
+          expirationDate: new Date(x.ExpirationDate),
+          roles: x.Roles,
+          token: x.Token,
+          firstName: x.FirstName,
+          lastName: x.LastName,
+          succeeded: x.Succeeded,
+          userId: x.UserId,
+          documento: x.Documento,
+          ruc: x.Ruc,
+          razonSocial: x.RazonSocial,
+          username: x.Username
         });
         this.loading = false;
-        this.router.navigate([this.getRedirectUrl(x.roles)]);
+        this.router.navigate(['/shop']);
       } else {
         this.loading = false;
-        console.log(x.message);
-        this.snackBar.open(x.message);
+        console.log(x.Message);
+        this.snackBar.open(x.Message);
       }
-      this.subscribeService.emitLogin(x.succeeded);
+      this.subscribeService.emitLogin(x.Succeeded);
     });
   };
 

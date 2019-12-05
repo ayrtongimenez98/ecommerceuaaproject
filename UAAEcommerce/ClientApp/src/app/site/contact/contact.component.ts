@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { SubscribeService } from "../../shared/services/subscribe.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { ValidationService } from "../../shared/services/validation.service";
 import { ContactService } from "../../shared/services/contact.service";
 
 @Component({
@@ -15,7 +14,7 @@ export class ContactComponent implements OnInit {
   process: boolean;
   contactForm: FormGroup;
 
-  constructor(private readonly subscribeService: SubscribeService, private readonly validationService: ValidationService, private readonly contactService: ContactService, private readonly router: Router) { }
+  constructor(private readonly subscribeService: SubscribeService, private readonly contactService: ContactService, private readonly router: Router) { }
 
   ngOnInit() {
     this.contactForm = new FormGroup({

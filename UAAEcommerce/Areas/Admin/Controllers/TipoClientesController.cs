@@ -14,7 +14,7 @@ namespace UAAEcommerce.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class TipoClientesController : Controller
     {
-        private UAAEcommerceEntities2 db = new UAAEcommerceEntities2();
+        private DataContext db = new DataContext();
 
         // GET: Admin/TipoClientes
         public async Task<ActionResult> Index()

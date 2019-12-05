@@ -4,7 +4,6 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {DISABLED} from "@angular/forms/src/model";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ValidationService} from "../../shared/services/validation.service";
 
 @Component({
   selector: 'app-reset-account',
@@ -22,8 +21,7 @@ export class ResetAccountComponent implements OnInit {
   constructor(private readonly userService: UserService,
               private readonly snackBar: MatSnackBar,
               private readonly activatedRoute: ActivatedRoute,
-              private readonly router: Router,
-              private readonly validationService: ValidationService) {
+              private readonly router: Router) {
   }
 
   ngOnInit() {
@@ -31,7 +29,7 @@ export class ResetAccountComponent implements OnInit {
       passwords: new FormGroup({
         password: new FormControl("",[Validators.required, Validators.minLength(6)]),
         confirmPassword: new FormControl("", [Validators.required])
-      }, [this.validationService.confirmPassword("password", "confirmPassword")])
+      })
     });
 
     this.sendForm = new FormGroup({
@@ -47,7 +45,7 @@ export class ResetAccountComponent implements OnInit {
 
   sendEmailForResetPass() {
     this.userService.resetPassByUserName(this.sendForm.value.username).subscribe(x => {
-      if (x.success) {
+      if (x.Success) {
         this.snackBar.open("Favor verifique su E-mail para resetear la contraseña.", "Aceptar", {duration: 5000});
         this.sendForm.patchValue({
           username: ''
@@ -59,11 +57,11 @@ export class ResetAccountComponent implements OnInit {
   resetPassword(){
     const password= this.resetForm.value.passwords.password;
       this.userService.updateUserPass(this.userId, password, this.tokenId).subscribe(x => {
-        if (x.success){
-          this.snackBar.open(x.message, "Aceptar", {duration:5000});
+        if (x.Success){
+          this.snackBar.open(x.Message, "Aceptar", {duration:5000});
           this.router.navigate(["/login"]);
         }else{
-          this.snackBar.open(x.message, "Aceptar", {duration:5000});
+          this.snackBar.open(x.Message, "Aceptar", {duration:5000});
         }
       });
   }

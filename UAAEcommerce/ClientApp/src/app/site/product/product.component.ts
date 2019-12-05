@@ -43,38 +43,28 @@ export class ProductComponent implements OnInit {
     this.banner = image.url;
   }
 
-  mainPhotoURL(): string {
-    if (this.product == null) return '';
-    const photo = this.product.photos.find(p => p.main);
-    if (photo == null) return '';
-    const image = photo.images.find(i => i.original);
-    if (image == null) return '';
-    this.mainPhoto = image.url;
+
+  addProduct(){
+    const cart = this.userCartService.userCart.getValue();
+    const cartItem = cart.Detalles.find(x => x.IdProducto == this.productId);
+    if (cartItem == null)
+      this.userCartService.addItem(this.productId, 1);
+    else
+      this.userCartService.updateItem(this.productId, cartItem.Cantidad + 1)
   }
 
-  // addProduct(){
-  //   const items = this.userCartService.userCart.getValue();
-  //   const cartItem = items.find(x => x.product.id == this.productId);
-  //   if (cartItem == null)
-  //     this.userCartService.addItem(this.product, 1);
-  //   else
-  //     this.userCartService.updateItem(this.productId, cartItem.quantity + 1)
-  // }
-
-  // openModal = (product: ProductModel): void => {
-  //   const items = this.userCartService.userCart.getValue();
-  //   const cartItem = items.find(x => x.product.id == product.id);
-  //   let quantity = 1;
-  //   let forGift = false;
-  //   if (cartItem != null) {
-  //     quantity = cartItem.quantity;
-  //     forGift = cartItem.forGift;
-  //   }
-  //   this.bottomSheetOpen(product, quantity, forGift);
-  //   if (cartItem == null) {
-  //     this.userCartService.addItem(product, 1);
-  //   }
-  // };
+  openModal = (product: any): void => {
+    const cart = this.userCartService.userCart.getValue();
+    const cartItem = cart.Detalles.find(x => x.IdProducto == product.id);
+    let quantity = 1;
+    let forGift = false;
+    if (cartItem != null) {
+      quantity = cartItem.Cantidad;
+    }
+    if (cartItem == null) {
+      this.userCartService.addItem(product, 1);
+    }
+  };
 
 }
 

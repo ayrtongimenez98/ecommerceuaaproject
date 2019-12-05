@@ -1,28 +1,34 @@
 ﻿using System;
 using System.Globalization;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Http.Cors;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Newtonsoft.Json;
+using UAAEcommerce.Areas.Admin.Models;
 using UAAEcommerce.Models;
 
 namespace UAAEcommerce.Controllers
 {
-    [Authorize]
+    [EnableCors("*", "*", "*")]
+    [Microsoft.AspNetCore.Mvc.ApiController]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private DataContext db = new DataContext();
         public AccountController()
         {
         }
+
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
@@ -61,6 +67,71 @@ namespace UAAEcommerce.Controllers
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
+        }
+
+        [AllowAnonymous]
+        public async Task<ActionResult> LoginCliente(LoginViewModel model, string returnUrl)
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+            var validation = new LoginResponseModel();
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            if (!ModelState.IsValid)
+            {
+                validation.Succeeded = false;
+                validation.Message = "Datos invalidos";
+                return Json(validation);
+            }
+            // No cuenta los errores de inicio de sesión para el bloqueo de la cuenta
+            // Para permitir que los errores de contraseña desencadenen el bloqueo de la cuenta, cambie a shouldLockout: true
+            try
+            {
+                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, false, shouldLockout: false);
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        var user = db.AspNetUsers.FirstOrDefault(x => x.Email == model.Email);
+                        var roles = await SignInManager.UserManager.GetRolesAsync(user.Id);
+                        var cliente = db.Cliente.FirstOrDefault(x => x.usuarioId == user.Id);
+                        validation = new LoginResponseModel()
+                        {
+                            Documento = cliente.cli_ruc,
+                            Email = cliente.cli_email,
+                            FullName = cliente.cli_razonsocial,
+                            RazonSocial = cliente.cli_razonsocial,
+                            Roles = roles.ToList(),
+                            Ruc = cliente.cli_ruc,
+                            UserId = cliente.idClientes,
+                            Username = user.UserName,
+                            Succeeded = true,
+                            ExpirationDate = DateTime.Now.AddDays(1),
+                            Message = "Logueado",
+                            Token = ""
+                        };
+                        break;
+                    case SignInStatus.LockedOut:
+                        validation.Succeeded = false;
+                        validation.Message = "Usuario bloqueado";
+                        break;
+                    case SignInStatus.RequiresVerification:
+                        validation.Succeeded = false;
+                        validation.Message = "Usuaario necesita verificacion";
+                        break;
+                    case SignInStatus.Failure:
+                        validation.Succeeded = false;
+                        validation.Message = "Error verifique su cuenta";
+                        break;
+                    default:
+                        break;
+                }
+                return Json(validation);
+            }
+            catch (Exception ex)
+            {
+                validation.Succeeded = false;
+                validation.Message = "Datos invalidos";
+                return Json(validation);
+                throw;
+            }
         }
 
 
@@ -185,6 +256,7 @@ namespace UAAEcommerce.Controllers
         }
 
         //
+        [HttpPost]
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
@@ -194,16 +266,27 @@ namespace UAAEcommerce.Controllers
 
         //
         // POST: /Account/Register
-        [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterModel model)
         {
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
-                await UserManager.AddToRoleAsync(user.Id, "Admin");
+                await UserManager.AddToRoleAsync(user.Id, "Cliente");
+                var cliente = new Cliente()
+                {
+                   idCiudad = model.CiudadId,
+                   cli_direccion = model.Direccion,
+                   cli_email = model.Email,
+                   cli_razonsocial = model.RazonSocial,
+                   cli_ruc = model.Ruc,
+                   cli_telefono = model.Telefono,
+                   idTipoCliente = 1,
+                   usuarioId = user.Id
+                };
+                db.Cliente.Add(cliente);
+                await db.SaveChangesAsync();
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
@@ -214,13 +297,13 @@ namespace UAAEcommerce.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirmar cuenta", "Para confirmar la cuenta, haga clic <a href=\"" + callbackUrl + "\">aquí</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return Json(new SystemValidationModel() { Success = result.Succeeded, Message = "Creado con exito"});
                 }
                 AddErrors(result);
             }
 
             // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
-            return View(model);
+            return Json(new SystemValidationModel() { Success = false, Message = "Ha ocurrido un error al crear el usuario." });
         }
 
         //
@@ -454,7 +537,9 @@ namespace UAAEcommerce.Controllers
             return View();
         }
 
-        protected override void Dispose(bool disposing)
+
+        
+    protected override void Dispose(bool disposing)
         {
             if (disposing)
             {

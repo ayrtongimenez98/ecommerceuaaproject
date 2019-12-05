@@ -6,112 +6,127 @@ import {CartItemModel} from "../../models/cartItem.model";
 import {SystemValidationModel} from '../../models/systemvalidation.model';
 import {UserService} from "./user.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import { CartModel, DEFAULT_CART_MODEL } from '../../models/cart.model';
+import { CartItemService } from './cart-item.service';
+import { CurrentUserService } from './current-user.service';
 
 
 @Injectable()
 export class UserCartService implements OnDestroy {
 
-  userCart: BehaviorSubject<Array<CartItemModel>>;
+  userCart: BehaviorSubject<CartModel>;
+  cartId: BehaviorSubject<number>;
 
-  constructor(private readonly cartService: CartService, private readonly userService: UserService,
-              private readonly _snackBarService: MatSnackBar) {
-    this.userCart = new BehaviorSubject<Array<CartItemModel>>([]);
+  constructor(private readonly cartService: CartService, private readonly cartItemService: CartItemService,private readonly userService: UserService,
+              private readonly _snackBarService: MatSnackBar, private readonly currentUser: CurrentUserService) {
+    this.userCart = new BehaviorSubject<CartModel>(DEFAULT_CART_MODEL);
+    this.cartId = new BehaviorSubject<number>(0);
   }
 
   ngOnDestroy(): void {
-    this.userCart.next(null);
+    this.userCart.next(DEFAULT_CART_MODEL);
     this.userCart.complete();
+    this.cartId.complete();
+    this.cartId.next(null);
   }
 
-  cart = (): Observable<Array<CartItemModel>> => this.userCart.asObservable();
+  cart = (): Observable<CartModel> => this.userCart.asObservable();
 
-  setCart(items: Array<CartItemModel>): void {
+  setCart(items: CartModel): void {
     this.userCart.next(items);
   }
 
   getCart(): void {
-    this.cartService.getActiveCart().subscribe(cart => {
-      if (cart == null) return;
-      this.userCart.next(cart);
-    });
+    if (this.cartId.getValue()) {
+      this.cartService.findOne(this.cartId.getValue()).subscribe(cart => {
+        if (cart == null) return;
+        this.userCart.next(cart);
+      });
+    }
   }
 
-  addItem(product: ProductModel, quantity: number): void {
-    const items = this.userCart.getValue();
+  addItem(product: any, quantity: number): void {
+    const cart = this.userCart.getValue();
     if (quantity < 1) return;
     const item: CartItemModel = {
-      id: null,
-      productId: product.id,
-      product: product,
-      quantity: quantity,
-      forGift: false
+      IdPedidoDetalle: 0,
+      Cantidad: quantity,
+      Descripcion: product.Descripcion,
+      IdPedido: cart.IdPedido,
+      IdProducto: product.IdProducto,
+      Photo: product.Photo,
+      SubTotal: product.Precio * quantity,
+      Precio: product.Precio
     };
-    items.push(item);
-    this.cartService
-      .addCartItem(product.id, quantity, false)
+    cart.Detalles.push(item);
+    var model = {
+      IdPedido: cart.IdPedido,
+      IdProducto: product.Id,
+      IdCliente: JSON.parse(localStorage.getItem('user')).userId,
+      Cantidad: quantity
+    };
+    this.cartItemService
+      .update(model.IdPedido, model)
       .subscribe(response => {
-        if (response.success){
-          item.id = response.cartItemId;
+        if (response.Success){
           this._snackBarService.open("Producto agregado al carrito.", "Aceptar", {duration:2000});
         } else{
-          const index = items.findIndex(x => x === item);
-          items.splice(index, 1);
+          const index = cart.Detalles.findIndex(x => x === item);
+          cart.Detalles.splice(index, 1);
           this._snackBarService.open("Ocurrio un error al agregar el producto al carrito.", "Aceptar", {duration:2000});
         }
-        this.userCart.next(items);
+        this.userCart.next(cart);
       });
   }
 
-  updateItem(productId: string, quantity?: number, forGift?: boolean): void {
-    const items = this.userCart.getValue();
-    const cartItem = items.find(x => x.productId === productId);
+  updateItem(productId: number, quantity?: number): void {
+    const cart = this.userCart.getValue();
+    const cartItem = cart.Detalles.find(x => x.IdProducto === productId);
     if (cartItem == null) return;
-    if (quantity < 1 && cartItem.id != null) {
-      this.deleteItem(cartItem.id);
+    if (quantity < 1 && cartItem != null) {
+      this.deleteItem(cartItem.IdPedidoDetalle);
       return;
     }
-    const oldQuantity = parseInt(cartItem.quantity.toString());
-    const oldForGift = JSON.parse(JSON.stringify(cartItem.forGift));
+    const oldQuantity = parseInt(cartItem.Cantidad.toString());
     if (quantity)
-      cartItem.quantity = quantity;
-    if (forGift)
-      cartItem.forGift = forGift;
-    this.cartService
-      .addCartItem(productId, cartItem.quantity, cartItem.forGift)
+      cartItem.Cantidad = quantity;
+
+    var model = {
+      IdPedido: cart.IdPedido,
+      IdProducto: productId,
+      IdCliente: this.currentUser.getUserId,
+      Cantidad: quantity
+    };
+    this.cartItemService
+      .addItem(model)
       .subscribe(response => {
-        if (response.success) {
-          if (cartItem.quantity !== response.quantity){
-            console.warn('cartItem quantity and response quantity do not match');
-          }
+        if (response.Success) {
+
           this._snackBarService.open("Producto actualizado en el carrito.", "Aceptar", {duration:2000});
         } else {
           console.error('Error updating cart item reverting values');
           this._snackBarService.open("Ocurrio un error al actualizar el carrito.", "Aceptar", {duration:2000});
-          cartItem.quantity = oldQuantity;
-          cartItem.forGift = oldForGift;
-          this.userCart.next(items);
+          cartItem.Cantidad = oldQuantity;
+          this.userCart.next(cart);
         }
       });
   }
 
-  deleteItem(cartItemId: string): void {
-    const items = this.userCart.getValue();
-    const index = items.findIndex(x => x.id === cartItemId);
+  deleteItem(cartItemId: number): void {
+    const cart = this.userCart.getValue();
+    const index = cart.Detalles.findIndex(x => x.IdPedidoDetalle === cartItemId);
     if (index < 0) return;
-    const removedValue = items.splice(index, 1)[0];
+    const removedValue = cart.Detalles.splice(index, 1)[0];
     this.cartService
-      .deleteCartItem(cartItemId)
+      .delete(cartItemId)
       .subscribe(response => {
         if (response.success){
 
         } else {
           console.error('Error deleting cart item');
-          items.splice(index, 0, removedValue);
-          this.userCart.next(items);
+          cart.Detalles.splice(index, 0, removedValue);
+          this.userCart.next(cart);
         }
       });
-  }
-  checkout(deliveryMethod: 'TAKEOUT' | 'DELIVERY', coupon: string): Observable<SystemValidationModel> {
-    return this.cartService.processCheckout(deliveryMethod, coupon);
   }
 }

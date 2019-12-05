@@ -6,7 +6,6 @@ import {AbstractControl, FormArray, FormBuilder, FormGroup} from '@angular/forms
 import {fromEvent, Observable, Subscription} from 'rxjs';
 import {debounceTime, exhaustMap, tap} from 'rxjs/operators';
 import { UserCartService } from '../../shared/services/user-cart.service';
-import {ValidationService} from '../../shared/services/validation.service';
 import {SystemValidationModel} from "../../models/systemvalidation.model";
 import {MatSnackBar} from "@angular/material";
 
@@ -24,28 +23,26 @@ export class CartComponent implements OnInit, OnDestroy {
   onCartChangeSubscription: Subscription;
   loading: boolean = false;
 
-  @ViewChild('payButton') payButton: ElementRef;
 
   constructor(private readonly userCartService: UserCartService,
               private readonly currentUserService: CurrentUserService,
               private readonly subscribeService: SubscribeService,
               private readonly formBuilder: FormBuilder,
-              private readonly validationService: ValidationService,
               private readonly matSnackBar: MatSnackBar) {
   }
 
   ngOnInit() {
     this.cartForm = this.formBuilder.group({
-      coupon: this.formBuilder.control('', [], [this.validationService.coupon()]),
+      coupon: this.formBuilder.control('', []),
       deliveryMethod: 'TAKEOUT',
       items: this.formBuilder.array([])
     });
 
-    this.onCartChangeSubscription = this.userCartService.cart().subscribe(cartItems => {
+    this.onCartChangeSubscription = this.userCartService.cart().subscribe(cart => {
       this.loading = true;
       this.clearItems();
       const items = (<FormArray>this.cartForm.get('items'));
-      for (const cartItem of cartItems) {
+      for (const cartItem of cart.Detalles) {
         const control = this.createItem(cartItem);
         items.push(control);
         const controlSubscription = control
@@ -63,15 +60,6 @@ export class CartComponent implements OnInit, OnDestroy {
       if (!x) return;
       this.clearItems();
     });
-
-    this.onMainPayButtonClick = fromEvent(this.payButton.nativeElement, 'click')
-      .pipe(
-        tap(x => this.loading = true),
-        debounceTime(600),
-        exhaustMap(this.checkout.bind(this)),
-        tap(x=> this.loading = false)
-      )
-      .subscribe(this.checkoutSuccess.bind(this), this.checkoutError.bind(this));
   }
 
   ngOnDestroy(): void {
@@ -107,18 +95,12 @@ export class CartComponent implements OnInit, OnDestroy {
     this.userCartService.deleteItem(item.get('id').value);
   }
 
-  checkout(): Observable<SystemValidationModel> {
-    const deliveryMethod = this.cartForm.get('deliveryMethod').value;
-    const coupon = this.cartForm.get('coupon').value;
-    return this.userCartService.checkout(deliveryMethod, coupon);
-  }
-
   checkoutSuccess(response: SystemValidationModel): void {
-    if (response.success) {
-      window.open(response.message, '_self');
+    if (response.Success) {
+      window.open(response.Message, '_self');
     }
     else {
-      this.matSnackBar.open(response.message, "Cerrar", {duration:1500});
+      this.matSnackBar.open(response.Message, "Cerrar", {duration:1500});
     }
   }
 
@@ -127,12 +109,8 @@ export class CartComponent implements OnInit, OnDestroy {
     this.matSnackBar.open(err, "Cerrar", {duration:1500});
   }
 
-  clickPayButton(): void {
-    this.payButton.nativeElement.click();
-  }
-
   updateCartItem(item: any): void {
-    return this.userCartService.updateItem(item.productId, item.quantity, item.forGift);
+    return this.userCartService.updateItem(item.productId, item.quantity);
   }
 
   get isAuthenticated(): Observable<boolean> {
@@ -185,15 +163,13 @@ export class CartComponent implements OnInit, OnDestroy {
 
   private createItem(item: CartItemModel): FormGroup {
     return this.formBuilder.group({
-      id: item.id,
-      name: item.product.name,
-      productId: item.product.id,
-      product: item.product,
-      photo: item.product.photos.find(x => x.main).images.find(x => x.original).url,
-      quantity: item.quantity,
-      price: item.product.price,
-      subTotal: item.product.price * item.quantity,
-      forGift: item.forGift
+      id: item.IdPedidoDetalle,
+      name: item.Descripcion,
+      productId: item.IdProducto,
+      photo: item.Photo,
+      quantity: item.Cantidad,
+      price: item.Precio,
+      subTotal: item.SubTotal
     });
   }
 

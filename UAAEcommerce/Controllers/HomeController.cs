@@ -11,7 +11,7 @@ namespace UAAEcommerce.Controllers
 {
     public class HomeController : Controller
     {
-        private UAAEcommerceEntities2 db = new UAAEcommerceEntities2();
+        private DataContext db = new DataContext();
         public ActionResult Index()
         {
             return View();

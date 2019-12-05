@@ -2,8 +2,6 @@ import {Component, OnInit} from "@angular/core";
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {LoginService} from "../../shared/services/login.service";
 import {Router, ActivatedRoute} from "@angular/router";
-import {ValidationService} from "../../shared/services/validation.service";
-import {CartService} from "src/app/shared/services/cart.service";
 import {CurrentUserService} from "../../shared/services/current-user.service";
 import {SubscribeService} from "../../shared/services/subscribe.service";
 
@@ -22,7 +20,6 @@ export class ExternalLoginComponent implements OnInit {
   constructor(private readonly activatedRoute: ActivatedRoute,
               private readonly loginService: LoginService,
               private readonly subscribeService: SubscribeService,
-              private readonly validationService: ValidationService,
               private readonly router: Router,
               private readonly currentUser: CurrentUserService) {
   }
@@ -32,28 +29,28 @@ export class ExternalLoginComponent implements OnInit {
       if (param['id']) {
         this.loginService.socialLogin(param['id']).subscribe(x => {
           this.saveCartId = this.cartId;
-          if (x.succeeded) {
+          if (x.Succeeded) {
             // window.localStorage.setItem("user", JSON.stringify(x));
             this.currentUser.setUser({
-              email: x.email,
-              expirationDate: new Date(x.expirationDate),
-              roles: x.roles,
-              token: x.token,
-              firstName: x.firstName,
-              lastName: x.lastName,
-              succeeded: x.succeeded,
-              userId: x.userId,
-              documento: x.documento,
-              ruc: x.ruc,
-              razonSocial: x.razonSocial,
-              username: x.username
+              email: x.Email,
+              expirationDate: new Date(x.ExpirationDate),
+              roles: x.Roles,
+              token: x.Token,
+              firstName: x.FirstName,
+              lastName: x.LastName,
+              succeeded: x.Succeeded,
+              userId: x.UserId,
+              documento: x.Documento,
+              ruc: x.Ruc,
+              razonSocial: x.RazonSocial,
+              username: x.Username
             });
-            this.router.navigate([this.getRedirectUrl(x.roles)]);
+            this.router.navigate([this.getRedirectUrl(x.Roles)]);
           } else {
-            console.log(x.message);
+            console.log(x.Message);
           }
           this.process = false;
-          this.subscribeService.emitLogin(x.succeeded);
+          this.subscribeService.emitLogin(x.Succeeded);
         });
       }
     });

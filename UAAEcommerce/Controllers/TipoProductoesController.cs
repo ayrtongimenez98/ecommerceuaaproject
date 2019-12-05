@@ -15,7 +15,7 @@ namespace UAAEcommerce.Controllers
 {
     public class TipoProductoesController : ApiController
     {
-        private UAAEcommerceEntities2 db = new UAAEcommerceEntities2();
+        private DataContext db = new DataContext();
 
         // GET: api/TipoProductoes
         public IQueryable<TipoProducto> GetTipoProducto()

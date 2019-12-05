@@ -15,18 +15,34 @@
       <div class="card">
         <mat-spinner [diameter]="100" *ngIf="loading"></mat-spinner>
         <form class="form-signin" [formGroup]="registerForm" [hidden]="loading" (ngSubmit)="registerUser()">
-          <label class="form-label" for="inputFirstName">
-            Nombre:
-            <input type="text" id="inputFirstName" formControlName="firstName">
-            <span class="text_info">
-              <mat-error *ngIf="rf.firstName.invalid && (rf.firstName.dirty || rf.firstName.touched) && rf.firstName.errors.required">Este campo es obligatorio</mat-error>
-            </span>
+          <label class="form-label" for="inputRazonSocial">
+            Razón Social:
+            <input type="text" id="inputRazonSocial" formControlName="razonSocial" autofocus>
           </label>
-          <label class="form-label" for="inputLastName">
-            Apellido:
-            <input type="text" id="inputLastName" formControlName="lastName">
-            <span class="text_info">
-              <mat-error *ngIf="rf.lastName.invalid && (rf.lastName.dirty || rf.lastName.touched) && rf.lastName.errors.required">Este campo es obligatorio</mat-error>
+          <label class="form-label" for="inputRuc">
+            RUC:
+            <input type="text" id="inputRuc" formControlName="ruc" autofocus>
+          </label>
+          <label class="form-label">
+            Teléfono:
+            <input type="text" class="form-control" formControlName="phone">
+          </label>
+          <label class="form-label">
+            Ciudad:
+            <mat-select  name="food" formControlName="cityId">
+              <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.idCiudad">
+                {{ciudad.ciu_descripcion}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="rf.cityId.invalid && (rf.cityId.dirty || rf.cityId.touched) && rf.cityId.errors.required">Este campo es obligatorio</mat-error>
+
+          </label>
+          <label class="form-label" for="inputEmail">
+            Correo electrónico:
+            <input type="email" class="form-control" id="inputEmail" placeholder="Email" formControlName="email">
+            <span *ngIf="rf.email.invalid && (rf.email.dirty || rf.email.touched)" class="text_info">
+              <mat-error *ngIf="rf.email.errors.required">Este campo es obligatorio</mat-error>
+              <mat-error *ngIf="rf.email.errors.email">Por favor ingrese un email valido</mat-error>
             </span>
           </label>
           <label class="form-label" for="inputAddress">
@@ -34,13 +50,6 @@
             <input type="text" id="inputAddress" formControlName="address">
             <span class="text_info">
               <mat-error *ngIf="rf.address.invalid && (rf.address.dirty || rf.address.touched) && rf.address.errors.required">Este campo es obligatorio</mat-error>
-            </span>
-          </label>
-          <label class="form-label" for="inputCity">
-            Ciudad:
-            <input type="text" id="inputCity" formControlName="city">
-            <span class="text_info">
-              <mat-error *ngIf="rf.city.invalid && (rf.city.dirty || rf.city.touched) && rf.city.errors.required">Este campo es obligatorio</mat-error>
             </span>
           </label>
           <label class="form-label" for="inputPass" formGroupName="passwords">
@@ -68,37 +77,6 @@
             </span>
             <span *ngIf="rf.passwords.invalid && (rf.passwords.dirty || rf.passwords.touched)" class="text_info">
               <mat-error *ngIf="rf.passwords.errors?.confirmPassword">Las contraseñas no son iguales</mat-error>
-            </span>
-          </label>
-          <label class="form-label" for="inputRazonSocial">
-            Razón Social:
-            <input type="text" id="inputRazonSocial" formControlName="razonSocial" autofocus>
-          </label>
-          <label class="form-label" for="inputRuc">
-            RUC:
-            <input type="text" id="inputRuc" formControlName="ruc" autofocus>
-          </label>
-          <label class="form-label" for="inputDocument">
-            Documento:
-            <input type="text" id="inputDocument" formControlName="document" autofocus autocomplete="on">
-            <span *ngIf="rf.document.invalid && (rf.document.dirty || rf.document.touched)" class="text_info">
-              <mat-error *ngIf="rf.document.errors.required">Este campo es obligatorio</mat-error>
-            </span>
-          </label>
-          <label class="form-label">
-            Fecha de Nacimiento:
-            <input type="date" class="form-control" formControlName="date">
-          </label>
-          <label class="form-label">
-            Teléfono:
-            <input type="text" class="form-control" formControlName="phone">
-          </label>
-          <label class="form-label" for="inputEmail">
-            Correo electrónico:
-            <input type="email" class="form-control" id="inputEmail" placeholder="Email" formControlName="email">
-            <span *ngIf="rf.email.invalid && (rf.email.dirty || rf.email.touched)" class="text_info">
-              <mat-error *ngIf="rf.email.errors.required">Este campo es obligatorio</mat-error>
-              <mat-error *ngIf="rf.email.errors.email">Por favor ingrese un email valido</mat-error>
             </span>
           </label>
           <button class="btn-primary btn-block" type="submit" [disabled]="registerForm.invalid" style="max-width: 18em; margin: auto; margin-bottom: 30px">

@@ -5,7 +5,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {CurrentUserService} from "../../shared/services/current-user.service";
 import {SubscribeService} from "../../shared/services/subscribe.service";
 import {MatSnackBar} from "@angular/material";
-import {ValidationService} from "../../shared/services/validation.service";
 
 @Component({
   selector: 'app-complete-register',
@@ -19,13 +18,12 @@ export class CompleteRegisterComponent implements OnInit {
   cartId: string = null;
   saveCartId: string = null;
   returnUrl: string;
-  userId: string;
+  userId: number;
   constructor(private readonly loginService: LoginService, private readonly router: Router,
               private readonly activatedRoute: ActivatedRoute,
               private readonly currentUser: CurrentUserService,
               private readonly subscribeService: SubscribeService,
-              private readonly snackBar: MatSnackBar,
-              private readonly validationService: ValidationService) { }
+              private readonly snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -42,48 +40,48 @@ export class CompleteRegisterComponent implements OnInit {
       passwords: new FormGroup({
         password: new FormControl("", [Validators.required, Validators.maxLength(6)]),
         rePassword: new FormControl("", [Validators.required])
-      }, [this.validationService.confirmPassword("password", "rePassword")])
+      })
     });
 
     this.activatedRoute.params.subscribe(param => {
       if (param['id']) {
         this.loginService.socialLogin(param['id']).subscribe(x => {
           this.saveCartId = this.cartId;
-          if (x.succeeded) {
-            this.userId = x.userId;
+          if (x.Succeeded) {
+            this.userId = x.UserId;
             // window.localStorage.setItem("user", JSON.stringify(x));
             this.currentUser.setUser({
-              email: x.email,
-              expirationDate: new Date(x.expirationDate),
-              roles: x.roles,
-              token: x.token,
-              firstName: x.firstName,
-              lastName: x.lastName,
-              succeeded: x.succeeded,
-              userId: x.userId,
-              documento: x.documento,
-              ruc: x.ruc,
-              razonSocial: x.razonSocial,
-              username: x.username
+              email: x.Email,
+              expirationDate: new Date(x.ExpirationDate),
+              roles: x.Roles,
+              token: x.Token,
+              firstName: x.FirstName,
+              lastName: x.LastName,
+              succeeded: x.Succeeded,
+              userId: x.UserId,
+              documento: x.Documento,
+              ruc: x.Ruc,
+              razonSocial: x.RazonSocial,
+              username: x.Username
             });
             this.registerForm.patchValue({
-              email: x.username,
+              email: x.Username,
               address: "",
-              firstName: x.firstName,
-              lastName: x.lastName,
-              documento: x.documento,
-              ruc: x.ruc,
-              razonSocial: x.razonSocial,
+              firstName: x.FirstName,
+              lastName: x.LastName,
+              documento: x.Documento,
+              ruc: x.Ruc,
+              razonSocial: x.RazonSocial,
             });
             this.registerForm.controls['email'].disable();
             this.registerForm.controls['firstName'].disable();
             this.registerForm.controls['lastName'].disable();
             this.registerForm.updateValueAndValidity();
           } else {
-            console.log(x.message);
+            console.log(x.Message);
           }
           this.process = false;
-          this.subscribeService.emitLogin(x.succeeded);
+          this.subscribeService.emitLogin(x.Succeeded);
         });
       }
     });
@@ -102,29 +100,29 @@ export class CompleteRegisterComponent implements OnInit {
     const password = (this.registerForm.get('passwords') as FormGroup).get('password').value;
     const ruc = this.registerForm.get("ruc").value;
     this.loginService.completeRegistration(this.userId, email, address, document, razonSocial, city, date, phone, ruc, password).subscribe(x => {
-        if (x.succeeded) {
+        if (x.Succeeded) {
           this.currentUser.setUser({
-            email: x.email,
-            expirationDate: new Date(x.expirationDate),
-            roles: x.roles,
-            token: x.token,
-            firstName: x.firstName,
-            lastName: x.lastName,
-            succeeded: x.succeeded,
-            userId: x.userId,
-            documento: x.documento,
-            ruc: x.ruc,
-            razonSocial: x.razonSocial,
-            username: x.username
+            email: x.Email,
+            expirationDate: new Date(x.ExpirationDate),
+            roles: x.Roles,
+            token: x.Token,
+            firstName: x.FirstName,
+            lastName: x.LastName,
+            succeeded: x.Succeeded,
+            userId: x.UserId,
+            documento: x.Documento,
+            ruc: x.Ruc,
+            razonSocial: x.RazonSocial,
+            username: x.Username
           });
-          this.router.navigate([this.getRedirectUrl(x.roles)]);
+          this.router.navigate([this.getRedirectUrl(x.Roles)]);
       } else {
-        console.log(x.message);
+        console.log(x.Message);
           this.process = false;
-          console.log(x.message);
-          this.snackBar.open(x.message);
+          console.log(x.Message);
+          this.snackBar.open(x.Message);
       }
-      this.subscribeService.emitLogin(x.succeeded);
+      this.subscribeService.emitLogin(x.Succeeded);
     });
   }
   private getRedirectUrl(roles: Array<string>): string {

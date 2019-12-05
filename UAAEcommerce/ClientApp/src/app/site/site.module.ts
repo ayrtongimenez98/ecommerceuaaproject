@@ -20,7 +20,6 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
 import {AgmCoreModule} from '@agm/core';
 import {PipesModule} from '../pipes/pipes.module';
 import {CartInfoComponent} from './nav-menu/cart-info/cart-info.component';
-import {ItemModalComponent} from './shop/item-modal/item-modal.component';
 import {DebounceClickDirective} from '../directives/debounce-click.directive';
 import {UserCartService} from '../shared/services/user-cart.service';
 import { CompleteRegisterComponent } from './complete-register/complete-register.component';
@@ -61,7 +60,6 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     ExternalLoginComponent,
     RegisterComponent,
     CartInfoComponent,
-    ItemModalComponent,
     DebounceClickDirective,
     CompleteRegisterComponent,
     ProfileComponent,
@@ -73,7 +71,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     UserCartService, CdkColumnDef, CdkTableModule, LayoutModule,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000}}
   ],
-  entryComponents: [ItemModalComponent],
+  entryComponents: [],
 })
 export class SiteModule {
 }

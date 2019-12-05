@@ -37,22 +37,18 @@
     </nav>
   </div>
   <div class="row cards">
-    <div class="col-12">
-      <img src="../../../assets/images/brand/nitsugaB.svg" alt="Nitsuga" class="logo-nitsuga" />
-    </div>
     <mat-spinner [diameter]="50" *ngIf="loading"></mat-spinner>
     <div class="card col-12 col-sm-10 col-md-6 col-lg-3 col-xl-3" *ngFor="let product of products">
-      <img class="card-img-top" src="{{getMainPhoto(product)}}" alt="{{product.name}}">
+      <img class="card-img-top" src="{{product.Photo}}" alt="{{product.Descripcion}}">
       <div class="card-body">
-        <a [routerLink]="['/product', product.id]" class="card-title">{{product.name}}</a>
-        <p class="card-text">{{product.description}}</p>
-        <p class="card-price">Gs. {{product.price | formatNumber}}</p>
+        <a [routerLink]="['/product', product.id]" class="card-title">{{product.Descripcion}}</a>
+        <p class="card-price">Gs. {{product.Precio | formatNumber}}</p>
       </div>
       <div class="d-flex" style="align-items: center; justify-content: center; padding-top: 15px;">
         <button mat-button class="shop-btn" (click)="openModal(product)">
           AGREGAR
         </button>
-        <button mat-button class="shop-btn" [routerLink]="['/product', product.id]">DETALLES</button>
+        <button mat-button class="shop-btn" [routerLink]="['/product', product.Id]">DETALLES</button>
       </div>
     </div>
   </div>

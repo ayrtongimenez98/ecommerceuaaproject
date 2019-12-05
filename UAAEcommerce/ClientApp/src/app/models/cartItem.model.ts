@@ -1,9 +1,12 @@
 import { ProductModel } from './product.model';
 
 export class CartItemModel {
-  id: string;
-  productId: string;
-  product: ProductModel = new ProductModel();
-  quantity: number = 0;
-  forGift: boolean;
+  IdPedidoDetalle: number;
+  IdPedido: number;
+  IdProducto: number;
+  Cantidad: number = 0;
+  Descripcion: string;
+  SubTotal: number;
+  Photo: string;
+  Precio: number;
 }

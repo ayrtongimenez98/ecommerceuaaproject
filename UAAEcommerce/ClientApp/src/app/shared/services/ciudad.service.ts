@@ -8,9 +8,9 @@ import { HttpClient } from "@angular/common/http";
 import { CrudService } from "./crud.service";
 
 @Injectable()
-export class CartService extends CrudService<any, number> {
+export class CiudadService extends CrudService<any, number> {
 
   constructor(protected _http: HttpClient) {
-    super(_http, "https://localhost:44375/api/Pedidos");
+    super(_http, "https://localhost:44375/api/Ciudads");
   }
 }

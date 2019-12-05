@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from "@angular/core";
-import { Subject } from "rxjs";
+import { Subject, Observable, fromEvent } from "rxjs";
 import {ProductModel} from '../../models/product.model';
 import {ICartItemAddModel} from '../../models/cart-item-add.model';
 
@@ -11,7 +11,7 @@ export class SubscribeService implements OnDestroy {
   onToggleNavbar: Subject<boolean> = new Subject();
   onLogin: Subject<boolean> = new Subject();
   onLogout: Subject<boolean> = new Subject();
-
+  private _onLocalStorage: Observable<StorageEvent> = fromEvent<StorageEvent>(window, 'storage');
   constructor() {
 
   }
@@ -37,6 +37,10 @@ export class SubscribeService implements OnDestroy {
     this.onOpenContactModal.next(toggle);
   }
 
+  onLocalStorage(): Observable<StorageEvent> {
+    return this._onLocalStorage;
+  }
+  
   emitMapOpenModal(toggle: boolean): void {
     this.onOpenMapModal.next(toggle);
   }

@@ -2,7 +2,8 @@ import {ProductModel} from './product.model';
 
 
 export interface ICartItemAddModel {
-  product: ProductModel;
-  quantity: number;
-  forGift: boolean;
+  idProducto: number;
+  cantidad: number;
+  idPedido: number;
+  idCliente: number;
 }

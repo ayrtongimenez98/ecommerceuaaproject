@@ -20,13 +20,13 @@ namespace UAAEcommerce.Controllers
     [EnableCors("*", "*", "*")]
     public class ProductoController : ApiController
     {
-        private UAAEcommerceEntities2 db = new UAAEcommerceEntities2();
+        private DataContext db = new DataContext();
         private Recommender recommender = new Recommender();
         private BlobStorageService blobStorage = new BlobStorageService();
         // GET: api/Producto
         [EnableCors("http://localhost:4200", // Origin
               null,                     // Request headers
-              "GET",                    // HTTP methods
+              "*",                    // HTTP methods
               "bar",                    // Response headers
               SupportsCredentials = true  // Allow credentials
   )]
@@ -42,7 +42,8 @@ namespace UAAEcommerce.Controllers
                     Id = item.idProducto,
                     Photo = blobStorage.GetBlobUrl(item.pro_blobname, item.pro_blobcontainername),
                     Precio = item.pro_precio,
-                    TipoProducto = item.TipoProducto.tipro_descripcion
+                    TipoProducto = item.TipoProducto.tipro_descripcion,
+                    Descripcionlarga = item.pro_descripcionlarga
                 };
                 models.Add(model);
             };
@@ -64,8 +65,15 @@ namespace UAAEcommerce.Controllers
                 Id = producto.idProducto,
                 Photo = blobStorage.GetBlobUrl(producto.pro_blobname, producto.pro_blobcontainername),
                 Precio = producto.pro_precio,
-                TipoProducto = producto.TipoProducto.tipro_descripcion
+                TipoProducto = producto.TipoProducto.tipro_descripcion,
+                Descripcionlarga = producto.pro_descripcionlarga
             };
+
+            if (db.PedidoDetalle.Any(x => x.idProducto == id))
+            {
+                model.Recomendaciones = Recommendations(id);
+            }
+
             return Ok(model);
         }
 
@@ -144,7 +152,7 @@ namespace UAAEcommerce.Controllers
             base.Dispose(disposing);
         }
 
-        public IEnumerable<Producto> Recommendations(int id)
+        public List<ProductModel> Recommendations(int id)
         {
             var enigneTask = recommender.GetEngine();
             var productTask = db.Producto
@@ -169,11 +177,21 @@ namespace UAAEcommerce.Controllers
 
             var recommendationIds = scores.OrderByDescending(x => x.Value).Take(5).Select(x => x.Key).ToList();
             var recommendations = products.Where(x => recommendationIds.Contains(x.idProducto)).ToList();
+            var models = new List<ProductModel>();
             foreach (var item in recommendations)
             {
-                item.pro_blobname = blobStorage.GetBlobUrl(item.pro_blobname, item.pro_blobcontainername);
-            }
-            return recommendations;
+                var model = new ProductModel()
+                {
+                    Descripcion = item.pro_descripcion,
+                    Id = item.idProducto,
+                    Photo = blobStorage.GetBlobUrl(item.pro_blobname, item.pro_blobcontainername),
+                    Precio = item.pro_precio,
+                    TipoProducto = item.TipoProducto.tipro_descripcion,
+                    Descripcionlarga = item.pro_descripcionlarga
+                };
+                models.Add(model);
+            };
+            return models;
         }
 
         private bool ProductoExists(int id)

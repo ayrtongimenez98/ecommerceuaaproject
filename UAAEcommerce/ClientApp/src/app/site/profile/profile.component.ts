@@ -11,7 +11,6 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {OrderModel} from "../../models/order.model";
 import {LoginService} from "../../shared/services/login.service";
-import {ValidationService} from "../../shared/services/validation.service";
 import {Router} from "@angular/router";
 
 
@@ -38,7 +37,6 @@ export class ProfileComponent implements OnInit {
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private readonly  userServices: UserService,
               private readonly snackBar: MatSnackBar, private readonly currentUser: CurrentUserService,
               private readonly orderServices: OrderService, private readonly loginService: LoginService,
-              private readonly validationService: ValidationService,
               private readonly router: Router) {
 
     this.mobileQuery = media.matchMedia('(max-width: 1200px)');
@@ -65,7 +63,7 @@ export class ProfileComponent implements OnInit {
       newPasswords: new FormGroup({
         newPassword: new FormControl(""),
         reNewPassword: new FormControl("")
-      }, [this.validationService.confirmPassword("newPassword", "reNewPassword")])
+      })
     });
     this.userServices.userProfile(this.currentUser.getUserId()).subscribe(x => {
       this.userName = x.username;
@@ -113,13 +111,13 @@ export class ProfileComponent implements OnInit {
     const newPassword = (this.userForm.get('newPasswords') as FormGroup).get('newPassword').value;
     this.loginService.updateProfile(this.currentUser.getUserId(), email, address, document, razonSocial, city,
       date, phoneNumber, ruc, newPassword, password, firstName, lastName).subscribe(x => {
-      if (x.succeeded) {
+      if (x.Succeeded) {
         this.loading = false;
         this.snackBar.open("Sus datos fueron actualizados exitosamente!.")
       } else {
         this.loading = false;
-        console.log(x.message);
-        this.snackBar.open(x.message);
+        console.log(x.Message);
+        this.snackBar.open(x.Message);
       }
     });
   }

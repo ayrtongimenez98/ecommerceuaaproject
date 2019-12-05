@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginService } from '../../shared/services/login.service';
 import { Router } from '@angular/router';
 import {MatSnackBar} from "@angular/material";
-import {ValidationService} from "../../shared/services/validation.service";
+import {CiudadService} from "../../shared/services/ciudad.service"
 
 @Component({
   selector: 'app-register',
@@ -13,50 +13,44 @@ import {ValidationService} from "../../shared/services/validation.service";
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   loading:boolean=false;
+  ciudades: Array<any>;
   constructor(private readonly loginService: LoginService, private readonly router: Router,
-              private readonly snackBar: MatSnackBar, private readonly validationService: ValidationService) { }
+              private readonly snackBar: MatSnackBar, private readonly ciudadService: CiudadService) { }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
-      firstName: new FormControl("", [Validators.required]),
-      lastName: new FormControl("", [Validators.required]),
       email: new FormControl("", [Validators.required, Validators.email]),
       address: new FormControl(""),
-      city: new FormControl("",),
+      cityId: new FormControl(0,),
       phone: new FormControl(""),
-      date: new FormControl("", [Validators.required]),
-      document: new FormControl("", [Validators.required]),
       razonSocial: new FormControl(""),
       ruc: new FormControl(""),
       passwords: new FormGroup({
         password: new FormControl("",[Validators.required, Validators.minLength(6)]),
         rePassword: new FormControl("", [Validators.required])
-      }, [this.validationService.confirmPassword("password", "rePassword")])
+      })
     });
+    this.ciudadService.findAll().subscribe(x => this.ciudades = x );
   }
 
   registerUser() {
     this.loading = true;
-    const firstName = this.registerForm.get("firstName").value;
-    const lastName = this.registerForm.get("lastName").value;
     const email = this.registerForm.get("email").value;
     const address = this.registerForm.get("address").value;
-    const city = this.registerForm.get("city").value;
+    const cityId = this.registerForm.get("cityId").value;
     const phone = this.registerForm.get("phone").value;
-    const date = this.registerForm.get("date").value;
-    const document = this.registerForm.get("document").value;
     const razonSocial = this.registerForm.get("razonSocial").value;
     const ruc = this.registerForm.get("ruc").value;
     const password = (this.registerForm.get('passwords') as FormGroup).get('password').value;
-    this.loginService.register(firstName, lastName, email, address, document, razonSocial, ruc, city, date, phone, password).subscribe(x => {
-      if (x.success) {
+    this.loginService.register(email, address, razonSocial, ruc, cityId, phone, password).subscribe(x => {
+      if (x.Success) {
         this.loading = false;
         this.snackBar.open("Registro exitoso!", "Aceptar", {duration:5000});
         this.router.navigate(["/login"]);
       } else {
         this.loading = false;
-        console.log(x.message);
-        this.snackBar.open(x.message? "" : "Ocurrio un error.");
+        console.log(x.Message);
+        this.snackBar.open(x.Message? "" : "Ocurrio un error.");
       }
     });
   }

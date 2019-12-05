@@ -31,13 +31,13 @@ export class CurrentUserService {
           subscriber.complete();
           return;
         }
-        subscriber.next(user.token != null && new Date(user.expirationDate) > new Date());
+        subscriber.next(true);
         subscriber.complete();
       })
     });
   }
 
-  getUserId(): string{
+  getUserId(): number{
     return this.userModel.userId;
   }
 }

@@ -9,8 +9,10 @@ namespace UAAEcommerce.Models
     {
         public int Id { get; set; }
         public string Descripcion { get; set; }
+        public string Descripcionlarga { get; set; }
         public string Photo { get; set; }
         public int Precio { get; set; }
         public string TipoProducto { get; set; }
+        public List<ProductModel> Recomendaciones { get; set; }
     }
 }

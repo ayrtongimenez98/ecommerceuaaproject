@@ -10,17 +10,24 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using UAAEcommerce.Areas.Admin.Models;
+using UAAEcommerce.Models;
 
 namespace UAAEcommerce.Controllers
 {
     public class CiudadsController : ApiController
     {
-        private UAAEcommerceEntities2 db = new UAAEcommerceEntities2();
+        private DataContext db = new DataContext();
 
         // GET: api/Ciudads
-        public IQueryable<Ciudad> GetCiudad()
+        public IEnumerable<CiudadModel> GetCiudad()
         {
-            return db.Ciudad;
+            var ciudades = db.Ciudad.ToList();
+            var models = new List<CiudadModel>();
+            foreach (var item in ciudades)
+            {
+                models.Add(new CiudadModel() { ciu_descripcion = item.ciu_descripcion, idCiudad = item.idCiudad});
+            }
+            return models;
         }
 
         // GET: api/Ciudads/5

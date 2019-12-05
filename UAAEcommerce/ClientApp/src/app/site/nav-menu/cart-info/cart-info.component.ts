@@ -3,6 +3,7 @@ import {Subscription} from 'rxjs';
 import {SubscribeService} from '../../../shared/services/subscribe.service';
 import {UserCartService} from '../../../shared/services/user-cart.service';
 import {CartItemModel} from "../../../models/cartItem.model";
+import { CartModel } from '../../../models/cart.model';
 
 @Component({
   selector: 'app-cart-info',
@@ -11,7 +12,7 @@ import {CartItemModel} from "../../../models/cartItem.model";
 })
 export class CartInfoComponent implements OnInit, OnDestroy {
 
-  cartItems: Array<CartItemModel> = [];
+  cart: CartModel;
   loading: boolean = false;
 
   cartSubscription: Subscription;
@@ -24,7 +25,7 @@ export class CartInfoComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.cartSubscription = this.userCartService.cart().subscribe(x => {
-      this.cartItems = x;
+      this.cart = x;
     });
 
     this.onLoginSubscription = this.subscribeService.onLogin.subscribe(successful => {
@@ -45,10 +46,10 @@ export class CartInfoComponent implements OnInit, OnDestroy {
   }
 
   get price(): number {
-    return this.cartItems.map(x => x.quantity * x.product.price).reduce((a, b, i) => a + b, 0);
+    return this.cart.Detalles.map(x => x.Cantidad * x.Precio).reduce((a, b, i) => a + b, 0);
   }
 
   get quantity(): number {
-    return this.cartItems.map(x => x.quantity).reduce((a, b, i) => a + b, 0)
+    return this.cart.Detalles.map(x => x.Cantidad).reduce((a, b, i) => a + b, 0)
   }
 }

@@ -3,8 +3,8 @@ import { GraphQlService } from "./graphql.service";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { SystemValidationModel } from "src/app/models/systemvalidation.model";
 import { CouponModel } from "../../models/coupon.model";
+import { SystemValidationModel } from "../../models/systemvalidation.model";
 
 @Injectable()
 export class CouponService{

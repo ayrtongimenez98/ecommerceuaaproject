@@ -2,7 +2,7 @@
   <ul>
     <li class="breadcrumb-link"><a href="/">Inicio</a></li>
     <li class="breadcrumb-link"><a [routerLink]="['/shop']">Shop</a></li>
-    <li class="breadcrumb-link"><a>{{product.name}}</a></li>
+    <li class="breadcrumb-link"><a>{{product.Descripcion}}</a></li>
   </ul>
 </section>
 <div id="hero" class="container">
@@ -13,14 +13,14 @@
     <span class="overlay"></span>
   </picture>
   <div class="caption">
-    <img *ngIf="product.subCategory.category.name == 'Nitsuga'" src="../../../assets/images/brand/nitsugaB.svg" alt="Nitsuga Logo" class="nitsuga-logo col-8 col-md-4 m-auto"/>
+    <img src="../../../assets/images/brand/nitsugaB.svg" alt="Nitsuga Logo" class="nitsuga-logo col-8 col-md-4 m-auto"/>
   </div>
 </div>
 <section>
   <mat-spinner [diameter]="50" *ngIf="loading"></mat-spinner>
   <div class="container">
     <div class="row" [style.margin]="0">
-      <ng-template #beer [ngIf]="product.subCategory.category.name == 'Nitsuga'" [ngIfElse]="notBeer">
+      <ng-template>
         <div class="col col-left">
           <h1 class="product-title">Ingredientes</h1>
           <img src="../../../assets/images/cerveceria/lupulo.svg" alt="Lupulo" class="lupulo" />
@@ -36,15 +36,11 @@
           <div class="d-flex w-100 product-spec">
             <div>
               <img src="../../../assets/images/cervezas/alcohol_m.svg" alt="Alcohol" />
-              <h5 class="chemistry">{{product.alcoholVol}}</h5>
+              <h5 class="chemistry">{{product.Precio}}</h5>
             </div>
             <div>
               <img src="../../../assets/images/cervezas/amargor_m.svg" alt="Amargor" />
-              <h5 class="chemistry">{{product.amargor}}</h5>
-            </div>
-            <div>
-              <img src="../../../assets/images/cervezas/color_m.svg" alt="Color" />
-              <h5 class="chemistry">{{product.color}}</h5>
+              <h5 class="chemistry">{{product.Descripcion}}</h5>
             </div>
           </div>
           <mat-divider></mat-divider>
@@ -61,20 +57,14 @@
           </div>
         </div>
         <div class="main-img">
-          <span *ngFor="let photo of product.photos">
-            <span *ngIf="photo.main">
-              <span *ngFor="let image of photo.images">
-                <img *ngIf="image.original" [src]="mainPhoto" alt="{{product.name}}" class="main-img" />
-              </span>
-            </span>
-          </span>
+                <img *ngIf="product.Photo" [src]="product.Photo" alt="{{product.Descripcion}}" class="main-img" />
+              
         </div>
         <div class="col col-right">
-          <h2 class="product-title">{{product.name}}</h2>
-          <p class="product-description">{{product.description}}</p>
+          <h2 class="product-title">{{product.Descripcion}}</h2>
           <mat-divider></mat-divider>
           <div class="product-spec">
-            <h2>Precio: {{product.price | formatNumber}} Gs.</h2>
+            <h2>Precio: {{product.Precio | formatNumber}} Gs.</h2>
             <h5>Botella de 355ml</h5>
           </div>
           <mat-divider></mat-divider>
@@ -82,45 +72,24 @@
             Agregar al carrito
           </button>
         </div>
-        <div class="arte">
-          <div class="art-description">
-            <h3 class="art-author-name">Artista: {{product.artist}}</h3>
-            <p class="artist-bio">{{product.artistDesc}}
-            </p>
-          </div>
-        </div>
         <div class="d-flex product-images">
-          <div *ngFor="let photo of product.photos">
-            <div *ngIf="!photo.main && !photo.banner">
-              <div *ngFor="let image of photo.images">
-                <div class="col">
-                  <img *ngIf="image.original" [src]="image.url" alt="Alternate Text" class="prod-secondary-img" />
-                </div>
-              </div>
-            </div>
-          </div>
+              <img *ngIf="product.Photo" [src]="product.Photo" alt="Alternate Text" class="prod-secondary-img" />
+                
         </div>
       </ng-template>
       <ng-template #notBeer>
         <div class="col col-left notBeer">
           <div class="merch-mainImg">
-            <span *ngFor="let photo of product.photos">
-              <span *ngIf="photo.main">
-                <span *ngFor="let image of photo.images">
-                  <img *ngIf="image.original" [src]="mainPhoto" alt="{{product.name}}"/>
-                </span>
-              </span>
-            </span>
+                  <img *ngIf="product.Photo" [src]="product.Photo" alt="{{product.Descripcion}}"/>
           </div>
           
         </div>
         <div class="col col-right">
           <div class="notBeer-description">
-            <h2 class="product-title">{{product.name}}</h2>
-            <p class="product-description text-center">{{product.description}}</p>
+            <h2 class="product-title">{{product.Descripcion}}</h2>
             <mat-divider></mat-divider>
             <div class="product-spec">
-              <h2>Precio: {{product.price | formatNumber }} Gs.</h2>
+              <h2>Precio: {{product.Precio | formatNumber }} Gs.</h2>
             </div>
             <mat-divider></mat-divider>
             <button class="btn-primary mr-auto ml-auto btn-add" (click)="addProduct()">

@@ -15,7 +15,7 @@ namespace UAAEcommerce.Controllers
 {
     public class MensajesWebsController : ApiController
     {
-        private UAAEcommerceEntities2 db = new UAAEcommerceEntities2();
+        private DataContext db = new DataContext();
 
         // GET: api/MensajesWebs
         public IQueryable<MensajesWeb> GetMensajesWeb()

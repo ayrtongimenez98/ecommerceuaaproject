@@ -1,12 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ProductModel} from 'src/app/models/product.model';
-import {ProductService} from 'src/app/shared/services/product.service';
-import {ItemModalComponent} from './item-modal/item-modal.component';
 import {MatBottomSheet} from '@angular/material';
 import {UserCartService} from '../../shared/services/user-cart.service';
 import {CategoryModel} from "../../models/category.model";
 import {SubCategoryModel} from "../../models/subcategory.model";
-
+import {ProductService} from '../../shared/services/product.service';
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
@@ -15,13 +12,13 @@ import {SubCategoryModel} from "../../models/subcategory.model";
 
 export class ShopComponent implements OnInit {
   primary: string = '#54682A';
-  products: Array<ProductModel> = [];
+  products: Array<any> = [];
   loading: boolean = false;
   categories: Array<CategoryModel> = [];
   subCategories: Array<SubCategoryModel> = [];
   subCategoriesTab: any;
   categoryIdSelected: string;
-  allProducts: Array<ProductModel> = [];
+  allProducts: Array<any> = [];
 
   constructor(private readonly productService: ProductService,
               private _bottomSheet: MatBottomSheet,
@@ -30,46 +27,24 @@ export class ShopComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.productService.getShop().subscribe(x => {
+    this.productService.findAll().subscribe(x => {
       this.loading = false;
-      this.categories = x.data['categories'];
-      this.subCategories = x.data['subCategories'];
-      this.allProducts = x.data['products'];
+      this.allProducts = x;
       this.products = this.allProducts;
 
     })
   }
 
-  openModal = (product: ProductModel): void => {
-    const items = this.userCartService.userCart.getValue();
-    const cartItem = items.find(x => x.product.id == product.id);
+  openModal = (product: any): void => {
+    const cart = this.userCartService.userCart.getValue();
+    const cartItem = cart.Detalles.find(x => x.IdProducto == product.id);
     let quantity = 1;
-    let forGift = false;
     if (cartItem != null) {
-      quantity = cartItem.quantity;
-      forGift = cartItem.forGift;
+      quantity = cartItem.Cantidad;
     }
-    this.bottomSheetOpen(product, quantity, forGift);
     if (cartItem == null) {
        this.userCartService.addItem(product, 1);
     }
-  };
-
-  getMainPhoto = (product: ProductModel): string => {
-    let url = "";
-    // console.log("entra en getMainPhoto");
-    let mainPhoto = product.photos.find(x => x.main);
-    if (!mainPhoto) {
-      return "";
-    }
-    let image = mainPhoto.images[0];
-    if (!image) {
-      return "";
-    }
-    if (mainPhoto.images != null && mainPhoto.images.length > 0) {
-      url = mainPhoto.images[0].url;
-    }
-    return url;
   };
 
   getSubCategories = (currentTarget: any) =>{
@@ -98,15 +73,5 @@ export class ShopComponent implements OnInit {
       this.products = this.allProducts.filter(x=> x.subCategory.category.id == categoryId);
     }
   };
-
-  private bottomSheetOpen(product: ProductModel, quantity: number, forGift: boolean): void {
-    this._bottomSheet.open(ItemModalComponent, {
-      data: {
-        product,
-        quantity,
-        forGift
-      },
-    });
-  }
 
 }
