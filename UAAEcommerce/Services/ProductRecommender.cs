@@ -55,14 +55,14 @@ namespace UAAEcommerce.Services
             using (var ms = new MemoryStream())
             {
                 mlContext.Model.Save(model, trainData.Schema, ms);
-                var uploadTask = blobStorage.UploadStream(ms, "recommender-model.ml", "Models", "application/octet-stream");
+                var uploadTask = blobStorage.UploadStream(ms, "recommender-model.ml", "models", "application/octet-stream");
                 Task.WaitAll(uploadTask);
             }
         }
 
         public async Task<PredictionEngine<ProductInput, ProductScore>> GetEngine()
         {
-            var modelStream = await blobStorage.DownloadBlobAsStream("recommender-model.ml", "Models");
+            var modelStream = await blobStorage.DownloadBlobAsStream("recommender-model.ml", "models");
             var mlContext = new MLContext();
             var model = mlContext.Model.Load(modelStream, out _);
             var engine = mlContext.Model.CreatePredictionEngine<ProductInput, ProductScore>(model);

@@ -71,7 +71,7 @@ namespace UAAEcommerce.Controllers
 
             if (db.PedidoDetalle.Any(x => x.idProducto == id))
             {
-                model.Recomendaciones = Recommendations(id);
+                model.Recomendaciones = await Recommendations(id);
             }
 
             return Ok(model);
@@ -152,15 +152,14 @@ namespace UAAEcommerce.Controllers
             base.Dispose(disposing);
         }
 
-        public List<ProductModel> Recommendations(int id)
+        public async Task<List<ProductModel>> Recommendations(int id)
         {
-            var enigneTask = recommender.GetEngine();
-            var productTask = db.Producto
+            var enigneTask = await recommender.GetEngine();
+            var productTask = await db.Producto
                 .FirstOrDefaultAsync(x => x.idProducto == id);
-            Task.WaitAll(enigneTask, productTask);
 
-            var engine = enigneTask.Result;
-            var product = productTask.Result;
+            var engine = enigneTask;
+            var product = productTask;
 
             var products = db.Producto.Where(x =>  x.TipoProducto.idTipoProducto == product.TipoProducto.idTipoProducto && x.idProducto != id).ToList();
             var scores = new Dictionary<int, float>();
