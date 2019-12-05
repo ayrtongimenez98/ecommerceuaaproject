@@ -80,7 +80,6 @@ namespace UAAEcommerce.Controllers
             try
             {
                 var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, false, shouldLockout: false);
-                if ()
                 switch (result)
                 {
                     case SignInStatus.Success:

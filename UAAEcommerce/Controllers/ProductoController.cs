@@ -9,27 +9,44 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using UAAEcommerce.Areas.Admin.Models;
+using UAAEcommerce.Models;
 using UAAEcommerce.Services;
 
 namespace UAAEcommerce.Controllers
 {
+    [EnableCors("*", "*", "*")]
     public class ProductoController : ApiController
     {
         private UAAEcommerceEntities2 db = new UAAEcommerceEntities2();
         private Recommender recommender = new Recommender();
         private BlobStorageService blobStorage = new BlobStorageService();
         // GET: api/Producto
-
-        public IEnumerable<Producto> GetProducto()
+        [EnableCors("http://localhost:4200", // Origin
+              null,                     // Request headers
+              "GET",                    // HTTP methods
+              "bar",                    // Response headers
+              SupportsCredentials = true  // Allow credentials
+  )]
+        public IEnumerable<ProductModel> GetProducto()
         {
-            var productos = db.Producto.ToList();
+            var productos = db.Producto.Include(x => x.TipoProducto).ToList();
+            var models = new List<ProductModel>();
             foreach (var item in productos)
             {
-                item.pro_blobname = blobStorage.GetBlobUrl(item.pro_blobname, item.pro_blobcontainername);
-            }
-            return productos;
+                var model = new ProductModel()
+                {
+                    Descripcion = item.pro_descripcion,
+                    Id = item.idProducto,
+                    Photo = blobStorage.GetBlobUrl(item.pro_blobname, item.pro_blobcontainername),
+                    Precio = item.pro_precio,
+                    TipoProducto = item.TipoProducto.tipro_descripcion
+                };
+                models.Add(model);
+            };
+            return models;
         }
 
         // GET: api/Producto/5
@@ -41,8 +58,15 @@ namespace UAAEcommerce.Controllers
             {
                 return NotFound();
             }
-
-            return Ok(producto);
+            var model = new ProductModel()
+            {
+                Descripcion = producto.pro_descripcion,
+                Id = producto.idProducto,
+                Photo = blobStorage.GetBlobUrl(producto.pro_blobname, producto.pro_blobcontainername),
+                Precio = producto.pro_precio,
+                TipoProducto = producto.TipoProducto.tipro_descripcion
+            };
+            return Ok(model);
         }
 
         // PUT: api/Producto/5

@@ -10,22 +10,12 @@
   </div>
   <div class="container-fluid beers-large">
     <div class="grid-beers grid-beers-large w-100" >
-      <a class="beer-link" *ngFor="let product of nitsuga; let last = last" routerLink="/product/{{product.id}}">{{last ? executeCss() : "" }}
-        <img src="{{getBeerPhoto(product)}}" alt="{{product.name}}}" />
+      <a class="beer-link" *ngFor="let product of products; let last = last" routerLink="/product/{{product.Id}}">{{last ? executeCss() : "" }}
+        <img src="{{product.Photo}}" alt="{{product.Descripcion}}}" />
         <div class="beer-hover">
           <h1 class="beer-title">
-            {{product.name}} - <span>{{product.subCategory.name}}</span>
+            {{product.Descripcion}} 
           </h1>
-          <div class="d-flex w-100 beer-spec">
-            <p><strong>Amargor:</strong> {{product.amargor}}</p>
-            <p><strong>Color:</strong> {{product.color}}</p>
-            <p><strong>Alcohol:</strong> {{product.alcoholVol}}</p>
-          </div>
-          <p class="beer-short-desc">
-            {{product.description}}
-          </p>
-          <mat-divider class="w-100" style="border-top-color: white;"></mat-divider>
-          <label class="w-100 artist-name">Artista: {{product.artist}}</label>
         </div>
       </a>
     </div>

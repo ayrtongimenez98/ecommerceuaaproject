@@ -11,7 +11,7 @@ declare var $: any;
 })
 export class BeersComponent implements OnInit, OnDestroy {
   // products: Array<ProductModel> = new Array<ProductModel>();
-  nitsuga: Array<ProductModel> = [];
+  products: Array<any> = [];
   shouldDoIt = true;
   private carusel: any;
 
@@ -19,8 +19,8 @@ export class BeersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.productServices.products().subscribe(x => {
-      this.nitsuga = x.filter(x => x.subCategory.category.name === "Nitsuga");
+    this.productServices.findAll().subscribe(x => {
+      this.products = x;
     });
   }
 
@@ -28,22 +28,6 @@ export class BeersComponent implements OnInit, OnDestroy {
     if(this.carusel != null)
       this.carusel.flickity('destroy');
   }
-
-  getBeerPhoto = (product: ProductModel): string => {
-    let url = "";
-    let bannerPhoto = product.photos.find(x => !x.main && !x.banner);
-    if (!bannerPhoto) {
-      return "";
-    }
-    let image = bannerPhoto.images[0];
-    if (!image) {
-      return "";
-    }
-    if (bannerPhoto.images != null && bannerPhoto.images.length > 0) {
-      url = bannerPhoto.images[0].url;
-    }
-    return url;
-  };
 
   executeCss() {
     if (this.shouldDoIt){

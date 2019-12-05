@@ -78,7 +78,7 @@
             <h5>Botella de 355ml</h5>
           </div>
           <mat-divider></mat-divider>
-          <button class="btn-primary ml-auto btn-add" (click)="addProduct()">
+          <button class="btn-primary ml-auto btn-add">
             Agregar al carrito
           </button>
         </div>
@@ -112,17 +112,7 @@
               </span>
             </span>
           </div>
-          <div class="d-flex merch-product-images">
-            <div *ngFor="let photo of product.photos">
-              <div *ngIf="!photo.main && !photo.banner">
-                <div *ngFor="let image of photo.images">
-                  <div class="col">
-                    <img *ngIf="image.original" [src]="image.url" alt="Alternate Text" class="prod-secondary-img" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          
         </div>
         <div class="col col-right">
           <div class="notBeer-description">

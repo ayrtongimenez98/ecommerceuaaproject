@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from 'src/app/shared/services/product.service';
-import { ProductModel } from 'src/app/models/product.model';
+
 import {UserCartService} from "../../shared/services/user-cart.service";
+import { ProductService } from '../../shared/services/product.service';
 
 @Component({
   selector: 'app-product',
@@ -11,8 +11,8 @@ import {UserCartService} from "../../shared/services/user-cart.service";
 })
 export class ProductComponent implements OnInit {
 
-  productId: string;
-  product: ProductModel = new ProductModel();
+  productId: number;
+  product: any = {Photo: '', Descripcion: '', Id: 0, Precio: 0, TipoProducto: ''};
   banner: string;
   notBanner: string = '../../assets/images/carrusel/carrusel2.jpg';
   mainPhoto: string;
@@ -26,10 +26,8 @@ export class ProductComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.productId = params["id"];
       if (this.productId != null) {
-        this.productService.product(this.productId).subscribe(x => {
+        this.productService.findOne(this.productId).subscribe(x => {
           this.product = x;
-          this.bannerUrl();
-          this.mainPhotoURL();
           this.loading = false;
         });
       }
@@ -38,7 +36,7 @@ export class ProductComponent implements OnInit {
 
   bannerUrl (): string {
     if (this.product == null) return '';
-    const photo = this.product.photos.find(p => p.banner);
+    const photo = this.product.Photo;
     if (photo == null) return '';
     const image = photo.images.find(i => i.original);
     if (image == null) return '';
@@ -54,14 +52,14 @@ export class ProductComponent implements OnInit {
     this.mainPhoto = image.url;
   }
 
-  addProduct(){
-    const items = this.userCartService.userCart.getValue();
-    const cartItem = items.find(x => x.product.id == this.productId);
-    if (cartItem == null)
-      this.userCartService.addItem(this.product, 1);
-    else
-      this.userCartService.updateItem(this.productId, cartItem.quantity + 1)
-  }
+  // addProduct(){
+  //   const items = this.userCartService.userCart.getValue();
+  //   const cartItem = items.find(x => x.product.id == this.productId);
+  //   if (cartItem == null)
+  //     this.userCartService.addItem(this.product, 1);
+  //   else
+  //     this.userCartService.updateItem(this.productId, cartItem.quantity + 1)
+  // }
 
   // openModal = (product: ProductModel): void => {
   //   const items = this.userCartService.userCart.getValue();
