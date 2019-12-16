@@ -11,6 +11,6 @@ import { CrudService } from "./crud.service";
 export class CiudadService extends CrudService<any, number> {
 
   constructor(protected _http: HttpClient) {
-    super(_http, "https://localhost:44375/api/Ciudads");
+    super(_http, "https://uaaecommerce20191205082947.azurewebsites.net/api/Ciudads");
   }
 }

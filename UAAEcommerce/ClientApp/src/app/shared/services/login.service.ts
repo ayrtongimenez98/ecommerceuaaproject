@@ -28,7 +28,7 @@ export class LoginService {
       "password":password,
       "rememberMe": false
     };
-    return this.http.post<LoginResponseModel>('https://localhost:44375/Account/LoginCliente', model);
+    return this.http.post<LoginResponseModel>('https://uaaecommerce20191205082947.azurewebsites.net/Account/LoginCliente', model);
   }
 
   socialLogin(id: string): Observable<LoginResponseModel> {
@@ -60,7 +60,7 @@ export class LoginService {
       "Password": password,
       "CiudadId": cityId
     };
-    return this.http.post<SystemValidationModel>('https://localhost:44375/Account/Register', model);
+    return this.http.post<SystemValidationModel>('https://uaaecommerce20191205082947.azurewebsites.net/Account/Register', model);
   }
 
   completeRegistration = (userId: number, email: string, address: string, document: string,

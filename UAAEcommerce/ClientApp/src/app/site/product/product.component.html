@@ -19,85 +19,43 @@
 <section>
   <mat-spinner [diameter]="50" *ngIf="loading"></mat-spinner>
   <div class="container">
-    <div class="row" [style.margin]="0">
-      <ng-template>
-        <div class="col col-left">
-          <h1 class="product-title">Ingredientes</h1>
-          <img src="../../../assets/images/cerveceria/lupulo.svg" alt="Lupulo" class="lupulo" />
-          <div class="d-flex">
-            <ul class="ingredients">
-              <li>Agua</li>
-              <li>Cebada Malteada</li>
-              <li>Lúpulos</li>
-              <li>Dióxido de carbono</li>
-            </ul>
+    <div class="section section-gray">
+      <div class="section-content">
+          <div class="product-details">
+              <ul class="product-info">
+                  <li class="product-name">{{product.Descripcion}}</li>
+                  <li class="product-price"><span>{{product.Precio}}</span><span>{{product.Descripcion}}</span></li>
+                  
+                  <li class="product-addtocart">
+                      <button>Agregar al carrito</button>
+                  </li>
+              </ul>
           </div>
-          <mat-divider></mat-divider>
-          <div class="d-flex w-100 product-spec">
-            <div>
-              <img src="../../../assets/images/cervezas/alcohol_m.svg" alt="Alcohol" />
-              <h5 class="chemistry">{{product.Precio}}</h5>
-            </div>
-            <div>
-              <img src="../../../assets/images/cervezas/amargor_m.svg" alt="Amargor" />
-              <h5 class="chemistry">{{product.Descripcion}}</h5>
-            </div>
-          </div>
-          <mat-divider></mat-divider>
-          <div class="product-warnings">
-            <p>
-              CERVEZA SIN FILTRAR PUEDE CONTENER SEDIMENTOS. CERVEZA SIN PASTEURIZAR. MANTENER REFRIGERADA ENTRE 0º Y
-              10ºC.
-            </p>
-          </div>
-          <mat-divider></mat-divider>
-          <div class="info-industria">
-            <img src="../../../assets/images/icons/industria_py.svg"
-                 alt="Industria Paraguaya - Bandera tricolor de la Republica del Paraguay" />
-          </div>
-        </div>
-        <div class="main-img">
-                <img *ngIf="product.Photo" [src]="product.Photo" alt="{{product.Descripcion}}" class="main-img" />
-              
-        </div>
-        <div class="col col-right">
-          <h2 class="product-title">{{product.Descripcion}}</h2>
-          <mat-divider></mat-divider>
-          <div class="product-spec">
-            <h2>Precio: {{product.Precio | formatNumber}} Gs.</h2>
-            <h5>Botella de 355ml</h5>
-          </div>
-          <mat-divider></mat-divider>
-          <button class="btn-primary ml-auto btn-add">
-            Agregar al carrito
-          </button>
-        </div>
-        <div class="d-flex product-images">
-              <img *ngIf="product.Photo" [src]="product.Photo" alt="Alternate Text" class="prod-secondary-img" />
-                
-        </div>
-      </ng-template>
-      <ng-template #notBeer>
-        <div class="col col-left notBeer">
-          <div class="merch-mainImg">
-                  <img *ngIf="product.Photo" [src]="product.Photo" alt="{{product.Descripcion}}"/>
-          </div>
-          
-        </div>
-        <div class="col col-right">
-          <div class="notBeer-description">
-            <h2 class="product-title">{{product.Descripcion}}</h2>
-            <mat-divider></mat-divider>
-            <div class="product-spec">
-              <h2>Precio: {{product.Precio | formatNumber }} Gs.</h2>
-            </div>
-            <mat-divider></mat-divider>
-            <button class="btn-primary mr-auto ml-auto btn-add" (click)="addProduct()">
-              Agregar al carrito
-            </button>
-          </div>
-        </div>
-      </ng-template>
+      </div>
+  </div>
+  <section id="productos">
+    <div class="section-header section-inverted">
+      <!--<button class="btn-secondary btn-small btn-section-header" style="position: relative; z-index: 3; background: white;" [routerLink]="['/shop']">
+        <i>
+          <img src="../../assets/images/icons/i_cart.svg" alt="Alternate Text" />
+        </i>
+        Shop
+      </button>-->
+      <h1 class="section-title" style="color: white">Productos</h1>
     </div>
+    <div class="container-fluid beers-large">
+      <div class="grid-beers grid-beers-large w-100" >
+        <a class="beer-link" *ngFor="let product of product.Recomendaciones; let last = last" routerLink="/product/{{product.Id}}">{{last ? executeCss() : "" }}
+          <img src="{{product.Photo}}" alt="{{product.Descripcion}}}" />
+          <div class="beer-hover">
+            <h1 class="beer-title">
+              {{product.Descripcion}} 
+            </h1>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+  
   </div>
 </section>

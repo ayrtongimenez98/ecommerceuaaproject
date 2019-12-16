@@ -14,6 +14,6 @@ import {CrudService} from '../services/crud.service';
 export class ProductService extends CrudService<any, number>{
 
   constructor(protected _http: HttpClient) {
-    super(_http, "https://localhost:44375/api/Producto");
+    super(_http, "https://uaaecommerce20191205082947.azurewebsites.net/api/Producto");
   }
 }
